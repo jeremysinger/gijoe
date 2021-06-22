@@ -1,0 +1,13 @@
+{
+   "name": "gijoe",
+   "version": "1.0.0",
+   "description": "Glasgow Interactive JavaScript Online Editor for Coursera MOOC",
+   "author": "Jeremy Singer <jeremy.singer@glasgow.ac.uk>",
+   "main": "lightserver.js",
+   "scripts": {
+      "start": "node lightserver.js"
+   },
+   "dependencies": {
+      "express": "^4.16.1"
+   }
+}

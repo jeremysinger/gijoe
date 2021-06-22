@@ -1,0 +1,58 @@
+<html>
+
+  <head>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js"></script>
+  </head>
+
+  <body>
+
+
+    
+    <h3>Glasgow Interactive JavaScript Online Editor</h3>
+
+    <p>
+      Type your JavaScript program below in the box below.
+    </p>
+
+    <div id="codeblock" style="padding: 10px; background-color: gray;">
+
+      <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* example JavaScript program */
+var x = 42;
+      </textarea>
+
+      <input type="submit" name="run" value="&#x25B7; run your code" onclick="executeCodeBlock()" />
+    </div>
+
+    <div id="outputblock" style="padding: 10px; background-color: purple;">
+
+      <div id="output" style="background-color: pink;">
+	code output here
+      </div>
+
+    </div>
+    
+
+
+    <script>
+
+      var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('textareacode'), {
+	  mode:  "javascript",
+	  lineNumbers: true,
+      });
+
+      function executeCodeBlock() {
+	  var codeFragment = myCodeMirror.getValue();
+	  var result = eval(codeFragment);
+	  document.getElementById('output').innerHTML = 'you executed this code: ' + codeFragment + '\n -> your result is ...\n'+result;
+	  return;
+      }
+
+    </script>
+
+
+
+  </body>
+</html>
