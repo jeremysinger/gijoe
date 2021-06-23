@@ -12,7 +12,16 @@ app.get('/', (req,res) => {
 	.then(contents => {
 	    res.setHeader("Content-Type", "text/html");
 	    res.writeHead(200);
-	    res.end(contents);
+	    fs.readFile(__dirname + "/instructions.txt")
+		.then(instrs => {
+		    fs.readFile(__dirname + "/initialcode.js")
+			.then(initcode => {
+			    let s = contents.toString()
+				.replace("<!-- INSTRS -->", instrs)
+				.replace("/* initial code */", initcode);
+			    res.end(s);
+			})
+		})
 	})
 	.catch(err => {
 	    res.writeHead(500);
