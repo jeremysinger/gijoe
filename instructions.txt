@@ -1,0 +1,5 @@
+This is a template instructions file.
+In here, you simply need to add the instructions
+for this particular lab.
+It is <i>possible</i> to use inline HTML elements
+if you want.
