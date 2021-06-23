@@ -16,10 +16,14 @@ app.get('/', (req,res) => {
 		.then(instrs => {
 		    fs.readFile(__dirname + "/initialcode.js")
 			.then(initcode => {
-			    let s = contents.toString()
-				.replace("<!-- INSTRS -->", instrs)
-				.replace("/* initial code */", initcode);
-			    res.end(s);
+			    fs.readFile(__dirname + "/turtle.js")
+				.then(preamble => {
+				    let s = contents.toString()
+					.replace("<!-- INSTRS -->", instrs)
+					.replace("/* initial code */", initcode)
+					.replace("<!-- PREAMBLE CODE -->", preamble);
+				    res.end(s);
+				})
 			})
 		})
 	})

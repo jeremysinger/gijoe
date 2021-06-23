@@ -4,7 +4,29 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/codemirror.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.60.0/mode/javascript/javascript.min.js"></script>
+
+<style>
+canvas {border: 2px dotted #564b47}
+
+.CodeMirror {
+    border: 1px solid #eee;
+    height: 150px;
+    max-height:150px;
+}
+
+.CodeMirror-scroll {
+    height: 150px;
+    max-height:150px;
+}
+    </style>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"		  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+crossorigin="anonymous"></script>
+
   </head>
 
   <body>
@@ -17,30 +39,61 @@
       <!-- INSTRS -->
     </p>
     <p>
-      Type your JavaScript program below in the box below.
+      Now type your JavaScript program in the box below.
     </p>
 
     <div id="codeblock" style="padding: 10px; background-color: gray;">
 
       <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* initial code */
 
-      </textarea>
+</textarea>
 
-      <input type="submit" name="run" value="&#x25B7; run your code" onclick="executeCodeBlock()" />
+      <button class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
+      <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
+      <button class="button reset" onclick="resetSource()">reset code <span class="fa fa-undo" aria-hidden="true"></span></button>
     </div>
 
     <div id="outputblock" style="padding: 10px; background-color: purple;">
 
-      <div id="output" style="background-color: pink;">
-	code output here
+      <div id="codeOutput" style="background-color: cornsilk; font-family: monospace; color: indigo;">
+	<b>Code evaluation</b><br/>
+	<div id="output">&nbsp;</div>
       </div>
 
+      <div id="consoleOutput" style="background-color: azure; font-family: monospace; color: darkblue;">
+	<b>Console output</b><br/>
+	<div id="fakeConsole">&nbsp;</div>
+	</div>
     </div>
+
+    <div id="graphicsblock" style="padding: 10px; background-color: lightgray;">
+      <h3>Graphics canvas</h3>
+    <!-- This is for drawing the little green turtle, and it sits above... -->
+    <canvas style="background-color: white;" id="turtlecanvas" width="300" height="300"></canvas>
     
+    <!-- ... this one, which is the image that the turtle is drawing. -->
+    <canvas id="imagecanvas" width="300" height="300" style="display:none"></canvas>
+
+      <br />
+          <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
+       <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
+
+    </div>
+
+    <script>
+    <!-- PREAMBLE CODE -->
+    </script>
 
 
     <script>
 
+
+
+      var originalCode = `/* example JavaScript program */
+// write code here`;
+    
+      //document.getElementById('textareacode').innerText = originalCode; // loses newlines?
+      $('#textareacode').text(originalCode); // jquery preserves newlines?
       var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('textareacode'), {
 	  mode:  "javascript",
 	  lineNumbers: true,
@@ -48,13 +101,81 @@
 
       function executeCodeBlock() {
 	  var codeFragment = myCodeMirror.getValue();
-	  var result = eval(codeFragment);
-	  document.getElementById('output').innerHTML = 'you executed this code: ' + codeFragment + '\n -> your result is ...\n'+result;
+	  var result = 'empty';
+	  try {
+	      result = eval(codeFragment);
+	  }
+	  catch (e) {
+	      //if (e instanceof SyntaxError) {
+	      alert('CAUGHT ERROR: ' + e + "\n MESSAGE: " + e.message);
+	      // }
+	      // else {
+	      //	  throw e;
+	      // }
+	  }
+	  document.getElementById('output').innerHTML = 'you executed this code: ' + codeFragment + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
 	  return;
       }
 
+      function resetSource() {
+	  myCodeMirror.setValue(originalCode);
+      }
     </script>
 
+
+    <script>
+    function dlCanvas() {
+      var canvas = document.getElementById("imagecanvas");
+      var dt = canvas.toDataURL('image/png');
+      /* Change MIME type to trick the browser to downlaod the file instead of displaying it */
+      dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
+
+      /* In addition to <a>'s "download" attribute, you can define HTTP-style headers */
+    dt = dt.replace(/^data:application\/octet-stream/,
+     'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
+
+     document.getElementById("download").href = dt;
+    };
+   /*    document.getElementById("download").addEventListener('click', dlCanvas, false);*/
+</script>
+
+<script>
+    
+  function dlSource() {
+    var sourceCode = myCodeMirror.getValue();
+    var textToSaveAsBlob = new Blob([sourceCode], {type:"text/plain"});
+    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+    var fileNameToSaveAs = "code.js"
+
+    var downloadLink = document.createElement("a");
+    downloadLink.download = fileNameToSaveAs;
+    downloadLink.innerHTML = "Download File";
+    downloadLink.href = textToSaveAsURL;
+    downloadLink.onclick = destroyClickedElement;
+    downloadLink.style.display = "none";
+    document.body.appendChild(downloadLink);
+
+    downloadLink.click();
+  }
+
+function destroyClickedElement(event)
+{
+    document.body.removeChild(event.target);
+}
+    </script>
+
+<script>
+// for console capture
+(function(){
+var oldLog = console.log;
+ var newLog = document.getElementById("fakeConsole");
+    console.log = function (message) {
+        newLog.innerHTML = message;
+        oldLog.apply(console, arguments);
+    };
+})();
+
+</script>
 
 
   </body>
