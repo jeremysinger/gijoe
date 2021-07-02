@@ -5,18 +5,19 @@ const fs = require('fs').promises;
 
 const PORT = 8080;
 const HOST = '0.0.0.0';
+const workdir = __dirname + "/custom";
 
 const app = express();
 app.get('/', (req,res) => {
-    fs.readFile(__dirname + "/js.html")
+    fs.readFile(workdir + "/js.html")
 	.then(contents => {
 	    res.setHeader("Content-Type", "text/html");
 	    res.writeHead(200);
-	    fs.readFile(__dirname + "/instructions.txt")
+	    fs.readFile(workdir + "/instructions.txt")
 		.then(instrs => {
-		    fs.readFile(__dirname + "/initialcode.js")
+		    fs.readFile(workdir + "/initialcode.js")
 			.then(initcode => {
-			    fs.readFile(__dirname + "/turtle.js")
+			    fs.readFile(workdir + "/turtle.js")
 				.then(preamble => {
 				    let s = contents.toString()
 					.replace("<!-- INSTRS -->", instrs)
