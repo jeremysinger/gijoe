@@ -44,7 +44,7 @@ crossorigin="anonymous"></script>
 
     <div id="codeblock" style="padding: 10px; background-color: gray;">
 
-      <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* initial code */
+      <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */
 
 </textarea>
 
@@ -89,8 +89,9 @@ crossorigin="anonymous"></script>
 
 
 
-      var originalCode = `/* example JavaScript program */
-// write code here`;
+      var originalCode = `/* initial code */
+
+`;
     
       //document.getElementById('textareacode').innerText = originalCode; // loses newlines?
       $('#textareacode').text(originalCode); // jquery preserves newlines?
