@@ -17,7 +17,7 @@ app.get('/', (req,res) => {
 		.then(instrs => {
 		    fs.readFile(workdir + "/initialcode.js")
 			.then(initcode => {
-			    fs.readFile(workdir + "/turtle.js")
+			    fs.readFile(workdir + "/preamble.js")
 				.then(preamble => {
 				    let s = contents.toString()
 					.replace("<!-- INSTRS -->", instrs)
