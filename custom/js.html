@@ -67,12 +67,9 @@ crossorigin="anonymous"></script>
     </div>
 
     <div id="graphicsblock" style="padding: 10px; background-color: lightgray;">
-      <h3>Graphics canvas</h3>
-    <!-- This is for drawing the little green turtle, and it sits above... -->
-    <canvas style="background-color: white;" id="turtlecanvas" width="300" height="300"></canvas>
-    
-    <!-- ... this one, which is the image that the turtle is drawing. -->
-    <canvas id="imagecanvas" width="300" height="300" style="display:none"></canvas>
+      <h3>Array visualization</h3>
+    <!-- draw the array here -->
+    <canvas id="vizcanvas" width="300" height="300" style="background-color: white;"></canvas>
 
       <br />
           <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
@@ -104,7 +101,14 @@ crossorigin="anonymous"></script>
 	  var codeFragment = myCodeMirror.getValue();
 	  var result = 'empty';
 	  try {
-	      result = eval(codeFragment);
+              result = eval(codeFragment);
+              var numArrays = 0;
+              for (x in this) {
+                  if (Array.isArray(this[x]) && this[x] != null) {
+                      drawArray(x, numArrays, this[x]);
+                      numArrays++;
+                  }
+	      }
 	  }
 	  catch (e) {
 	      //if (e instanceof SyntaxError) {
@@ -121,12 +125,37 @@ crossorigin="anonymous"></script>
       function resetSource() {
 	  myCodeMirror.setValue(originalCode);
       }
+
+    function drawArray(name, n, arr) {
+        if (arr == null) {
+            console.error("null array!!");
+            return;
+        }
+        else {
+            console.log("drawing array with " + arr.length + " elements...");
+        }
+        var canvas = document.getElementById("vizcanvas");
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        side = 50;
+        startx = 10;
+        starty = 10 + ((side+10)*n);
+        ctx.font = "20px Arial";
+        ctx.fillText(name, startx, starty+side/2);
+        startx += ctx.measureText(name).width + 10;
+        for (let i=0; i<arr.length; i++) {
+            ctx.rect(startx, starty, side, side);
+            ctx.fillText(String(arr[i]), startx+25, starty+25);
+            startx += side;
+        }
+        ctx.stroke();
+    }
     </script>
 
 
     <script>
     function dlCanvas() {
-      var canvas = document.getElementById("imagecanvas");
+      var canvas = document.getElementById("vizcanvas");
       var dt = canvas.toDataURL('image/png');
       /* Change MIME type to trick the browser to downlaod the file instead of displaying it */
       dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
