@@ -6,6 +6,7 @@ somewhere that we can use in order.
 console.log("Autosave loaded successfully");
 
 setInterval(autosave, 2000);
+var codeArea = document.getElementById("textareacode");
 
 function autosave() {
     alert("Autosaved");
