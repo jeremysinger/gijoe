@@ -34,6 +34,7 @@ app.get('/', (req,res) => {
 	    return;
 	});
 });
+app.use("/static", express.static("public"));
 
 app.listen(PORT, HOST);
 console.log(`running on http://${HOST}:${PORT}`);
