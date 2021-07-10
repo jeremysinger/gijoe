@@ -95,7 +95,6 @@ crossorigin="anonymous"></script>
 
 
       var originalCode = `/* initial code */
-
 `;
     
       //document.getElementById('textareacode').innerText = originalCode; // loses newlines?
@@ -107,6 +106,7 @@ crossorigin="anonymous"></script>
 
       function executeCodeBlock() {
 	  var codeFragment = myCodeMirror.getValue();
+    console.log("---");
 	  var result = 'empty';
 	  try {
 	      clearConsole();
@@ -182,14 +182,17 @@ function destroyClickedElement(event)
 <script>
 // for console capture
 (function(){
-var oldLog = console.log;
- var newLog = document.getElementById("fakeConsole");
-    console.log = function (message) {
-      var newElement = document.createElement("p");  
-      newElement.appendChild(document.createTextNode(message));
-      newLog.appendChild(newElement);
-      oldLog.apply(console, arguments);
-    };
+  var oldLog = console.log;
+  var pastLog = document.createElement("p"); 
+  var newLog = document.getElementById("fakeConsole");
+  console.log = function (message) {
+    var newElement = document.createElement("p");  
+    newElement.appendChild(document.createTextNode(message));
+    newLog.appendChild(pastLog);
+    newLog.appendChild(newElement);
+    pastLog.appendChild(newElement);
+    //oldLog.apply(console, arguments);
+  };
 })();
 
 function clearConsole() {
@@ -204,8 +207,8 @@ function log(x) {
     console.log(x);
 }
 </script>
-<script type="text/javascript" src="/static/autosave.js"></script>
 
+<script type="text/javascript" src="/static/autosave.js"></script>
 
   </body>
 </html>

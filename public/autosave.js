@@ -5,7 +5,7 @@ somewhere that we can use in order.
 */
 console.log("Autosave loaded successfully");
 
-setInterval(autosave, 2000);
+setInterval(autosave, 60000);
 
 function autosave() {
     alert("Autosaved");
