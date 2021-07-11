@@ -56,8 +56,6 @@ app.post("/autosave", (req, res) => {
 	} catch (err) {
 		res.status(400).send("AUTOSAVE FAILED");
 	}
-	
-	
 });
 
 app.listen(PORT, HOST);
