@@ -10,6 +10,9 @@ const HOST = '0.0.0.0';
 const workdir = __dirname + "/custom";
 
 const app = express();
+app.use("/static", express.static("public"));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 app.get('/', (req,res) => {
     fs.readFile(workdir + "/js.html")
@@ -37,11 +40,24 @@ app.get('/', (req,res) => {
 	    return;
 	});
 });
-app.use("/static", express.static("public"));
+
 
 //This will be the POST request that will save to the savefile folder
-app.post("/autosave", function (req, res) {
-	res.send("POST request has been sets")
+app.post("/autosave", (req, res) => {
+	const savePath = workdir + "/savefiles/save.js";
+	try {
+		fs.writeFile(savePath, req.body.code, err => {
+			if (err) {
+				console.error(err);
+				return;
+			}
+		});
+		res.status(201).send("AUTOSAVE");
+	} catch (err) {
+		res.status(400).send("AUTOSAVE FAILED");
+	}
+	
+	
 });
 
 app.listen(PORT, HOST);

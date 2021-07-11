@@ -9,9 +9,15 @@ var codeArea = document.getElementById("textareacode");
 myCodeMirror.setValue(localStorage.getItem("code"));
 
 function autosave() {
-    var theValue = codeArea.value;
-    localStorage.setItem("code", theValue);
     var codeFragment = myCodeMirror.getValue();
-    console.log(codeFragment);
     localStorage.setItem("code", codeFragment);
+    const http = new XMLHttpRequest();
+    http.open("POST", "/autosave");
+    http.setRequestHeader("Content-Type", "application/json");
+    http.send(JSON.stringify({code: codeFragment }));
+    http.onload = function() {
+        console.log(http.responseText);
+    }
+
+    
 }
