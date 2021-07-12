@@ -4,7 +4,21 @@ before I understand where the data will be going. I assume that there will be a 
 somewhere that we can use in order.
 */
 
-setInterval(autosave, 2000);
+const typingInterval = 3000;
+const autosaveArea = document.getElementById("autosave-area");
+let typingTimer;
+
+
+myCodeMirror.on("keyup", function() {
+    clearTimeout(typingTimer);
+    typingTimer = setTimeout(autosave, typingInterval);
+});
+
+myCodeMirror.on("keydown", function() {
+    autosaveArea.innerHTML = "<h4>Typing...</h4>";
+    clearTimeout(typingTimer);
+});
+
 var codeArea = document.getElementById("textareacode");
 
 function formatTimeStamp(date_list) {
@@ -22,7 +36,6 @@ function formatTimeStamp(date_list) {
 
 
 function autosaveDisplay(statusCode) {
-    const autosaveArea = document.getElementById("autosave-area");
     const date = new Date();
     const dateArray = [date.getHours(), date.getMinutes(), date.getSeconds()];
     let timestamp = formatTimeStamp(dateArray);
@@ -43,7 +56,6 @@ function autosaveDisplay(statusCode) {
 
 function autosave() {
     var codeFragment = myCodeMirror.getValue();
-    //localStorage.setItem("code", codeFragment);
     const http = new XMLHttpRequest();
     try {
         http.open("POST", "/autosave");
