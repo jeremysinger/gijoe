@@ -25,11 +25,15 @@ app.get('/', (req,res) => {
 			.then(initcode => {
 			    fs.readFile(workdir + "/preamble.js")
 				.then(preamble => {
-				    let s = contents.toString()
-					.replace("<!-- INSTRS -->", instrs)
-					.replace("/* initial code */", initcode)
-					.replace("<!-- PREAMBLE CODE -->", preamble);
-				    res.end(s);
+					fs.readFile(workdir + "/savefiles/save.js")
+					.then(savecode => {
+						let s = contents.toString()
+						.replace("<!-- INSTRS -->", instrs)
+						.replace("/* initial code */", initcode)
+						.replace("<!-- PREAMBLE CODE -->", preamble)
+						.replace("/* saved code */", savecode);
+				    	res.end(s);
+					})
 				})
 			})
 		})
@@ -57,6 +61,7 @@ app.post("/autosave", (req, res) => {
 		res.status(400).send("AUTOSAVE FAILED");
 	}
 });
+
 
 app.listen(PORT, HOST);
 console.log(`running on http://${HOST}:${PORT}`);

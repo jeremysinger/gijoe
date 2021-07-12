@@ -95,9 +95,10 @@ crossorigin="anonymous"></script>
 
 
       var originalCode = `/* initial code */`;
+      var saveCode =  `/* saved code */`;
     
       //document.getElementById('textareacode').innerText = originalCode; // loses newlines?
-      $('#textareacode').text(originalCode); // jquery preserves newlines?
+      $('#textareacode').text(saveCode); // jquery preserves newlines?
       var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('textareacode'), {
 	  mode:  "javascript",
 	  lineNumbers: true,
@@ -124,7 +125,17 @@ crossorigin="anonymous"></script>
       }
 
       function resetSource() {
-	  myCodeMirror.setValue(originalCode);
+        myCodeMirror.setValue(originalCode);
+        var data = {
+          code: originalCode
+        }
+        var http = new XMLHttpRequest();
+        http.open("POST", "/autosave");
+        http.onload = function() {
+          var autosaveArea = document.getElementById("autosave-area");
+          autosaveArea.innerHTML = "<h4>Code Successfully Reset</h4>";
+        }
+        http.send();
       }
 
     function clearConsole() {

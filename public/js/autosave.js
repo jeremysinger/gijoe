@@ -6,7 +6,6 @@ somewhere that we can use in order.
 
 setInterval(autosave, 2000);
 var codeArea = document.getElementById("textareacode");
-myCodeMirror.setValue(localStorage.getItem("code"));
 
 function formatTimeStamp(date_list) {
     let formatted = [];
@@ -44,7 +43,7 @@ function autosaveDisplay(statusCode) {
 
 function autosave() {
     var codeFragment = myCodeMirror.getValue();
-    localStorage.setItem("code", codeFragment);
+    //localStorage.setItem("code", codeFragment);
     const http = new XMLHttpRequest();
     try {
         http.open("POST", "/autosave");
