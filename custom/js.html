@@ -24,7 +24,7 @@ canvas {border: 2px dotted #564b47}
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"		  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"                 integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 crossorigin="anonymous"></script>
 
   </head>
@@ -56,14 +56,14 @@ crossorigin="anonymous"></script>
     <div id="outputblock" style="padding: 10px; background-color: purple;">
 
       <div id="codeOutput" style="background-color: cornsilk; font-family: monospace; color: indigo;">
-	<b>Code evaluation</b><br/>
-	<div id="output">&nbsp;</div>
+        <b>Code evaluation</b><br/>
+        <div id="output">&nbsp;</div>
       </div>
 
       <div id="consoleOutput" style="background-color: azure; font-family: monospace; color: darkblue;">
-	<b>Console output</b><br/>
-	<div id="fakeConsole">&nbsp;</div>
-	</div>
+        <b>Console output</b><br/>
+        <div id="fakeConsole">&nbsp;</div>
+        </div>
     </div>
 
     <div id="graphicsblock" style="padding: 10px; background-color: lightgray;">
@@ -73,9 +73,18 @@ crossorigin="anonymous"></script>
 
       <br />
           <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
-       <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
+       <button class="button reset" onclick="resetCanvas()">reset<span class="fa fa-undo" aria-hidden="true"></span></button>
 
     </div>
+
+    <script>
+      function resetCanvas() {
+          let canvas = document.getElementById("vizcanvas");
+          let context = canvas.getContext('2d');
+          context.clearRect(0, 0, canvas.width, canvas.height);
+          context.moveTo(0,0);
+      }
+    </script>
 
     <script>
     <!-- PREAMBLE CODE -->
@@ -93,37 +102,39 @@ crossorigin="anonymous"></script>
       //document.getElementById('textareacode').innerText = originalCode; // loses newlines?
       $('#textareacode').text(originalCode); // jquery preserves newlines?
       var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('textareacode'), {
-	  mode:  "javascript",
-	  lineNumbers: true,
+          mode:  "javascript",
+          lineNumbers: true,
       });
 
       function executeCodeBlock() {
-	  var codeFragment = myCodeMirror.getValue();
-	  var result = 'empty';
-	  try {
+          var codeFragment = myCodeMirror.getValue();
+          var result = 'empty';
+          try {
               result = eval(codeFragment);
               var numArrays = 0;
+              // blank the canvas first
+              resetCanvas();
               for (x in this) {
                   if (Array.isArray(this[x]) && this[x] != null) {
                       drawArray(x, numArrays, this[x]);
                       numArrays++;
                   }
-	      }
-	  }
-	  catch (e) {
-	      //if (e instanceof SyntaxError) {
-	      alert('CAUGHT ERROR: ' + e + "\n MESSAGE: " + e.message);
-	      // }
-	      // else {
-	      //	  throw e;
-	      // }
-	  }
-	  document.getElementById('output').innerHTML = 'you executed this code: ' + codeFragment + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
-	  return;
+              }
+          }
+          catch (e) {
+              //if (e instanceof SyntaxError) {
+              alert('CAUGHT ERROR: ' + e + "\n MESSAGE: " + e.message);
+              // }
+              // else {
+              //          throw e;
+              // }
+          }
+          document.getElementById('output').innerHTML = 'you executed this code: ' + codeFragment + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
+          return;
       }
 
       function resetSource() {
-	  myCodeMirror.setValue(originalCode);
+          myCodeMirror.setValue(originalCode);
       }
 
     function drawArray(name, n, arr) {
@@ -131,23 +142,25 @@ crossorigin="anonymous"></script>
             console.error("null array!!");
             return;
         }
-        else {
-            console.log("drawing array with " + arr.length + " elements...");
-        }
         var canvas = document.getElementById("vizcanvas");
         var ctx = canvas.getContext("2d");
         ctx.beginPath();
-        side = 50;
-        startx = 10;
-        starty = 10 + ((side+10)*n);
+        let height = 50;
+        let margin = 10;
+        let startx = 10;
+        let starty = 10 + ((height+10)*n);
         ctx.font = "20px Arial";
-        ctx.fillText(name, startx, starty+side/2);
+        ctx.fillText(name, startx, starty+height/2);
         startx += ctx.measureText(name).width + 10;
         for (let i=0; i<arr.length; i++) {
-            ctx.rect(startx, starty, side, side);
-            ctx.fillText(String(arr[i]), startx+25, starty+25);
-            startx += side;
+            let elementText = String(arr[i]);
+            let elementTextWidth = ctx.measureText(elementText).width;
+            let currentSide = (elementTextWidth+2*margin);
+            ctx.rect(startx, starty, currentSide, height);
+            ctx.fillText(elementText, startx+margin, starty+height/2);
+            startx += currentSide;
         }
+        ctx.strokeStyle = 'blue';
         ctx.stroke();
     }
     </script>
