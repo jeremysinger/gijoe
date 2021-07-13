@@ -43,7 +43,7 @@ function autosaveDisplay(statusCode) {
         autosaveArea.classList.add("success");
         autosaveArea.classList.remove("error");
         autosaveArea.innerHTML = "<h4>Autosaved Successfully at " + timestamp + "</h4>";
-    } else if (statusCode == 500) {
+    } else if (statusCode == 0) {
         autosaveArea.classList.add("error");
         autosaveArea.classList.remove("success");
         autosaveArea.innerHTML = "<h4>Autosave Failed. No connection to the server found</h4>";
