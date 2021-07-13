@@ -1,10 +1,10 @@
 // sample JavaScript code
 console.log("hello world");
 
-console.log("That isn't good it is telling me undefined");
+console.log("I want to see if this is working");
 
-console.log("I will need to check that out once I am done");
+console.log("It is amazing that this is working properly");
 
-console.log("I am typing now which is fun");
+console.log("I also love that I can have the autosaving function without worrying about coding");
 
 // end sample code

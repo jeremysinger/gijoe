@@ -55,6 +55,7 @@ function autosaveDisplay(statusCode) {
 }
 
 function autosave() {
+    autosaveArea.innerHTML = "<h4>Autosaving...</h4>";
     var codeFragment = myCodeMirror.getValue();
     const http = new XMLHttpRequest();
     try {
