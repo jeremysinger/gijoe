@@ -1,0 +1,14 @@
+#autosave-area {
+    padding: 5px;
+    border: 3px dotted black;
+    color: white;
+    text-align: center;
+}
+
+.success {
+    background-color: green;
+}
+
+.error {
+    background-color: red;
+}

@@ -1,2 +1,6 @@
 // sample JavaScript code
-console.log("hello world");
+forward(10);
+left(90);
+forward(20);
+right(90); 
+forward(10);

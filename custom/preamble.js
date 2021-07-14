@@ -87,6 +87,22 @@ var shapes = {
 // initialise the state of the turtle
 var turtle = undefined;
 
+// Delay execution of commands for the given amount of time
+/*
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+*/
+
+/*
+function sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+        currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+}*/
+
 function initialise() {
     turtle = {
         pos: {
@@ -129,6 +145,7 @@ function centerCoords(context) {
 
 // draw the turtle and the current image
 function draw() {
+
     clearContext(turtleContext);
     if (turtle.visible) {
         var x = turtle.pos.x;
@@ -162,7 +179,9 @@ function draw() {
         turtleContext.fill();
         turtleContext.restore();
     }
+
     turtleContext.drawImage(imageCanvas, 0, 0, 300, 300, 0, 0, 300, 300);
+    
 }
 
 // clear the display, don't move the turtle
@@ -252,10 +271,13 @@ function forward(distance) {
         }
     }
     // only draw if the pen is currently down.
-    if (turtle.penDown)
+    if (turtle.penDown) {
         imageContext.stroke();
+    }
     imageContext.restore();
+
     drawIf();
+    
 }
 
 // turn edge wrapping on/off

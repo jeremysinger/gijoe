@@ -24,7 +24,7 @@ canvas {border: 2px dotted #564b47}
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+<link rel="stylesheet" href="/static/css/autosave.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"		  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 crossorigin="anonymous"></script>
 
@@ -32,7 +32,7 @@ crossorigin="anonymous"></script>
 
   <body>
 
-
+    <div id="autosave-area" class="success"></div>
     
     <h3>Glasgow Interactive JavaScript Online Editor</h3>
 
@@ -76,7 +76,7 @@ crossorigin="anonymous"></script>
 
       <br />
           <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
-       <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
+      <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
 
     </div>
 
@@ -86,10 +86,12 @@ crossorigin="anonymous"></script>
 
 
     <script>
+
       var originalCode = `/* initial code */`;
+      var saveCode =  `/* saved code */`;
     
       //document.getElementById('textareacode').innerText = originalCode; // loses newlines?
-      $('#textareacode').text(originalCode); // jquery preserves newlines?
+      $('#textareacode').text(saveCode); // jquery preserves newlines?
       var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('textareacode'), {
         mode:  "javascript",
         lineNumbers: true,
@@ -104,13 +106,20 @@ crossorigin="anonymous"></script>
           result = eval(codeFragment);
           
       }
-      catch (e) {
-          //if (e instanceof SyntaxError) {
-          alert('CAUGHT ERROR: ' + e + "\n MESSAGE: " + e.message);
-          // }
-          // else {
-          //	  throw e;
-          // }
+
+      function resetSource() {
+        myCodeMirror.setValue(originalCode);
+        var data = JSON.stringify({
+          code: originalCode
+        });
+        var http = new XMLHttpRequest();
+        http.open("POST", "/autosave");
+        http.setRequestHeader("Content-Type", "application/json");
+        http.onload = function() {
+          var autosaveArea = document.getElementById("autosave-area");
+          autosaveArea.innerHTML = "<h4>Code Successfully Reset</h4>";
+        }
+        http.send(data);
       }
       document.getElementById('output').innerHTML = 'you executed this code: ' + codeFragment + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
       return;
@@ -225,18 +234,12 @@ function destroyClickedElement(event)
   };
 })();
 
-function clearConsole() {
-  var consoleElement = document.getElementById("fakeConsole");
-  while (consoleElement.childNodes[1]) {
-    consoleElement.removeChild(consoleElement.childNodes[1]);
-  }
-}
-
 // convenience function
 function log(x) {
     console.log(x);
 }
 </script>
+<script type="text/javascript" src="/static/js/autosave.js"></script>
 
 <script type="text/javascript" src="/static/autosave.js"></script>
 

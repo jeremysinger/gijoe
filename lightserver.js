@@ -1,13 +1,19 @@
 'use strict';
 
 const express = require('express');
+const router = express.Router();
 const fs = require('fs').promises;
 
+//Set up the Port and the Host
 const PORT = 8080;
 const HOST = '0.0.0.0';
 const workdir = __dirname + "/custom";
 
 const app = express();
+app.use("/static", express.static("public"));
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 app.get('/', (req,res) => {
     fs.readFile(workdir + "/js.html")
 	.then(contents => {
@@ -19,11 +25,15 @@ app.get('/', (req,res) => {
 			.then(initcode => {
 			    fs.readFile(workdir + "/preamble.js")
 				.then(preamble => {
-				    let s = contents.toString()
-					.replace("<!-- INSTRS -->", instrs)
-					.replace("/* initial code */", initcode)
-					.replace("<!-- PREAMBLE CODE -->", preamble);
-				    res.end(s);
+					fs.readFile(workdir + "/savefiles/save.js")
+					.then(savecode => {
+						let s = contents.toString()
+						.replace("<!-- INSTRS -->", instrs)
+						.replace("/* initial code */", initcode)
+						.replace("<!-- PREAMBLE CODE -->", preamble)
+						.replace("/* saved code */", savecode);
+				    	res.end(s);
+					})
 				})
 			})
 		})
@@ -34,7 +44,24 @@ app.get('/', (req,res) => {
 	    return;
 	});
 });
-app.use("/static", express.static("public"));
+
+
+//This will be the POST request that will save to the savefile folder
+app.post("/autosave", (req, res) => {
+	const savePath = workdir + "/savefiles/save.js";
+	try {
+		fs.writeFile(savePath, req.body.code, err => {
+			if (err) {
+				console.error(err);
+				return;
+			}
+		});
+		res.status(201).send("AUTOSAVE");
+	} catch (err) {
+		res.status(400).send("AUTOSAVE FAILED");
+	}
+});
+
 
 app.listen(PORT, HOST);
 console.log(`running on http://${HOST}:${PORT}`);
