@@ -45,8 +45,8 @@ crossorigin="anonymous"></script>
 
     <div id="codeblock" style="padding: 10px; background-color: gray;">
 
-<textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
-<div class="handle"></div>
+    <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
+    <div class="handle"></div>
 
       <button class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
       <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
@@ -86,7 +86,6 @@ crossorigin="anonymous"></script>
 
 
     <script>
-
       var originalCode = `/* initial code */`;
       var saveCode =  `/* saved code */`;
     
@@ -106,6 +105,7 @@ crossorigin="anonymous"></script>
           result = eval(codeFragment);
           
       }
+      finally{}
 
       function resetSource() {
         myCodeMirror.setValue(originalCode);
