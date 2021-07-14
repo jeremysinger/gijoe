@@ -8,6 +8,7 @@
       "start": "node lightserver.js"
    },
    "dependencies": {
+      "async-mutex": "^0.3.1",
       "express": "^4.16.1"
    }
 }
