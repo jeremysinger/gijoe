@@ -13,7 +13,7 @@ function getTutorial(id) {
         if (http.status === 200) {
             let data = JSON.parse(http.responseText);
             let steps =  data.steps;
-            myCodeMirror.setValue(steps[0]);
+            tutorialCodeMirror.setValue(steps[0]);
             let i = 1;
             
             forwardButton.addEventListener("click", () => {
@@ -21,7 +21,7 @@ function getTutorial(id) {
                     backButton.disabled = false;
                 }
                 const tutorialText = steps.slice(0, i+1).join("//NEXT");
-                myCodeMirror.setValue(tutorialText);
+                tutorialCodeMirror.setValue(tutorialText);
                 i++;
                 if (i == steps.length) {
                     forwardButton.disabled = true;
@@ -33,15 +33,12 @@ function getTutorial(id) {
                     forwardButton.disabled = false;
                 }
                 const tutorialText = steps.slice(0, i - 1).join("//NEXT");
-                myCodeMirror.setValue(tutorialText);
+                tutorialCodeMirror.setValue(tutorialText);
                 i--;
                 if (i == 0) {
                     backButton.disabled = true;
                 }
             });
-
-            
-            
 
         } else {
             console.log("DATA NOT FOUND");

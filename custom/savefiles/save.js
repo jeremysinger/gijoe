@@ -1,4 +1,9 @@
-// sample JavaScript code
-console.log("hello world");
+console.log("Tutorial_1");
+console.log("Hello World");
 
-// end sample code
+//NEXT
+
+console.log("Hello World Again");
+jiodjfidojfidosfjdisofjdisfjdsiofjsiofjsiofjdsaiofjsfio
+dfdsfafsdfsdafdsfsdfdsfdsfdsffdsfdsdfs
+console.log("Welcome to the tutorial problem");

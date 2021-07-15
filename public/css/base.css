@@ -1,0 +1,24 @@
+canvas {
+    border: 2px dotted #564b47;
+}
+
+.CodeMirror {
+    border: 1px solid #eee;
+    resize: vertical;
+    min-height: 150px;
+}
+
+#fakeConsole {
+  max-height: 250px;
+  resize: vertical;
+  overflow: auto !important;
+}
+
+#tutorialControls {
+  padding: 10px;
+}
+
+.col {
+    max-width: 50%;
+}
+
