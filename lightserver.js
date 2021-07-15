@@ -62,6 +62,24 @@ app.post("/autosave", (req, res) => {
 	}
 });
 
+app.get(`/tutorial/:id`, (req, res) => {
+	fs.readFile(`${workdir}/tutorials/${req.params.id}.js`)
+		.then(contents => {
+			let theString = contents.toString();
+			let theArray = theString.split("//NEXT");
+			let theData = {steps: theArray};
+			res.setHeader("Content-Type", "application/json");
+			res.writeHead(200);
+			res.end(JSON.stringify(theData));
+			return;
+		})
+		.catch(err => {
+			res.writeHead(404);
+			res.end("FILE NOT FOUND");
+			return;
+		})
+});
+
 
 app.listen(PORT, HOST);
 console.log(`running on http://${HOST}:${PORT}`);

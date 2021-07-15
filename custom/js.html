@@ -105,6 +105,13 @@ crossorigin="anonymous"></script>
           clearConsole();
           result = eval(codeFragment);
           
+      } catch (e) {
+        if (e instanceof SyntaxError) {
+          alert("CAUGHT ERROR " + e + "\n MESSAGE: " + e.message);
+        } else {
+          throw e;
+        }
+        
       }
 
       function resetSource() {
