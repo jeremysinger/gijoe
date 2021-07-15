@@ -11,20 +11,16 @@ canvas {border: 2px dotted #564b47}
 
 .CodeMirror {
     border: 1px solid #eee;
-    height: 150px;
-    max-height:150px;
-}
-
-.CodeMirror-scroll {
-    height: 150px;
-    max-height:150px;
+    resize: vertical;
+    min-height: 150px;
 }
 
 #fakeConsole {
   max-height: 250px;
-  overflow: scroll;
+  resize: vertical;
+  overflow: auto !important;
 }
-    </style>
+</style>
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -49,9 +45,8 @@ crossorigin="anonymous"></script>
 
     <div id="codeblock" style="padding: 10px; background-color: gray;">
 
-      <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */
-
-</textarea>
+<textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
+<div class="handle"></div>
 
       <button class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
       <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
@@ -81,7 +76,7 @@ crossorigin="anonymous"></script>
 
       <br />
           <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
-       <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
+      <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
 
     </div>
 
@@ -92,36 +87,24 @@ crossorigin="anonymous"></script>
 
     <script>
 
-
-
       var originalCode = `/* initial code */`;
       var saveCode =  `/* saved code */`;
     
       //document.getElementById('textareacode').innerText = originalCode; // loses newlines?
       $('#textareacode').text(saveCode); // jquery preserves newlines?
       var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('textareacode'), {
-	  mode:  "javascript",
-	  lineNumbers: true,
+        mode:  "javascript",
+        lineNumbers: true,
       });
 
-      function executeCodeBlock() {
-	  var codeFragment = myCodeMirror.getValue();
-	  var result = 'empty';
-	  try {
-	      clearConsole();
-        result = eval(codeFragment);
-        
-	  }
-	  catch (e) {
-	      //if (e instanceof SyntaxError) {
-	      alert('CAUGHT ERROR: ' + e + "\n MESSAGE: " + e.message);
-	      // }
-	      // else {
-	      //	  throw e;
-	      // }
-	  }
-	  document.getElementById('output').innerHTML = 'you executed this code: ' + codeFragment + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
-	  return;
+    function executeCodeBlock() {
+      codeFragment = myCodeMirror.getValue();
+      console.log("---");
+      var result = 'empty';
+      try {
+          clearConsole();
+          result = eval(codeFragment);
+          
       }
 
       function resetSource() {
@@ -138,13 +121,59 @@ crossorigin="anonymous"></script>
         }
         http.send(data);
       }
+      document.getElementById('output').innerHTML = 'you executed this code: ' + codeFragment + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
+      return;
+    }
+
+    function resetSource() {
+      myCodeMirror.setValue(originalCode);
+    }
 
     function clearConsole() {
       var consoleElement = document.getElementById("fakeConsole");
       while (consoleElement.childNodes[1]) {
         consoleElement.removeChild(consoleElement.childNodes[1]);
+      }
     }
-}
+    </script>
+
+    <!-- making area code resizable -->
+    <script>
+      let $handle = document.querySelector(".handle");
+      let $container = document.getElementById('textareacode');
+
+      let cm = CodeMirror($container, { lineNumbers: true });
+
+      function height_of($el) {
+        return parseInt(window.getComputedStyle($el).height.replace(/px$/, ""));
+      }
+
+      const MIN_HEIGHT = 200;
+
+      var start_x;
+      var start_y;
+      var start_h;
+
+      function on_drag(e) {
+        cm.setSize(null, Math.max(MIN_HEIGHT, (start_h + e.y - start_y)) + "px");
+      }
+
+      function on_release(e) {
+        console.log("end");
+        document.body.removeEventListener("mousemove", on_drag);
+        window.removeEventListener("mouseup", on_release);
+      }
+
+      $handle.addEventListener("mousedown", function (e) {    
+        start_x = e.x;
+        start_y = e.y;
+        start_h = ($container).offsetHeight;  //changed this from height_of($container);
+        console.log("start_h: " + start_h); //this is where the error is: gives NaN rather than what it actually is
+
+        document.body.addEventListener("mousemove", on_drag);
+        window.addEventListener("mouseup", on_release);
+      });
+
     </script>
 
 
@@ -192,14 +221,17 @@ function destroyClickedElement(event)
 <script>
 // for console capture
 (function(){
-var oldLog = console.log;
- var newLog = document.getElementById("fakeConsole");
-    console.log = function (message) {
-      var newElement = document.createElement("p");  
-      newElement.appendChild(document.createTextNode(message));
-      newLog.appendChild(newElement);
-      oldLog.apply(console, arguments);
-    };
+  var oldLog = console.log;
+  var pastLog = document.createElement("p"); 
+  var newLog = document.getElementById("fakeConsole");
+  console.log = function (message) {
+    var newElement = document.createElement("p");  
+    newElement.appendChild(document.createTextNode(message));
+    newLog.appendChild(pastLog);
+    newLog.appendChild(newElement);
+    pastLog.appendChild(newElement);
+    //oldLog.apply(console, arguments);
+  };
 })();
 
 // convenience function
@@ -210,6 +242,7 @@ function log(x) {
 <script type="text/javascript" src="/static/js/tutorial.js"></script>
 <script type="text/javascript" src="/static/js/autosave.js"></script>
 
+<script type="text/javascript" src="/static/autosave.js"></script>
 
   </body>
 </html>
