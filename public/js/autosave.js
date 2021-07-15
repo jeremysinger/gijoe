@@ -35,7 +35,7 @@ function formatTimeStamp(date_list) {
 }
 
 
-function autosaveDisplay(statusCode) {
+function autosaveDisplay(state, statusCode) {
     const date = new Date();
     const dateArray = [date.getHours(), date.getMinutes(), date.getSeconds()];
     let timestamp = formatTimeStamp(dateArray);
@@ -62,8 +62,11 @@ function autosave() {
         http.open("POST", "/autosave");
         http.setRequestHeader("Content-Type", "application/json");
         http.send(JSON.stringify({code: codeFragment }));
-        http.onload = function() {
-            autosaveDisplay(http.status);
+        http.onreadystatechange = function() {
+            if (http.readyState == 4) {
+                autosaveDisplay(http.readyState, http.status);
+            }
+            
         }
     } catch (err) {
         autosaveDisplay(500);
