@@ -1,9 +1,14 @@
-console.log("Tutorial_1");
-console.log("Hello World");
+// sample JavaScript code
 
-//NEXT
+console.log("Hello World!");
+console.log("Hello World!");
 
-console.log("Hello World Again");
-console.log("Welcome to the tutorial problem");
+// end JavaScript code
+console.log("I'm not sure how I am meant to stop the CodeMirror from resizing");
 
-console.log("I love tutorials");
+var theObject = {
+  hello: "world",
+  world: "hello"
+}
+console.log(theObject.hello);
+console.log(theObject.world);

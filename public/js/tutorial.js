@@ -20,7 +20,8 @@ function getTutorial(id) {
                 if(backButton.disabled) {
                     backButton.disabled = false;
                 }
-                const tutorialText = steps.slice(0, i+1).join("//NEXT");
+                let tutorialText = steps.slice(0, i+1).join("//NEXT");
+                tutorialText = tutorialText.replace(new RegExp("//NEXT", "g"), "");
                 tutorialCodeMirror.setValue(tutorialText);
                 i++;
                 if (i == steps.length) {
@@ -32,7 +33,8 @@ function getTutorial(id) {
                 if (forwardButton.disabled) {
                     forwardButton.disabled = false;
                 }
-                const tutorialText = steps.slice(0, i - 1).join("//NEXT");
+                let tutorialText = steps.slice(0, i - 1).join("//NEXT");
+                tutorialText = tutorialText.replace(new RegExp("//NEXT", "g"), "");
                 tutorialCodeMirror.setValue(tutorialText);
                 i--;
                 if (i == 0) {

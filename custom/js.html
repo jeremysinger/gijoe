@@ -33,8 +33,7 @@ crossorigin="anonymous"></script>
 <div id="tutorialArea" class="col">
   <h2 class="codeHeading">Tutorial Space</h2>
   <textarea id="textareatutorial" style="padding:10px; background-color: 0xffffff">/* insert tutorial code here */</textarea>
-  <div id="tutorialControls">
-    <p>Tutorial Controls</p>
+  <div id="tutorialControls" class="handle">
     <button id="tutorialBack">< Back</button>
     <button id="tutorialForward">Forward ></button>
   </div>
@@ -96,11 +95,13 @@ crossorigin="anonymous"></script>
       var tutorialCodeMirror = CodeMirror.fromTextArea(document.getElementById("textareatutorial"), {
         mode: "javascript",
         lineNumbers: true,
-        readOnly: true
+        readOnly: true,
+        lineWrapping: true
       })
       var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('textareacode'), {
         mode:  "javascript",
         lineNumbers: true,
+        lineWrapping: true
       });
 
     function executeCodeBlock() {
