@@ -1,0 +1,30 @@
+body {
+    overflow-x: hidden;
+}
+
+canvas {
+    border: 2px dotted #564b47;
+}
+
+.CodeMirror {
+    border: 1px solid #eee;
+    resize: vertical;
+    min-height: 150px;
+    max-width: 100%;
+}
+
+#fakeConsole {
+  max-height: 250px;
+  resize: vertical;
+  overflow: auto !important;
+}
+
+.codeControls {
+    padding: 20px;
+}
+
+
+.codeHeading {
+    color: white;
+}
+
