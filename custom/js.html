@@ -103,9 +103,12 @@ crossorigin="anonymous"></script>
         lineWrapping: true
       });
 
-    function executeCodeBlock() {
+    async function executeCodeBlock() {
+
       codeFragment = myCodeMirror.getValue();
-      console.log("---");
+
+      codeFragment = "async function code(){ " + codeFragment + " } code();"; 
+
       var result = 'empty';
       try {
           clearConsole();

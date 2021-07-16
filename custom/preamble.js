@@ -88,11 +88,10 @@ var shapes = {
 var turtle = undefined;
 
 // Delay execution of commands for the given amount of time
-/*
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-*/
 
 /*
 function sleep(milliseconds) {
