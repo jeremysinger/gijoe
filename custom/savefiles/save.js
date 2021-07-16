@@ -12,3 +12,5 @@ var theObject = {
 }
 console.log(theObject.hello);
 console.log(theObject.world);
+
+console.log("Is the autosave function still working");
