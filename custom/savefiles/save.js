@@ -1,4 +1,6 @@
-console.log("1");
-await sleep(1000);
-console.log("@");
+forward(10);
+right(30);
+forward(10);
 
+left(90);
+forward(10);

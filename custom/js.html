@@ -108,6 +108,7 @@ crossorigin="anonymous"></script>
       codeFragment = myCodeMirror.getValue();
 
       codeFragment = "async function code(){ " + codeFragment + " } code();"; 
+      codeFragment = codeFragment.replace(/forward/gi, " await sleep(1000); forward");
 
       var result = 'empty';
       try {
