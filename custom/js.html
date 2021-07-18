@@ -39,7 +39,7 @@ crossorigin="anonymous"></script>
   </div>
 </div>
 <div id="codeArea" class="col">
-  <h2 class="codeHeading">Write Code Here</h2>
+  <h2 class="codeHeading">Write Code Here </h2>
   <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
 
   <div class="handle codeControls"></div>
@@ -75,6 +75,7 @@ crossorigin="anonymous"></script>
     <canvas id="imagecanvas" width="300" height="300" style="display:none"></canvas>
 
       <br />
+      <button id="goSlowButton" onclick="goSlowSwitch()"> Speed up turtle! <span class="fa fa-clock" aria-hidden="true"></span></button>
           <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
       <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
 
@@ -107,8 +108,7 @@ crossorigin="anonymous"></script>
 
       codeFragment = myCodeMirror.getValue();
 
-      codeFragment = "async function code(){ " + codeFragment + " } code();"; 
-      codeFragment = codeFragment.replace(/forward/gi, " await sleep(1000); forward");
+      codeFragment = goSlowMode(codeFragment);
 
       var result = 'empty';
       try {
@@ -259,6 +259,7 @@ function log(x) {
 </script>
 <script type="text/javascript" src="/static/js/tutorial.js"></script>
 <script type="text/javascript" src="/static/js/autosave.js"></script>
+<script type="text/javascript" src="/static/js/goslow.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
   </body>
