@@ -105,10 +105,9 @@ crossorigin="anonymous"></script>
       });
 
     async function executeCodeBlock() {
+      codeInput = myCodeMirror.getValue();
 
-      codeFragment = myCodeMirror.getValue();
-
-      codeFragment = goSlowMode(codeFragment);
+      codeFragment = goSlowMode(codeInput);
 
       var result = 'empty';
       try {
@@ -139,7 +138,7 @@ crossorigin="anonymous"></script>
         }
         http.send(data);
       }
-      document.getElementById('output').innerHTML = 'you executed this code: ' + codeFragment + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
+      document.getElementById('output').innerHTML = 'you executed this code: ' + codeInput + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
       return;
     }
 
