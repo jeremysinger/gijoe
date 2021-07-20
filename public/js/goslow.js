@@ -1,12 +1,18 @@
+//This should really be a class tbh
+
 const goSlowButton = document.getElementById("goSlowButton");
-let isGoSlowOn = true;
 const speedBumps = new Array("forward", "left", "right");
+const delayTime = 1000;
+
+let isGoSlowOn = true;
+let timesDelayIsApplied = 0
 
 function slowDownAt(codeBit, codeFragment){
     let regex = new RegExp(codeBit, "gi"); //perform a global, case insensitive replacement
 
-    let substitution = " await sleep(1000); " + codeBit
+    let substitution = " await sleep(" + delayTime + "); " + codeBit;
 
+    timesDelayIsApplied++;
     return codeFragment.replace(regex, substitution);  
 }
 
@@ -20,7 +26,6 @@ function goSlowMode(codeFragment){
     }
     return codeFragment;
 }
-
 
 function goSlowSwitch(){
     

@@ -44,7 +44,7 @@ crossorigin="anonymous"></script>
 
   <div class="handle codeControls"></div>
   
-        <button class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
+        <button id="submitcode" class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
         <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
         <button class="button reset" onclick="resetSource()">reset code <span class="fa fa-undo" aria-hidden="true"></span></button>
         <br>
@@ -105,6 +105,7 @@ crossorigin="anonymous"></script>
       });
 
     async function executeCodeBlock() {
+
       codeInput = myCodeMirror.getValue();
 
       codeFragment = goSlowMode(codeInput);
