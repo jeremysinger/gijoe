@@ -11,6 +11,6 @@
       "async-mutex": "^0.3.1",
       "body-parser": "^1.19.0",
       "express": "^4.16.1",
-      "monaco": "^1.201704190613.0"
+      "monaco-editor": "^0.26.1"
    }
 }
