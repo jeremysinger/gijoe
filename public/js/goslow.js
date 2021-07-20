@@ -1,10 +1,22 @@
 const goSlowButton = document.getElementById("goSlowButton");
 let isGoSlowOn = true;
+const speedBumps = new Array("forward", "left", "right");
+
+function slowDownAt(codeBit, codeFragment){
+    let regex = new RegExp(codeBit, "gi"); //perform a global, case insensitive replacement
+
+    let substitution = " await sleep(1000); " + codeBit
+
+    return codeFragment.replace(regex, substitution);  
+}
 
 function goSlowMode(codeFragment){
     if(isGoSlowOn){
         codeFragment = "async function code(){ " + codeFragment + " } code();"; 
-        codeFragment = codeFragment.replace(/forward/gi, " await sleep(1000); forward");
+
+        for(let i = 0; i < speedBumps.length; i++){
+            codeFragment = slowDownAt(speedBumps[i], codeFragment);
+        }
     }
     return codeFragment;
 }
