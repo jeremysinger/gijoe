@@ -2,9 +2,22 @@
 
 const forwardButton = document.getElementById("tutorialForward");
 const backButton = document.getElementById("tutorialBack");
+const tutorialArea = document.getElementById("tutorialArea");
 
+//Parse the settings json file to see whether the tutorial settings were on
+function checkSettings() {
+    const settings = JSON.parse(tutorialSettings);
+    if (settings.tutorial) {
+        getTutorial(1);
+        tutorialArea.style.display = "block";
+    } else {
+        tutorialArea.style.display = "none";
+    }
+}
 
 function getTutorial(id) {
+    const settings = JSON.parse(tutorialSettings);
+    console.log(settings);
     const http = new XMLHttpRequest();
     http.open("GET", `/tutorial/${id}`);
 
@@ -45,10 +58,10 @@ function getTutorial(id) {
         } else {
             console.log("DATA NOT FOUND");
         }
-        
+
     }
 
     http.send();
 }
 
-getTutorial(1);
+checkSettings();

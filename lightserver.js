@@ -25,14 +25,18 @@ app.get('/', (req,res) => {
 			.then(initcode => {
 			    fs.readFile(workdir + "/preamble.js")
 				.then(preamble => {
-					fs.readFile(workdir + "/savefiles/save.js")
-					.then(savecode => {
-						let s = contents.toString()
-						.replace("<!-- INSTRS -->", instrs)
-						.replace("/* initial code */", initcode)
-						.replace("<!-- PREAMBLE CODE -->", preamble)
-						.replace("/* saved code */", savecode);
-				    	res.end(s);
+					fs.readFile(workdir + "/settings.json")
+					.then(settings => {
+						fs.readFile(workdir + "/savefiles/save.js")
+						.then(savecode => {
+							let s = contents.toString()
+							.replace("<!-- INSTRS -->", instrs)
+							.replace("/* initial code */", initcode)
+							.replace("<!-- PREAMBLE CODE -->", preamble)
+							.replace("/* tutorial_settings */", settings)
+							.replace("/* saved code */", savecode);
+							res.end(s);
+						})
 					})
 				})
 			})
