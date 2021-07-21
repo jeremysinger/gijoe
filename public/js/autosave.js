@@ -59,7 +59,7 @@ function autosave() {
     var codeFragment = myCodeMirror.getValue();
     const http = new XMLHttpRequest();
     try {
-        http.open("POST", "/autosave");
+        http.open("POST", `/autosave/${currentFile}`);
         http.setRequestHeader("Content-Type", "application/json");
         http.send(JSON.stringify({code: codeFragment }));
         http.onreadystatechange = function() {

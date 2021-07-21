@@ -41,15 +41,12 @@ backButton.addEventListener("click", () => {
 
 function getTutorial(id) {
     const settings = JSON.parse(tutorialSettings);
-    console.log(settings);
-    console.log(`Tutorial file is ${currentFile}`);
     const http = new XMLHttpRequest();
     http.open("GET", `/tutorial/${id}`);
 
     http.onload = function() {
         
         if (http.status === 200) {
-            console.log(http.responseText);
             let data = http.responseText;
             tutorialSpace.innerHTML = data;
         } else {
