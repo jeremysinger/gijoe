@@ -86,5 +86,21 @@ app.get(`/tutorial/:id`, (req, res) => {
 		})
 });
 
+app.get(`/savefile/:id`, (req, res) => {
+	fs.readFile(`${workdir}/savefiles/${req.params.id}.js`)
+		.then(contents => {
+			var data = JSON.stringify({code: contents.toString()});
+			res.setHeader("Content-Type", "application/json");
+			res.writeHead(200);
+			res.end(data);
+			return;
+		})
+		.catch(err => {
+			res.writeHead(404);
+			res.end("FILE NOT FOUND");
+			return;
+		})
+});
+
 app.listen(PORT, HOST);
 console.log(`running on http://${HOST}:${PORT}`);

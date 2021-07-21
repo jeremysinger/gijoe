@@ -23,6 +23,7 @@ forwardButton.addEventListener("click", () => {
     }
     currentFile++;
     getTutorial(currentFile);
+    updateCodeMirror(currentFile);
     if (currentFile === tutorialFiles) {
         forwardButton.disabled = true;
     }
@@ -33,7 +34,8 @@ backButton.addEventListener("click", () => {
         forwardButton.disabled = false;
     }
     currentFile--;
-    getTutorial(currentFile);    
+    getTutorial(currentFile);
+    updateCodeMirror(currentFile);    
     if (currentFile === 1) {
         backButton.disabled = true;
     }
@@ -53,6 +55,22 @@ function getTutorial(id) {
             console.log("DATA NOT FOUND");
         }
 
+    }
+
+    http.send();
+}
+
+function updateCodeMirror(id) {
+    const http = new XMLHttpRequest();
+    http.open("GET", `/savefile/${id}`);
+
+    http.onload = function() {
+        if (http.status === 200) {
+            const data = JSON.parse(http.responseText);
+            myCodeMirror.setValue(data.code);
+        } else {
+            console.log("DATA NOT FOUND");
+        }
     }
 
     http.send();
