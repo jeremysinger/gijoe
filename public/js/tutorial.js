@@ -3,6 +3,7 @@
 const forwardButton = document.getElementById("tutorialForward");
 const backButton = document.getElementById("tutorialBack");
 const tutorialArea = document.getElementById("tutorialArea");
+const tutorialSpace = document.getElementById("tutorialSpace");
 
 //Parse the settings json file to see whether the tutorial settings were on
 function checkSettings() {
@@ -24,9 +25,10 @@ function getTutorial(id) {
     http.onload = function() {
         
         if (http.status === 200) {
-            let data = JSON.parse(http.responseText);
+            console.log(http.responseText);
+            let data = http.responseText;
+            tutorialSpace.innerHTML = data;
             let steps =  data.steps;
-            tutorialCodeMirror.setValue(steps[0]);
             let i = 1;
             
             forwardButton.addEventListener("click", () => {

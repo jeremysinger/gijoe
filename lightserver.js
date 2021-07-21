@@ -3,7 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs').promises;
-
+const markdown = require("markdown").markdown;
 //Set up the Port and the Host
 const PORT = 8080;
 const HOST = '0.0.0.0';
@@ -29,13 +29,17 @@ app.get('/', (req,res) => {
 					.then(settings => {
 						fs.readFile(workdir + "/savefiles/save.js")
 						.then(savecode => {
-							let s = contents.toString()
-							.replace("<!-- INSTRS -->", instrs)
-							.replace("/* initial code */", initcode)
-							.replace("<!-- PREAMBLE CODE -->", preamble)
-							.replace("/* tutorial_settings */", settings)
-							.replace("/* saved code */", savecode);
-							res.end(s);
+							fs.readdir(workdir + "/tutorials")
+							.then(files => {
+								let s = contents.toString()
+								.replace("<!-- INSTRS -->", instrs)
+								.replace("/* initial code */", initcode)
+								.replace("<!-- PREAMBLE CODE -->", preamble)
+								.replace("/* tutorial_settings */", settings)
+								.replace("/* saved code */", savecode)
+								.replace("/* tutorial_files */", files.length);
+								res.end(s);
+							})
 						})
 					})
 				})
@@ -67,14 +71,12 @@ app.post("/autosave", (req, res) => {
 });
 
 app.get(`/tutorial/:id`, (req, res) => {
-	fs.readFile(`${workdir}/tutorials/${req.params.id}.js`)
+	fs.readFile(`${workdir}/tutorials/${req.params.id}.md`)
 		.then(contents => {
-			let theString = contents.toString();
-			let theArray = theString.split("//NEXT");
-			let theData = {steps: theArray};
-			res.setHeader("Content-Type", "application/json");
+			let HTML = markdown.toHTML(contents.toString());
+			res.setHeader("Content-Type", "text/html");
 			res.writeHead(200);
-			res.end(JSON.stringify(theData));
+			res.end(HTML);
 			return;
 		})
 		.catch(err => {
@@ -84,7 +86,5 @@ app.get(`/tutorial/:id`, (req, res) => {
 		})
 });
 
-
 app.listen(PORT, HOST);
 console.log(`running on http://${HOST}:${PORT}`);
-
