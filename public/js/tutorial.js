@@ -2,6 +2,7 @@
 
 const forwardButton = document.getElementById("tutorialForward");
 const backButton = document.getElementById("tutorialBack");
+backButton.disabled = true;
 const tutorialArea = document.getElementById("tutorialArea");
 const tutorialSpace = document.getElementById("tutorialSpace");
 
@@ -16,9 +17,32 @@ function checkSettings() {
     }
 }
 
+forwardButton.addEventListener("click", () => {
+    if(backButton.disabled) {
+        backButton.disabled = false;
+    }
+    currentFile++;
+    getTutorial(currentFile);
+    if (currentFile === tutorialFiles) {
+        forwardButton.disabled = true;
+    }
+});
+
+backButton.addEventListener("click", () => {
+    if (forwardButton.disabled) {
+        forwardButton.disabled = false;
+    }
+    currentFile--;
+    getTutorial(currentFile);    
+    if (currentFile === 1) {
+        backButton.disabled = true;
+    }
+});
+
 function getTutorial(id) {
     const settings = JSON.parse(tutorialSettings);
     console.log(settings);
+    console.log(`Tutorial file is ${currentFile}`);
     const http = new XMLHttpRequest();
     http.open("GET", `/tutorial/${id}`);
 
@@ -28,35 +52,6 @@ function getTutorial(id) {
             console.log(http.responseText);
             let data = http.responseText;
             tutorialSpace.innerHTML = data;
-            let steps =  data.steps;
-            let i = 1;
-            
-            forwardButton.addEventListener("click", () => {
-                if(backButton.disabled) {
-                    backButton.disabled = false;
-                }
-                let tutorialText = steps.slice(0, i+1).join("//NEXT");
-                tutorialText = tutorialText.replace(new RegExp("//NEXT", "g"), "");
-                tutorialCodeMirror.setValue(tutorialText);
-                i++;
-                if (i == steps.length) {
-                    forwardButton.disabled = true;
-                }
-            });
-
-            backButton.addEventListener("click", () => {
-                if (forwardButton.disabled) {
-                    forwardButton.disabled = false;
-                }
-                let tutorialText = steps.slice(0, i - 1).join("//NEXT");
-                tutorialText = tutorialText.replace(new RegExp("//NEXT", "g"), "");
-                tutorialCodeMirror.setValue(tutorialText);
-                i--;
-                if (i == 0) {
-                    backButton.disabled = true;
-                }
-            });
-
         } else {
             console.log("DATA NOT FOUND");
         }
