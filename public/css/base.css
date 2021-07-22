@@ -30,7 +30,15 @@ canvas {
     height: 300px;
 }
 
-.button {
+pre {
+    padding: 10px;
+    background-color: #efefef;
+    
+}
+
+code {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
 }
 
 .codeHeading {
