@@ -39,3 +39,17 @@ We are intending to run GIJOE in the online labs for our
 upcoming Coursera specialization entitled *Computational
 Thinking with JavaScript*.
 
+## Tutorials
+
+All tutorials must be written within the tutorials file. The
+website takes in markdown files and each tutorial file must
+be numbered in order. E.g. 1.md, 2.md etc. In order to parse
+through the markdown we are making use of the showdown library.
+For documentation of the syntax click [here](http://demo.showdownjs.com)
+
+If you want to have a specific code base with your tutorial
+please enter js files in the savefiles directory and name the
+files with the same number as the markdown files within the tutorial
+file. e.g. 1.md will have the savefile 1.js. Don't worry if you
+don't have a js file for each md file as they will be automatically
+created when the user opens the tutorial for the first time.

@@ -3,7 +3,8 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs').promises;
-const markdown = require("markdown").markdown;
+const showdown = require("showdown");
+const converter = new showdown.Converter();
 //Set up the Port and the Host
 const PORT = 8080;
 const HOST = '0.0.0.0';
@@ -73,7 +74,7 @@ app.post(`/autosave/:id`, (req, res) => {
 app.get(`/tutorial/:id`, (req, res) => {
 	fs.readFile(`${workdir}/tutorials/${req.params.id}.md`)
 		.then(contents => {
-			let HTML = markdown.toHTML(contents.toString());
+			let HTML = converter.makeHtml(contents.toString());
 			res.setHeader("Content-Type", "text/html");
 			res.writeHead(200);
 			res.end(HTML);
