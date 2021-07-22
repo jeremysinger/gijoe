@@ -127,10 +127,33 @@ crossorigin="anonymous"></script>
 
       codeFragment = goSlowMode(codeInput);
 
+      //goSlowButton and submitcodeButton should not be clickable while execution is happening
+      const submitCodeButton = document.getElementById("submitcode");
+      //only deactivate (and reactivate) the two buttons when on goSlowMode, do not otherwise
+      if(isGoSlowOn){
+        if(!goSlowButton.disabled) {
+          goSlowButton.disabled = true;
+        }
+        if(!submitCodeButton.disabled) {
+          submitCodeButton.disabled = true;
+        }
+      }
+
       var result = 'empty';
       try {
           clearConsole();
-          result = eval(codeFragment);
+          result = eval(codeFragment).then(function () {
+
+            if(isGoSlowOn){
+              if(goSlowButton.disabled) {
+                goSlowButton.disabled = false;
+              }
+              if(submitCodeButton.disabled) {
+                submitCodeButton.disabled = false;
+              }
+            }
+
+          });
           
       } catch (e) {
         if (e instanceof SyntaxError) {
@@ -177,46 +200,6 @@ crossorigin="anonymous"></script>
     <script>
       const tutorialSettings = `/* tutorial_settings */`;
     </script>
-
-    <!-- making area code resizable -->
-    <script>
-      let $handle = document.querySelector(".handle");
-      let $container = document.getElementById('textareacode');
-
-      let cm = CodeMirror($container, { lineNumbers: true });
-
-      function height_of($el) {
-        return parseInt(window.getComputedStyle($el).height.replace(/px$/, ""));
-      }
-
-      const MIN_HEIGHT = 200;
-
-      var start_x;
-      var start_y;
-      var start_h;
-
-      function on_drag(e) {
-        cm.setSize(null, Math.max(MIN_HEIGHT, (start_h + e.y - start_y)) + "px");
-      }
-
-      function on_release(e) {
-        console.log("end");
-        document.body.removeEventListener("mousemove", on_drag);
-        window.removeEventListener("mouseup", on_release);
-      }
-
-      $handle.addEventListener("mousedown", function (e) {    
-        start_x = e.x;
-        start_y = e.y;
-        start_h = ($container).offsetHeight;  //changed this from height_of($container);
-        console.log("start_h: " + start_h); //this is where the error is: gives NaN rather than what it actually is
-
-        document.body.addEventListener("mousemove", on_drag);
-        window.addEventListener("mouseup", on_release);
-      });
-
-    </script>
-
 
     <script>
     function dlCanvas() {
