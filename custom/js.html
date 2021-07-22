@@ -23,7 +23,7 @@ crossorigin="anonymous"></script>
 
   <body>
 
-    <div id="autosave-area" class="success"></div>
+    
     
     <h3>Glasgow Interactive JavaScript Online Editor</h3>
 
@@ -43,19 +43,25 @@ crossorigin="anonymous"></script>
     <button id="tutorialForward">Forward ></button>
   </div>
 </div>
-<div id="codeArea" class="col">
+<div id="codeArea" class="col container">
   <h2 class="codeHeading">Write Code Here </h2>
   <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
-
-  <div class="handle codeControls"></div>
-  
+  <div class="row container">
+    <div class="handle codeControls col btn-group" role="group" aria-label="codeControls">
         <button id="submitcode" class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
         <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
         <button class="button reset" onclick="resetSource()">reset code <span class="fa fa-undo" aria-hidden="true"></span></button>
         <br>
+    </div>
         
+      <div class="col">
+        <div id="autosave-area" class="success"></div>
       </div>
+  </div>
+      
 </div>
+  </div>
+  
 
 
     <div id="outputblock" style="padding: 10px; background-color: purple;">
