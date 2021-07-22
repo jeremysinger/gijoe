@@ -105,12 +105,6 @@ crossorigin="anonymous"></script>
     
       //document.getElementById('textareacode').innerText = originalCode; // loses newlines?
       $('#textareacode').text(saveCode); // jquery preserves newlines?
-      /*var tutorialCodeMirror = CodeMirror.fromTextArea(document.getElementById("textareatutorial"), {
-        mode: "javascript",
-        lineNumbers: true,
-        readOnly: true,
-        lineWrapping: true
-      })*/
       var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('textareacode'), {
         mode:  "javascript",
         lineNumbers: true,
