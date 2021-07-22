@@ -87,7 +87,9 @@ app.get(`/tutorial/:id`, (req, res) => {
 });
 
 app.get(`/savefile/:id`, (req, res) => {
-	fs.readFile(`${workdir}/savefiles/${req.params.id}.js`)
+	const savePath = `${workdir}/savefiles/${req.params.id}.js`;
+	const defaultSaveFile = `/* Default savefile */`;
+	fs.readFile(savePath)
 		.then(contents => {
 			var data = JSON.stringify({code: contents.toString()});
 			res.setHeader("Content-Type", "application/json");
@@ -96,9 +98,32 @@ app.get(`/savefile/:id`, (req, res) => {
 			return;
 		})
 		.catch(err => {
-			res.writeHead(404);
-			res.end("FILE NOT FOUND");
-			return;
+			const tutorialPath = `${workdir}/tutorials/${req.params.id}.md`;
+			fs.readFile(tutorialPath)
+				.then(tutorial => {
+					fs.writeFile(savePath, defaultSaveFile)
+						.then(file => {
+							fs.readFile(savePath)
+								.then(content => {
+									const data = JSON.stringify({code: content.toString()});
+									res.setHeader("Content-Type", "application/json");
+									res.writeHead(200);
+									res.end(data);
+									return;
+								});
+						})
+						.catch(writeFileError => {
+							console.log(writeFileError);
+							res.writeHead(404);
+							res.end(writeFileError);
+							return;
+						})
+				})
+				.catch(error => {
+					res.writeHead(404);
+					res.end("FILE NOT FOUND");
+					return;
+				});
 		})
 });
 
