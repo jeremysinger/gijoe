@@ -406,6 +406,10 @@ function setFont(font) {
     imageContext.font = font;
 }
 
+function message(text) {
+    console.log(text);
+}
+
 // initial setup
 initialise()
 clear()
