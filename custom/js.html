@@ -19,6 +19,13 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"		  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
 crossorigin="anonymous"></script>
 
+    <!-- slider stuff -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/static/css/turtleslider.css">
+
   </head>
 
   <body>
@@ -86,8 +93,14 @@ crossorigin="anonymous"></script>
     <canvas id="imagecanvas" width="300" height="300" style="display:none"></canvas>
 
       <br />
-      <button id="goSlowButton" onclick="goSlowSwitch()"> Speed up turtle! <span class="fa fa-clock" aria-hidden="true"></span></button>
-          <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
+      <div>
+        <p> Turtle speed: </p>
+        <div id="slider">
+          <div id="custom-handle" class="ui-slider-handle"></div>
+        </div>  
+      </div>
+      <br />
+      <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
       <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
 
     </div>
@@ -125,9 +138,6 @@ crossorigin="anonymous"></script>
       const submitCodeButton = document.getElementById("submitcode");
       //only deactivate (and reactivate) the two buttons when on goSlowMode, do not otherwise
       if(isGoSlowOn){
-        if(!goSlowButton.disabled) {
-          goSlowButton.disabled = true;
-        }
         if(!submitCodeButton.disabled) {
           submitCodeButton.disabled = true;
         }
@@ -139,9 +149,6 @@ crossorigin="anonymous"></script>
           result = eval(codeFragment).then(function () {
 
             if(isGoSlowOn){
-              if(goSlowButton.disabled) {
-                goSlowButton.disabled = false;
-              }
               if(submitCodeButton.disabled) {
                 submitCodeButton.disabled = false;
               }
@@ -259,6 +266,7 @@ function log(x) {
 </script>
 <script type="text/javascript" src="/static/js/tutorial.js"></script>
 <script type="text/javascript" src="/static/js/autosave.js"></script>
+<script type="text/javascript" src="/static/js/turtleslider.js"></script>
 <script type="text/javascript" src="/static/js/goslow.js"></script>
 <script type="text/javascript" src="/static/js/autocomplete.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

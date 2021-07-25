@@ -1,10 +1,16 @@
 // sample JavaScript code
 
-console.log("Hello World!");
-console.log("Hello World");
-console.log("Hello World");
-console.log("Write to 1.js");
-console.log("I need to fix that");
-// end JavaScript code
 
-console.log("Hello World");
+let step = 50;
+for(let i = 0; i < 10; i++){ 
+
+  goto(0, 0)
+
+  for(let i = 0; i < 40; i++){
+    forward(step);
+    right(30);
+    forward(step);
+    left(100);
+    forward(step);
+  }
+}
