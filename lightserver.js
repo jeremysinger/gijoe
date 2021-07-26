@@ -4,7 +4,12 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs').promises;
 const showdown = require("showdown");
-const converter = new showdown.Converter();
+const converter = new showdown.Converter({
+	tables: true,
+	strikethrough: true,
+	tasklists: true
+});
+console.log(converter.getOptions());
 //Set up the Port and the Host
 const PORT = 8080;
 const HOST = '0.0.0.0';

@@ -9,7 +9,7 @@ canvas {
 .CodeMirror {
     border: 1px solid #eee;
     resize: vertical;
-    min-height: 150px;
+    min-height: 300px;
     max-width: 100%;
 }
 
@@ -21,19 +21,6 @@ canvas {
 
 .codeControls {
     padding: 20px;
-}
-
-#tutorialSpace {
-    background-color: white;
-    padding: 10px;
-    overflow-y: scroll;
-    height: 300px;
-}
-
-pre {
-    padding: 10px;
-    background-color: #efefef;
-    
 }
 
 code {

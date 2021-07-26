@@ -1,0 +1,86 @@
+#tutorialSpace {
+    background-color: white;
+    padding: 10px;
+    overflow-y: scroll;
+    resize: vertical;
+    height: 300px;
+    min-height: 300px;
+    max-height: 900px;
+    font-size: 15px;
+}
+
+#tutorialSpace::-webkit-scrollbar {
+    width: 10px;
+    padding: 5px;
+    padding: 2px;
+}
+
+#tutorialSpace::-webkit-scrollbar-track {
+    width: 100%;
+    padding: 2px;
+    background-color: white;
+}
+
+#tutorialSpace::-webkit-scrollbar-thumb {
+    width: 80%;
+    background-color: #dadada;
+    padding: 10px;
+    border: 2px sold black;
+    background-clip: padding-box;
+}
+
+#tutorialSpace h1 {
+    font-size: 4em;
+}
+
+#tutorialSpace h2 {
+    font-size: 3.5em;
+}
+
+#tutorialSpace h3 {
+    font-size: 3em;
+}
+
+#tutorialSpace h4 {
+    font-size: 2.5em;
+}
+
+#tutorialSpace h5 {
+    font-size: 2em;
+}
+
+#tutorialSpace p {
+    width: 50ch;
+    max-width: 100%;
+}
+
+#tutorialSpace table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+#tutorialSapce table tr {
+    border: 3px solid black;
+}
+
+#tutorialSpace table td {
+    border: 2px solid black;
+    width: 45ch;
+    max-width: 100%;
+    padding: 10px;
+    text-align: left !important; 
+}
+
+#tutorialSpace table th {
+    background-color: lightgray;
+    font-size: 0.8em;
+    padding: 10px;
+    text-align: center !important;
+}
+
+pre {
+    padding: 10px;
+    background-color: #efefef;
+    
+}
+
