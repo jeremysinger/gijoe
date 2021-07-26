@@ -84,3 +84,19 @@ pre {
     
 }
 
+pre code {
+    display: block;
+    background: none;
+    white-space: pre;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: scroll;
+    max-width: 100%;
+    padding: 0;
+}
+
+.hljs {
+    display: block;
+    overflow-x: auto;
+    padding: 0.5 em;
+}
+

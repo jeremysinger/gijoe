@@ -9,7 +9,6 @@ const converter = new showdown.Converter({
 	strikethrough: true,
 	tasklists: true
 });
-console.log(converter.getOptions());
 //Set up the Port and the Host
 const PORT = 8080;
 const HOST = '0.0.0.0';
