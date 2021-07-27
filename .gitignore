@@ -1,4 +1,5 @@
 *~
 node_modules/*
-custom/savefiles/save.js
+savefiles/*
+tutorials/*
 
