@@ -11,5 +11,6 @@ for (var i = 1; i < 100; i++) {
 	forward(i);
   	left(25);
 	forward(i);
+  	console.log("Hello World");
 }
 

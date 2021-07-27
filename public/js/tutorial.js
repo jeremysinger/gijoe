@@ -51,8 +51,8 @@ function getTutorial(id) {
         if (http.status === 200) {
             let data = http.responseText;
             tutorialSpace.innerHTML = data;
-            //makeCodeMirrorInstances();
-            hljs.highlightAll();
+            makeCodeMirrorInstances();
+            //hljs.highlightAll();
         } else {
             console.log("DATA NOT FOUND");
         }
@@ -82,17 +82,8 @@ function updateCodeMirror(id) {
 
 /*This code tries to create brand new Code Mirror elements. For some reason it
 crashes the website so I'm commenting it out before I commit this 
+*/
 
-function createNewMirror(selector) {
-    console.log(selector.classList[0]);
-    return CodeMirror.fromTextArea(selector, {
-        mode: selector.classList[0],
-        readOnly: true,
-        lineNumbers: false,
-        lineWrapping: true
-    });
-
-}
 
 
 function makeCodeMirrorInstances() {
@@ -100,17 +91,13 @@ function makeCodeMirrorInstances() {
     codeMirrors = [];
     for (var i = 0; i < preElements.length; i++) {
         var codeBlock = preElements[i].childNodes[0];
-        console.log(codeBlock);
-        var newTextArea = document.createElement("textarea");
-        newTextArea.classList = codeBlock.classList;
-        newTextArea.value = codeBlock.innerHTML;
-        console.log(preElements[i].parentNode);
-        preElements[i].parentNode.replaceChild(newTextArea, preElements[i]);
-        codeMirrors.push(createNewMirror(newTextArea));
+        console.log(codeBlock.innerHTML);
+        preElements[i].classList.add("example");
+        CodeMirror.runMode(codeBlock.innerHTML, "text/javascript", preElements[i]);
     }
     console.log(preElements);
 }
 
-*/
+
 
 checkSettings();

@@ -6,12 +6,7 @@ canvas {
     border: 2px dotted #564b47;
 }
 
-.CodeMirror {
-    border: 1px solid #eee;
-    resize: vertical;
-    min-height: 300px;
-    max-width: 100%;
-}
+
 
 #fakeConsole {
   max-height: 250px;
