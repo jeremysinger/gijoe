@@ -4,6 +4,7 @@
     font-family: "Courier";
     font-size: 1em;
     min-height: 300px;
+    max-height: 600px;
     max-width: 100%;
     background-color: #efefef; 
 }

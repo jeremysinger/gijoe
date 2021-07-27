@@ -91,11 +91,9 @@ function makeCodeMirrorInstances() {
     codeMirrors = [];
     for (var i = 0; i < preElements.length; i++) {
         var codeBlock = preElements[i].childNodes[0];
-        console.log(codeBlock.innerHTML);
         preElements[i].classList.add("example");
         CodeMirror.runMode(codeBlock.innerHTML, "text/javascript", preElements[i]);
     }
-    console.log(preElements);
 }
 
 function resizeCodeMirror() {
