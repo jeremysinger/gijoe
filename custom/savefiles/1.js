@@ -12,5 +12,8 @@ for (var i = 1; i < 100; i++) {
   	left(25);
 	forward(i);
   	console.log("Hello World");
+  	console.log("Hello World Again");
 }
+
+
 

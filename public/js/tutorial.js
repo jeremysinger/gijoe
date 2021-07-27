@@ -78,14 +78,6 @@ function updateCodeMirror(id) {
     http.send();
 }
 
-
-
-/*This code tries to create brand new Code Mirror elements. For some reason it
-crashes the website so I'm commenting it out before I commit this 
-*/
-
-
-
 function makeCodeMirrorInstances() {
     const preElements = tutorialSpace.getElementsByTagName("pre");
     codeMirrors = [];
@@ -97,15 +89,19 @@ function makeCodeMirrorInstances() {
 }
 
 function resizeCodeMirror() {
-    var height = tutorialSpace.style.height;
-    var width = myCodeMirror.getWrapperElement().offsetWidth;
-    myCodeMirror.setSize(width, height);
+    if (codeMirrorEl.offsetTop == tutorialSpace.offsetTop) {
+        var height = tutorialSpace.style.height;
+        var width = myCodeMirror.getWrapperElement().offsetWidth;
+        myCodeMirror.setSize(width, height);
+    }
 }
 
 function resizeTutorialArea() {
-    var width = tutorialSpace.style.width;
-    var newHeight = myCodeMirror.getWrapperElement().offsetHeight;
-    tutorialSpace.style.height = newHeight;
+    if (codeMirrorEl.offsetTop == tutorialSpace.offsetTop) {
+        var width = tutorialSpace.style.width;
+        var newHeight = myCodeMirror.getWrapperElement().offsetHeight;
+        tutorialSpace.style.height = newHeight;
+    }
 }
 
 new ResizeObserver(resizeCodeMirror).observe(tutorialSpace);
