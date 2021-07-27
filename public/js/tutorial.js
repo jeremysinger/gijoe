@@ -105,13 +105,16 @@ function resizeCodeMirror() {
 }
 
 function resizeTutorialArea() {
-    console.log("Resize tutorial area run");
     var width = tutorialSpace.style.width;
     var newHeight = myCodeMirror.getWrapperElement().offsetHeight;
     tutorialSpace.style.height = newHeight;
 }
 
 new ResizeObserver(resizeCodeMirror).observe(tutorialSpace);
+
+const codeResize = new ResizeObserver(resizeTutorialArea);
+const codeMirrorEl = document.querySelector("div.CodeMirror.CodeMirror-wrap");
+codeResize.observe(codeMirrorEl);
 
 
 
