@@ -1,6 +1,6 @@
 // sample JavaScript code
 
-for (var i = 0; i < 40; i++) {
+for (var i = 1; i < 100; i++) {
   	left(90);
 	forward(i);
 	left(45);
@@ -11,6 +11,5 @@ for (var i = 0; i < 40; i++) {
 	forward(i);
   	left(25);
 	forward(i);
-  	console.log("Hello World");
 }
 
