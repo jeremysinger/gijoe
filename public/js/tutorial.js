@@ -98,6 +98,21 @@ function makeCodeMirrorInstances() {
     console.log(preElements);
 }
 
+function resizeCodeMirror() {
+    var height = tutorialSpace.style.height;
+    var width = myCodeMirror.getWrapperElement().offsetWidth;
+    myCodeMirror.setSize(width, height);
+}
+
+function resizeTutorialArea() {
+    console.log("Resize tutorial area run");
+    var width = tutorialSpace.style.width;
+    var newHeight = myCodeMirror.getWrapperElement().offsetHeight;
+    tutorialSpace.style.height = newHeight;
+}
+
+new ResizeObserver(resizeCodeMirror).observe(tutorialSpace);
+
 
 
 checkSettings();

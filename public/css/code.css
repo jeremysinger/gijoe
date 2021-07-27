@@ -1,8 +1,16 @@
 .CodeMirror {
     border: 1px solid #eee;
     resize: vertical;
+    font-family: "Courier";
+    font-size: 1em;
     min-height: 300px;
     max-width: 100%;
+    background-color: #efefef; 
+}
+
+.example {
+    font-family: "Courier";
+    font-size: 1em;
 }
 
 .CodeMirror::-webkit-scrollbar {
