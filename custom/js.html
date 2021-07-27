@@ -159,11 +159,11 @@ crossorigin="anonymous"></script>
           });
           
       } catch (e) {
-        if (e instanceof SyntaxError) {
+        // if (e instanceof SyntaxError) {
           alert("CAUGHT ERROR " + e + "\n MESSAGE: " + e.message);
-        } else {
-          throw e;
-        }
+        // } else {
+        //   throw e;
+        // }
         
       }
       finally{
