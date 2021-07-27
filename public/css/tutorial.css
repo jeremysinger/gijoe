@@ -100,3 +100,8 @@ pre code {
     padding: 0.5 em;
 }
 
+#tutorialSpace img {
+    max-width: 100%;
+    object-fit: cover;
+}
+
