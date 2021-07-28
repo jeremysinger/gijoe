@@ -155,6 +155,7 @@ crossorigin="anonymous"></script>
                 submitCodeButton.disabled = false;
               }
             }
+            console.log("---");  //place a divider between the outputs of different runs of the code
 
           });
           
@@ -166,9 +167,7 @@ crossorigin="anonymous"></script>
         // }
         
       }
-      finally{
-        console.log("---");
-      }
+      finally{}
 
       function resetSource() {
         myCodeMirror.setValue(originalCode);
