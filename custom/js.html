@@ -146,9 +146,13 @@ crossorigin="anonymous"></script>
       }
 
       var result = 'empty';
-      try {
+      
           clearConsole();
-          result = eval(codeFragment).then(function () {
+          result = eval(codeFragment).catch(
+            function (e) {
+              alert("CAUGHT ERROR " + e + "\n MESSAGE: " + e.message);
+            }
+          ).then(function () {
 
             if(isGoSlowOn){
               if(submitCodeButton.disabled) {
@@ -158,16 +162,6 @@ crossorigin="anonymous"></script>
             console.log("---");  //place a divider between the outputs of different runs of the code
 
           });
-          
-      } catch (e) {
-        // if (e instanceof SyntaxError) {
-          alert("CAUGHT ERROR " + e + "\n MESSAGE: " + e.message);
-        // } else {
-        //   throw e;
-        // }
-        
-      }
-      finally{}
 
       function resetSource() {
         myCodeMirror.setValue(originalCode);
