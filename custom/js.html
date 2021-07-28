@@ -150,7 +150,12 @@ crossorigin="anonymous"></script>
           clearConsole();
           result = eval(codeFragment).catch(
             function (e) {
-              alert("CAUGHT ERROR " + e + "\n MESSAGE: " + e.message);
+              if (e instanceof ReferenceError) {
+                alert('CAUGHT ERROR: ' + e + "\n HINT: don't forget to spell functions and variables correctly and to only use those that you have already defined!");
+              }
+              else {
+                alert('UNDEFINED ERROR: ' + e);
+              }
             }
           ).then(function () {
 
