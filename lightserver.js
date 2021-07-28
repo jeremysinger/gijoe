@@ -20,6 +20,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get('/', (req,res) => {
+	checkSaveExists();
+	checkTutorialExists();
     fs.readFile(workdir + "/js.html")
 	.then(contents => {
 	    res.setHeader("Content-Type", "text/html");
@@ -57,6 +59,7 @@ app.get('/', (req,res) => {
 	    return;
 	});
 });
+
 
 
 //This will be the POST request that will save to the savefile folder
@@ -131,6 +134,32 @@ app.get(`/savefile/:id`, (req, res) => {
 				});
 		})
 });
+
+function checkSaveExists() {
+	const savePath = workdir + "/savefiles/1.js";
+	fs.readFile(savePath)
+		.then(result => {
+			return true;
+		})
+		.catch(error => {
+			fs.writeFile(savePath, "/* Generic Javascript Code */");
+			return true;
+		})
+}
+
+function checkTutorialExists() {
+	const tutorialPath = workdir + "/tutorials/1.md";
+	
+	
+	fs.readFile(tutorialPath)
+	.then(result => {
+		return true;
+	})
+	.catch(error => {
+		fs.writeFile(tutorialPath ,"# Generic Tutorial File");
+		return true;
+	})
+}
 
 app.listen(PORT, HOST);
 console.log(`running on http://${HOST}:${PORT}`);

@@ -112,6 +112,7 @@ crossorigin="anonymous"></script>
     </script>
 
 
+
     <script>
       var originalCode = `/* initial code */`;
       var saveCode =  `/* saved code */`;
@@ -148,18 +149,21 @@ crossorigin="anonymous"></script>
       var result = 'empty';
       try {
           clearConsole();
-          result = eval(codeFragment).then(function () {
+          result = await eval(codeFragment).then(function () {
 
             if(isGoSlowOn){
               if(submitCodeButton.disabled) {
                 submitCodeButton.disabled = false;
               }
             }
+            console.log("SUCCESS");
 
-          });
+          })
+          
           
       } catch (e) {
         // if (e instanceof SyntaxError) {
+          //console.log(e.lineNumbers);
           alert("CAUGHT ERROR " + e + "\n MESSAGE: " + e.message);
         // } else {
         //   throw e;
