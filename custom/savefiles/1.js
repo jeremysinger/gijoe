@@ -1,8 +1,16 @@
 // sample JavaScript code
-var i = 0;
-log("hello");
-forward(i);
-log("Hello World");
+function fib(a) {
+  console.log(a);
+  if (a == 0) {
+    return 1;
+  } else if (a == 1) {
+    return 1;
+  } else {
+    return fib(a-1) + fib(a-2);
+  }
+}
+
+console.log(fib(2));
 
 
 
