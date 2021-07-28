@@ -149,7 +149,7 @@ crossorigin="anonymous"></script>
       var result = 'empty';
       try {
           clearConsole();
-          result = await eval(codeFragment).then(function () {
+          result = eval(codeFragment).then(function () {
 
             if(isGoSlowOn){
               if(submitCodeButton.disabled) {
@@ -158,7 +158,7 @@ crossorigin="anonymous"></script>
             }
             console.log("SUCCESS");
 
-          })
+          });
           
           
       } catch (e) {
