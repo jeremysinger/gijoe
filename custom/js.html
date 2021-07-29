@@ -149,16 +149,7 @@ crossorigin="anonymous"></script>
       var result = 'empty';
       
           clearConsole();
-          result = eval(codeFragment).catch(
-            function (e) {
-              if (e instanceof ReferenceError) {
-                alert('CAUGHT ERROR: ' + e + "\n HINT: don't forget to spell functions and variables correctly and to only use those that you have already defined!");
-              }
-              else {
-                alert('UNDEFINED ERROR: ' + e);
-              }
-            }
-          ).then(function () {
+          result = eval(codeFragment).catch( handleError ).then( function () {
 
             if(isGoSlowOn){
               if(submitCodeButton.disabled) {
@@ -269,6 +260,7 @@ function log(x) {
 <script type="text/javascript" src="/static/js/autosave.js"></script>
 <script type="text/javascript" src="/static/js/turtleslider.js"></script>
 <script type="text/javascript" src="/static/js/goslow.js"></script>
+<script type="text/javascript" src="/static/js/errorcoach.js"></script>
 <script type="text/javascript" src="/static/js/autocomplete.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
