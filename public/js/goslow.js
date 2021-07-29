@@ -15,7 +15,7 @@ function slowDownAt(codeBit, codeFragment){
 
 function goSlowMode(codeFragment){
     if(isGoSlowOn){
-        codeFragment = "async function code(){ " + codeFragment + " } code().catch(err => {alert});";
+        codeFragment = "async function code(){ " + codeFragment + " } code()";
         for(let i = 0; i < speedBumps.length; i++){
             codeFragment = slowDownAt(speedBumps[i], codeFragment);
         }
