@@ -8,11 +8,7 @@ canvas {
 
 
 
-#fakeConsole {
-  max-height: 250px;
-  resize: vertical;
-  overflow: auto !important;
-}
+
 
 .codeControls {
     padding: 20px;

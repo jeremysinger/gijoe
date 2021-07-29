@@ -1,4 +1,4 @@
-errorMap = {
+hintMap = {
     "ReferenceError": "don't forget to spell functions, variables and objects correctly and to only use those that you have already defined!", 
     "TypeError": "make sure that you're accessing the right method idk man",
     "SyntaxError": "", 
@@ -6,11 +6,14 @@ errorMap = {
 }
 
 function handleError(err) {
-    if (err.name in errorMap) {
-        console.log("ERROR: " + err);
-        console.log(errorMap[err.name]);
+    if (err.name in hintMap) {
+        output.innerHTML = `<font color='red'>ERROR: ${err}<br></br>HINT: ${hintMap[err.name]}</font>`;
     }
     else {
-        console.log("UNDEFINED ERROR: " + err);
+        output.innerHTML = `<font color='red'>UNDEFINED ERROR: ${err}</font>`;
     }
+    getLineNumber(err.stack);
+    
 }
+
+let output = document.getElementById("output");
