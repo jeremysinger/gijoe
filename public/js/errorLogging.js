@@ -1,8 +1,8 @@
 hintMap = {
     "ReferenceError": "don't forget to spell functions, variables and objects correctly and to only use those that you have already defined!", 
     "TypeError": "make sure that you're accessing the right method idk man",
-    "SyntaxError": "", 
-    "RangeError": "",
+    "SyntaxError": "hey there", 
+    "RangeError": "hello there",
 }
 
 function handleError(err) {
@@ -12,7 +12,10 @@ function handleError(err) {
     else {
         output.innerHTML = `<font color='red'>UNDEFINED ERROR: ${err}</font>`;
     }
-    getLineNumber(err.stack);
+    
+    // getLineNumber(err.stack); this gives error under some conditions: if it is a Syntax error the stack string can't be split this many times  
+    
+    console.log("---");  //place a divider between the outputs of different runs of the code
     
 }
 

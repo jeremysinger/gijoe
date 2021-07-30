@@ -152,17 +152,28 @@ crossorigin="anonymous"></script>
 
       var result = 'empty';
       
+      try{
           clearConsole();
-          result = eval(codeFragment).catch( handleError ).then( function () {
+          result = eval(codeFragment).catch( handleError ).then( function () {  //only a catch like this can catch most errors
 
             if(isGoSlowOn){
               if(submitCodeButton.disabled) {
                 submitCodeButton.disabled = false;
               }
             }
-            console.log("---");  //place a divider between the outputs of different runs of the code
 
           });
+      }
+      catch (err) { //only a catch like this can catch syntax errors for whatever reason, but it can't catch any other one
+        handleError(err);
+      }  
+      finally { 
+        if(isGoSlowOn){
+              if(submitCodeButton.disabled) {
+                submitCodeButton.disabled = false;
+              }
+            }
+      }
 
       function resetSource() {
         myCodeMirror.setValue(originalCode);
@@ -264,7 +275,6 @@ function log(x) {
 <script type="text/javascript" src="/static/js/autosave.js"></script>
 <script type="text/javascript" src="/static/js/turtleslider.js"></script>
 <script type="text/javascript" src="/static/js/goslow.js"></script>
-<script type="text/javascript" src="/static/js/errorcoach.js"></script>
 <script type="text/javascript" src="/static/js/autocomplete.js"></script>
 <script type="text/javascript" src="/static/js/outputResize.js"></script>
 <script type="text/javascript" src="/static/js/errorLogging.js"></script>
