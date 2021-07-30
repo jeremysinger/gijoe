@@ -6,13 +6,13 @@ hintMap = {
 }
 
 function handleError(err) {
+    var lineNumber = getLineNumber(err.stack);
     if (err.name in hintMap) {
-        output.innerHTML = `<font color='red'>ERROR: ${err}<br></br>HINT: ${hintMap[err.name]}</font>`;
+        output.innerHTML = `<font color='red'>ERROR: ${err} at line ${lineNumber}<br></br>HINT: ${hintMap[err.name]}</font>`;
     }
     else {
-        output.innerHTML = `<font color='red'>UNDEFINED ERROR: ${err}</font>`;
+        output.innerHTML = `<font color='red'>UNDEFINED ERROR: ${err} at line ${lineNumber}</font>`;
     }
-    getLineNumber(err.stack);
     
 }
 
