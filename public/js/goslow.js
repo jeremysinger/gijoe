@@ -8,14 +8,14 @@ function slowDownAt(codeBit, codeFragment){
     let delayTime = slider.innerHTML;
     let regex = new RegExp(codeBit, "gi"); //perform a global, case insensitive replacement
 
-    let substitution = " await sleep(" + delayTime + "); " + codeBit;
+    let substitution = "delayTime = slider.innerHTML; await sleep(delayTime); " + codeBit;
 
     return codeFragment.replace(regex, substitution);  
 }
 
 function goSlowMode(codeFragment){
     if(isGoSlowOn){
-        codeFragment = "async function code(){ " + codeFragment + " } code()";
+        codeFragment = "const slider = document.getElementById('custom-handle'); let delayTime = slider.innerHTML; async function code(){ " + codeFragment + " } code()";
         for(let i = 0; i < speedBumps.length; i++){
             codeFragment = slowDownAt(speedBumps[i], codeFragment);
         }
