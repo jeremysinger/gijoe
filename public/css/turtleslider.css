@@ -5,10 +5,14 @@
     margin-top: -.8em;
     text-align: center;
     line-height: 1.6em;
+    color: white;
+    background-color: rgb(128, 0, 127);
 }
 
 #slider{
     width: 100%;
+    background: rgb(0,0,255);
+    background: linear-gradient(90deg, rgba(0,0,255,1) 0%,rgba(255,0,0,1) 100%);
 }
 
 label {
