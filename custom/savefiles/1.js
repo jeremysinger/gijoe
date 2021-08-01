@@ -1,3 +1,3 @@
-// sample JavaScript code
-lg("hi")
-
+while(true) {
+  console.log("Hello World");
+}

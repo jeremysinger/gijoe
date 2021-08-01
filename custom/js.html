@@ -100,10 +100,19 @@ crossorigin="anonymous"></script>
 
       <br />
       <div>
-        <p> Turtle speed: </p>
-        <div id="slider">
-          <div id="custom-handle" class="ui-slider-handle"></div>
-        </div>  
+        <p id="speedLabel" class="row"> Turtle speed: </p>
+        <div class="row">
+          <label class="col-sm">Slower</label>
+          <div id="slider" class="col">
+          
+            <div id="custom-handle" class="ui-slider-handle">
+            </div>
+            
+          </div>
+          <label class="col-sm">Faster</label>
+        </div>
+        
+          
       </div>
       <br />
       <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
@@ -130,7 +139,8 @@ crossorigin="anonymous"></script>
         lineNumbers: true,
         lineWrapping: true,
         hint: CodeMirror.hint.javascript,
-        autoCloseBrackets: true
+        autoCloseBrackets: true,
+        styleSelectedText: true
       });
 
       
@@ -138,7 +148,6 @@ crossorigin="anonymous"></script>
     async function executeCodeBlock() {
 
       codeInput = myCodeMirror.getValue();
-
       codeFragment = goSlowMode(codeInput);
 
       //goSlowButton and submitcodeButton should not be clickable while execution is happening

@@ -6,16 +6,13 @@ hintMap = {
 }
 
 function handleError(err) {
+    var lineNumber = getLineNumber(err.stack);
     if (err.name in hintMap) {
-        output.innerHTML = `<font color='red'>ERROR: ${err}<br></br>HINT: ${hintMap[err.name]}</font>`;
+        output.innerHTML = `<font color='red'>ERROR: ${err} at line ${lineNumber}<br></br>HINT: ${hintMap[err.name]}</font>`;
     }
     else {
-        output.innerHTML = `<font color='red'>UNDEFINED ERROR: ${err}</font>`;
+        output.innerHTML = `<font color='red'>UNDEFINED ERROR: ${err} at line ${lineNumber}</font>`;
     }
-    
-    // getLineNumber(err.stack); this gives error under some conditions: if it is a Syntax error the stack string can't be split this many times  
-    
-    console.log("---");  //place a divider between the outputs of different runs of the code
     
 }
 
