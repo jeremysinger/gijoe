@@ -1,2 +1,2 @@
 
-console.log(y);
+console.log(0)

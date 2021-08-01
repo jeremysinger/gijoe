@@ -158,6 +158,8 @@ crossorigin="anonymous"></script>
       }
 
       var result = 'empty';
+
+      var runtimeError = false;
       
       try{
           clearConsole();
@@ -168,20 +170,25 @@ crossorigin="anonymous"></script>
                 submitCodeButton.disabled = false;
               }
             }
-
+            
             console.log( "---" );
 
           });
       }
       catch (err) { //only a catch like this can catch syntax errors for whatever reason, but it can't catch any other one
+        runtimeError = true;
         handleError(err);
       }  
       finally { 
         if(isGoSlowOn){
-              if(submitCodeButton.disabled) {
-                submitCodeButton.disabled = false;
-              }
-            }
+          if(submitCodeButton.disabled) {
+            submitCodeButton.disabled = false;
+          }
+        }
+        console.log(runtimeError);
+        if(!runtimeError){
+          document.getElementById('output').innerHTML = 'you executed this code: ' + codeInput + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
+        }
       }
 
       function resetSource() {
@@ -198,7 +205,6 @@ crossorigin="anonymous"></script>
         }
         http.send(data);
       }
-      document.getElementById('output').innerHTML = 'you executed this code: ' + codeInput + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
       return;
     }
 
