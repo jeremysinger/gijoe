@@ -3,7 +3,7 @@ function getLineNumber(stack) {
 
     stack = stack.split("at")[2];
     let lineNumber= stack.split(",")[1].split(":")[1];
-    return lineNumber;
+    return lineNumber - 1;
 }
 
 function getLineNumberForSyntax(stack) {
