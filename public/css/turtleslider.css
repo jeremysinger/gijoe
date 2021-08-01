@@ -1,8 +1,6 @@
 #custom-handle {
-    width: 3em;
-    height: 1.6em;
     top: 50%;
-    margin-top: -.8em;
+    margin-top: -.6em;
     text-align: center;
     line-height: 1.6em;
     color: white;
@@ -17,4 +15,14 @@
 
 label {
     text-align: center;
+}
+
+#slower-label {
+    margin-top: -.5em;
+    text-align: right;
+}
+
+#faster-label {
+    margin-top: -.5em;
+    text-align: left;
 }

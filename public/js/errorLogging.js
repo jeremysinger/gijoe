@@ -6,14 +6,19 @@ hintMap = {
 }
 
 function handleError(err) {
-    var lineNumber = getLineNumber(err.stack);
+    if (err.name == "SyntaxError"){
+        var lineNumber = getLineNumberForSyntax(err.stack);
+        console.log("---");
+    } else {
+        var lineNumber = getLineNumber(err.stack);        
+    }
+
     if (err.name in hintMap) {
         output.innerHTML = `<font color='red'>ERROR: ${err} at line ${lineNumber}<br></br>HINT: ${hintMap[err.name]}</font>`;
     }
     else {
         output.innerHTML = `<font color='red'>UNDEFINED ERROR: ${err} at line ${lineNumber}</font>`;
     }
-    
 }
 
 let output = document.getElementById("output");

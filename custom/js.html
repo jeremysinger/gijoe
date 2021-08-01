@@ -36,7 +36,7 @@ crossorigin="anonymous"></script>
 
   </head>
 
-  <body>
+  <body class="mx-5">
 
     <h3>Glasgow Interactive JavaScript Online Editor</h3>
 
@@ -100,18 +100,16 @@ crossorigin="anonymous"></script>
 
       <br />
       <div>
-        <p id="speedLabel" class="row"> Turtle speed: </p>
         <div class="row">
-          <label class="col-sm">Slower</label>
+          <p id="speedLabel" class="col-sm"> Turtle speed: </p>
+          <label id="slower-label" class="col-sm ">Slower</label>
           <div id="slider" class="col">
           
             <div id="custom-handle" class="ui-slider-handle">
             </div>
             
           </div>
-          <label class="col-sm">Faster</label>
-        </div>
-        
+          <label id="faster-label" class="col-sm">Faster</label>        
           
       </div>
       <br />
@@ -170,6 +168,8 @@ crossorigin="anonymous"></script>
                 submitCodeButton.disabled = false;
               }
             }
+
+            console.log( "---" );
 
           });
       }

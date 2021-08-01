@@ -9,7 +9,7 @@ $( function() {
         max: 2000,
         value: 1000,
         create: function() {
-            handle.text( $( this ).slider( "value" ) );
+            //handle.text( $( this ).slider( "value" ) ); superflous according to customer
             $("#speedLabel").html(`Turtle Speed: ${$( this ).slider( "value" )} ms`);
         },
         slide: function( event, ui ) {
@@ -21,7 +21,7 @@ $( function() {
             }
             theColour = `rgb(${red}, 0, ${blue})`;
             $("#custom-handle").css("background-color", theColour);
-            handle.text(new_value);
+            //handle.text(new_value);
             
         }
     });
