@@ -59,260 +59,261 @@ crossorigin="anonymous"></script>
         Now type your JavaScript program in the box below.
       </p>
 
-    <div id="codeblock" class="row" style="padding: 10px; background-color: gray;">
-      <div id="tutorialArea" class="col">
-        <h2 class="codeHeading">Tutorial Space</h2>
-        <div id="tutorialSpace"></div>
-        <div id="tutorialControls" class="codeControls">
-          <button id="tutorialBack">< Back</button>
-          <button id="tutorialForward">Forward ></button>
-        </div>  
-    </div>
-    <div id="codeArea" class="col container">
-      <h2 class="codeHeading">Write Code Here </h2>
-      <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
-      <div class="row container">
-        <div class="handle codeControls col btn-group" role="group" aria-label="codeControls">
-            <button id="submitcode" class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
-            <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
-            <button class="button reset" onclick="resetSource()">reset code <span class="fa fa-undo" aria-hidden="true"></span></button>
-            <br>
-        </div>
-            
-        <div class="col">
-          <div id="autosave-area" class="success"></div>
-        </div>
+      <div id="codeblock" class="row " style="padding: 10px; background-color: rgb(0,83,152);">
+        <div id="tutorialArea" class="col">
+          <h2 class="codeHeading">Tutorial Space</h2>
+          <div id="tutorialSpace"></div>
+          <div id="tutorialControls" class="codeControls">
+            <button id="tutorialBack">< Back</button>
+            <button id="tutorialForward">Forward ></button>
+          </div>  
       </div>
-          
-    </div>
-  </div>
-  
-
-
-    <div id="outputblock" class="row" style="padding: 10px; background-color: purple;">
-
-      <div id="codeOutput" class="col" style="background-color: cornsilk; font-family: monospace; color: indigo;">
-        <b>Code evaluation</b><br/>
-        <div id="output">&nbsp;</div>
-      </div>
-
-      <div id="consoleOutput" class="col" style="background-color: azure; font-family: monospace; color: darkblue;">
-        <b>Console output</b><br/>
-        <div id="fakeConsole">&nbsp;</div>
-      </div>
-      
-    </div>
-
-    <div id="graphicsblock" style="padding: 10px; background-color: lightgray;">
-      <h3>Graphics canvas</h3>
-    <!-- This is for drawing the little green turtle, and it sits above... -->
-    <canvas style="background-color: white;" id="turtlecanvas" width="300" height="300"></canvas>
-    
-    <!-- ... this one, which is the image that the turtle is drawing. -->
-    <canvas id="imagecanvas" width="300" height="300" style="display:none"></canvas>
-
-      <br />
-      <div>
-        <div class="row">
-          <div id="speed-indicator"> 
-            <p id="speedLabel" class="col-2"> Turtle speed: </p>
+        <div id="codeArea" class="col container">
+          <h2 class="codeHeading">Write Code Here </h2>
+          <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
+          <div class="row container">
+            <div class="handle codeControls col btn-group" role="group" aria-label="codeControls">
+                <button id="submitcode" class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
+                <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
+                <button class="button reset" onclick="resetSource()">reset code <span class="fa fa-undo" aria-hidden="true"></span></button>
+                <br>
+            </div>
+                
+            <div class="col">
+              <div id="autosave-area" class="success"></div>
+            </div>
           </div>
-          <label id="slower-label" class="col-2 ">Slower</label>
-          <div id="slider" class="col">
-            <div id="custom-handle" class="ui-slider-handle"></div>
-          </div>
-          <label id="faster-label" class="col-2">Faster</label>        
-          
+              
+        </div>
+        
       </div>
-      <br />
-      <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
-      <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
-
-    </div>
-
-    <script>
-    <!-- PREAMBLE CODE -->
-    </script>
-
-
-
-    <script>
-      var originalCode = `/* initial code */`;
-      var saveCode =  `/* saved code */`;
-      var tutorialFiles = parseInt(`/* tutorial_files */`);
-      var currentFile = 1;
-    
-      //document.getElementById('textareacode').innerText = originalCode; // loses newlines?
-      $('#textareacode').text(saveCode); // jquery preserves newlines?
-      var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('textareacode'), {
-        mode:  "javascript",
-        lineNumbers: true,
-        lineWrapping: true,
-        hint: CodeMirror.hint.javascript,
-        autoCloseBrackets: true,
-        styleSelectedText: true
-      });
-
       
 
-    async function executeCodeBlock() {
 
-      codeInput = myCodeMirror.getValue();
-      codeFragment = goSlowMode(codeInput);
+        <div id="outputblock" class="row py-3">
 
-      //goSlowButton and submitcodeButton should not be clickable while execution is happening
-      const submitCodeButton = document.getElementById("submitcode");
-      //only deactivate (and reactivate) the two buttons when on goSlowMode, do not otherwise
-      if(isGoSlowOn){
-        if(!submitCodeButton.disabled) {
-          submitCodeButton.disabled = true;
-        }
-      }
+          <div id="codeOutput" class="col" style="background-color: cornsilk; font-family: monospace; color: indigo;">
+            <b>Code evaluation</b><br/>
+            <div id="output">&nbsp;</div>
+          </div>
 
-      var result = 'empty';
+          <div id="consoleOutput" class="col" style="background-color: azure; font-family: monospace; color: #003865;">
+            <b>Console output</b><br/>
+            <div id="fakeConsole">&nbsp;</div>
+          </div>
+          
+        </div>
 
-      var runtimeError = false;
-      
-      try{
-          clearConsole();
-          result = eval(codeFragment).catch( handleError ).then( function () {  //only a catch like this can catch most errors
+        <div id="graphicsblock" style="padding: 10px; background-color: lightgray;">
+          <h3>Graphics canvas</h3>
+          <!-- This is for drawing the little green turtle, and it sits above... -->
+          <canvas style="background-color: white;" id="turtlecanvas" width="300" height="300"></canvas>
+          
+          <!-- ... this one, which is the image that the turtle is drawing. -->
+          <canvas id="imagecanvas" width="300" height="300" style="display:none"></canvas>
 
+          <br />
+          <div>
+            <div class="row">
+              <div id="speed-indicator"> 
+                <p id="speedLabel" class="col-2"> Turtle speed: </p>
+              </div>
+              <label id="slower-label" class="col-2 ">Slower</label>
+              <div id="slider" class="col">
+                <div id="custom-handle" class="ui-slider-handle"></div>
+              </div>
+              <label id="faster-label" class="col-2">Faster</label>        
+              
+          </div>
+          <br />
+          <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
+          <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
+
+        </div>
+
+        <script>
+        <!-- PREAMBLE CODE -->
+        </script>
+
+
+
+        <script>
+          var originalCode = `/* initial code */`;
+          var saveCode =  `/* saved code */`;
+          var tutorialFiles = parseInt(`/* tutorial_files */`);
+          var currentFile = 1;
+        
+          //document.getElementById('textareacode').innerText = originalCode; // loses newlines?
+          $('#textareacode').text(saveCode); // jquery preserves newlines?
+          var myCodeMirror = CodeMirror.fromTextArea(document.getElementById('textareacode'), {
+            mode:  "javascript",
+            lineNumbers: true,
+            lineWrapping: true,
+            hint: CodeMirror.hint.javascript,
+            autoCloseBrackets: true,
+            styleSelectedText: true
+          });
+
+          
+
+        async function executeCodeBlock() {
+
+          codeInput = myCodeMirror.getValue();
+          codeFragment = goSlowMode(codeInput);
+
+          //goSlowButton and submitcodeButton should not be clickable while execution is happening
+          const submitCodeButton = document.getElementById("submitcode");
+          //only deactivate (and reactivate) the two buttons when on goSlowMode, do not otherwise
+          if(isGoSlowOn){
+            if(!submitCodeButton.disabled) {
+              submitCodeButton.disabled = true;
+            }
+          }
+
+          var result = 'empty';
+
+          var runtimeError = false;
+          
+          try{
+              clearConsole();
+              result = eval(codeFragment).catch( handleError ).then( function () {  //only a catch like this can catch most errors
+
+                if(isGoSlowOn){
+                  if(submitCodeButton.disabled) {
+                    submitCodeButton.disabled = false;
+                  }
+                }
+                
+                console.log( "---" );
+
+              });
+          }
+          catch (err) { //only a catch like this can catch syntax errors for whatever reason, but it can't catch any other one
+            runtimeError = true;
+            handleError(err);
+          }  
+          finally { 
             if(isGoSlowOn){
               if(submitCodeButton.disabled) {
                 submitCodeButton.disabled = false;
               }
             }
-            
-            console.log( "---" );
+            console.log(runtimeError);
+            if(!runtimeError){
+              document.getElementById('output').innerHTML = 'you executed this code: ' + codeInput + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
+            }
+          }
 
-          });
-      }
-      catch (err) { //only a catch like this can catch syntax errors for whatever reason, but it can't catch any other one
-        runtimeError = true;
-        handleError(err);
-      }  
-      finally { 
-        if(isGoSlowOn){
-          if(submitCodeButton.disabled) {
-            submitCodeButton.disabled = false;
+          function resetSource() {
+            myCodeMirror.setValue(originalCode);
+            var data = JSON.stringify({
+              code: originalCode
+            });
+            var http = new XMLHttpRequest();
+            http.open("POST", "/autosave");
+            http.setRequestHeader("Content-Type", "application/json");
+            http.onload = function() {
+              var autosaveArea = document.getElementById("autosave-area");
+              autosaveArea.innerHTML = "<h4>Code Successfully Reset</h4>";
+            }
+            http.send(data);
+          }
+
+          //scroll console to the last output
+          var fakeConsole = document.getElementById("fakeConsole");
+          fakeConsole.scrollTop = fakeConsole.scrollHeight;
+
+          return;
+        }
+
+        function resetSource() {
+          myCodeMirror.setValue(originalCode);
+        }
+
+        function clearConsole() {
+          var consoleElement = document.getElementById("fakeConsole");
+          while (consoleElement.childNodes[1]) {
+            consoleElement.removeChild(consoleElement.childNodes[1]);
           }
         }
-        console.log(runtimeError);
-        if(!runtimeError){
-          document.getElementById('output').innerHTML = 'you executed this code: ' + codeInput + '<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
+        
+        </script>
+
+          <script>
+            let tutorialSettings = `/* tutorial_settings */`;
+          </script>
+
+          <script>
+          function dlCanvas() {
+            var canvas = document.getElementById("imagecanvas");
+            var dt = canvas.toDataURL('image/png');
+            /* Change MIME type to trick the browser to downlaod the file instead of displaying it */
+            dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
+
+            /* In addition to <a>'s "download" attribute, you can define HTTP-style headers */
+          dt = dt.replace(/^data:application\/octet-stream/,
+          'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
+
+          document.getElementById("download").href = dt;
+          };
+        /*    document.getElementById("download").addEventListener('click', dlCanvas, false);*/
+      </script>
+
+      <script>
+          
+        function dlSource() {
+          var sourceCode = myCodeMirror.getValue();
+          var textToSaveAsBlob = new Blob([sourceCode], {type:"text/plain"});
+          var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+          var fileNameToSaveAs = "code.js"
+
+          var downloadLink = document.createElement("a");
+          downloadLink.download = fileNameToSaveAs;
+          downloadLink.innerHTML = "Download File";
+          downloadLink.href = textToSaveAsURL;
+          downloadLink.onclick = destroyClickedElement;
+          downloadLink.style.display = "none";
+          document.body.appendChild(downloadLink);
+
+          downloadLink.click();
         }
+
+      function destroyClickedElement(event)
+      {
+          document.body.removeChild(event.target);
       }
+          </script>
 
-      function resetSource() {
-        myCodeMirror.setValue(originalCode);
-        var data = JSON.stringify({
-          code: originalCode
-        });
-        var http = new XMLHttpRequest();
-        http.open("POST", "/autosave");
-        http.setRequestHeader("Content-Type", "application/json");
-        http.onload = function() {
-          var autosaveArea = document.getElementById("autosave-area");
-          autosaveArea.innerHTML = "<h4>Code Successfully Reset</h4>";
-        }
-        http.send(data);
+      <script>
+      // for console capture
+      (function(){
+        var oldLog = console.log;
+        var pastLog = document.createElement("p"); 
+        var newLog = document.getElementById("fakeConsole");
+        console.log = function (message) {
+          var newElement = document.createElement("p");  
+          newElement.appendChild(document.createTextNode(message));
+          newLog.appendChild(pastLog);
+          newLog.appendChild(newElement);
+          pastLog.appendChild(newElement);
+          oldLog.apply(console, arguments);
+        };
+      })();
+
+      // convenience function
+      function log(x) {
+          console.log(x);
       }
-
-      //scroll console to the last output
-      var fakeConsole = document.getElementById("fakeConsole");
-      fakeConsole.scrollTop = fakeConsole.scrollHeight;
-
-      return;
-    }
-
-    function resetSource() {
-      myCodeMirror.setValue(originalCode);
-    }
-
-    function clearConsole() {
-      var consoleElement = document.getElementById("fakeConsole");
-      while (consoleElement.childNodes[1]) {
-        consoleElement.removeChild(consoleElement.childNodes[1]);
-      }
-    }
-    
-    </script>
-
-    <script>
-      let tutorialSettings = `/* tutorial_settings */`;
-    </script>
-
-    <script>
-    function dlCanvas() {
-      var canvas = document.getElementById("imagecanvas");
-      var dt = canvas.toDataURL('image/png');
-      /* Change MIME type to trick the browser to downlaod the file instead of displaying it */
-      dt = dt.replace(/^data:image\/[^;]*/, 'data:application/octet-stream');
-
-      /* In addition to <a>'s "download" attribute, you can define HTTP-style headers */
-    dt = dt.replace(/^data:application\/octet-stream/,
-     'data:application/octet-stream;headers=Content-Disposition%3A%20attachment%3B%20filename=Canvas.png');
-
-     document.getElementById("download").href = dt;
-    };
-   /*    document.getElementById("download").addEventListener('click', dlCanvas, false);*/
-</script>
-
-<script>
-    
-  function dlSource() {
-    var sourceCode = myCodeMirror.getValue();
-    var textToSaveAsBlob = new Blob([sourceCode], {type:"text/plain"});
-    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
-    var fileNameToSaveAs = "code.js"
-
-    var downloadLink = document.createElement("a");
-    downloadLink.download = fileNameToSaveAs;
-    downloadLink.innerHTML = "Download File";
-    downloadLink.href = textToSaveAsURL;
-    downloadLink.onclick = destroyClickedElement;
-    downloadLink.style.display = "none";
-    document.body.appendChild(downloadLink);
-
-    downloadLink.click();
-  }
-
-function destroyClickedElement(event)
-{
-    document.body.removeChild(event.target);
-}
-    </script>
-
-<script>
-// for console capture
-(function(){
-  var oldLog = console.log;
-  var pastLog = document.createElement("p"); 
-  var newLog = document.getElementById("fakeConsole");
-  console.log = function (message) {
-    var newElement = document.createElement("p");  
-    newElement.appendChild(document.createTextNode(message));
-    newLog.appendChild(pastLog);
-    newLog.appendChild(newElement);
-    pastLog.appendChild(newElement);
-    oldLog.apply(console, arguments);
-  };
-})();
-
-// convenience function
-function log(x) {
-    console.log(x);
-}
-</script>
-<script type="text/javascript" src="/static/js/tutorial.js"></script>
-<script type="text/javascript" src="/static/js/autosave.js"></script>
-<script type="text/javascript" src="/static/js/turtleslider.js"></script>
-<script type="text/javascript" src="/static/js/goslow.js"></script>
-<script type="text/javascript" src="/static/js/autocomplete.js"></script>
-<script type="text/javascript" src="/static/js/outputResize.js"></script>
-<script type="text/javascript" src="/static/js/errorLogging.js"></script>
-<script type="text/javascript" src="/static/js/getLineNumber.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+      </script>
+      <script type="text/javascript" src="/static/js/tutorial.js"></script>
+      <script type="text/javascript" src="/static/js/autosave.js"></script>
+      <script type="text/javascript" src="/static/js/turtleslider.js"></script>
+      <script type="text/javascript" src="/static/js/goslow.js"></script>
+      <script type="text/javascript" src="/static/js/autocomplete.js"></script>
+      <script type="text/javascript" src="/static/js/outputResize.js"></script>
+      <script type="text/javascript" src="/static/js/errorLogging.js"></script>
+      <script type="text/javascript" src="/static/js/getLineNumber.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 
     </div>

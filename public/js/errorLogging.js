@@ -2,7 +2,7 @@ hintMap = {
     "ReferenceError": "don't forget to spell functions, variables and objects correctly and to only use those that you have already defined!", 
     "TypeError": "make sure that you're accessing the right method",
     "SyntaxError": "check for missing or open brackets, or missing parentheses or punctuation", 
-    "RangeError": "hello there",
+    "RangeError": "A RangeError is thrown when trying to pass a value as an argument to a function that does not allow a range that includes the value.",
 }
 
 let output = document.getElementById("output");
