@@ -1,2 +1,4 @@
+while (true) {
+  console.log("Hello World");
+}
 
-console.log(0

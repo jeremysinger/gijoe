@@ -14,11 +14,11 @@ function slowDownAt(codeBit, codeFragment){
 }
 
 function goSlowMode(codeFragment){
-    codeFragment = `let check = 0;\n ${codeFragment}`
+    let variables = [];
     codeList = codeFragment.split("\n");
     console.log(codeList);
     var indexes = [];
-    var infiniteLoopChecker = "check++; if(check > 1000) { break; }";
+    var infiniteLoopChecker;
     for (var i = 0; i < codeList.length; i++) {
         console.log(i);
         if ((codeList[i].includes("for") && !codeList[i].includes("forward")) || codeList[i].includes("while")) {
@@ -29,9 +29,13 @@ function goSlowMode(codeFragment){
     let the_index;
     for (var j = 0; j < indexes.length; j++) {
         the_index = indexes[j];
-        codeList[the_index] = `check = 0; ${codeList[the_index]} ${infiniteLoopChecker}`;
+        variables.push(`check${j}`);
+        infiniteLoopChecker = `check${j}++; if(check${j} > 100) { break; }`;
+        codeList[the_index] = `check${j} = 0; ${codeList[the_index]} ${infiniteLoopChecker}`;
     }
-    console.log(codeList);
+    for (var k = 0; k < variables.length; k++) {
+        codeList.unshift(`let ${variables[k]} = 0;`)
+    }
     codeFragment = codeList.join("\n");
 
     if(isGoSlowOn){
