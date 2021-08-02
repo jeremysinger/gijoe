@@ -15,6 +15,7 @@ function slowDownAt(codeBit, codeFragment){
 
 function goSlowMode(codeFragment){
     let variables = [];
+    codeFragment = `timeout = false;\n ${codeFragment}`;
     codeList = codeFragment.split("\n");
     console.log(codeList);
     var indexes = [];
@@ -30,7 +31,7 @@ function goSlowMode(codeFragment){
     for (var j = 0; j < indexes.length; j++) {
         the_index = indexes[j];
         variables.push(`check${j}`);
-        infiniteLoopChecker = `check${j}++; if(check${j} > 100) { break; }`;
+        infiniteLoopChecker = `check${j}++; if(check${j} > 100) {timeout = true; break; }`;
         codeList[the_index] = `check${j} = 0; ${codeList[the_index]} ${infiniteLoopChecker}`;
     }
     for (var k = 0; k < variables.length; k++) {

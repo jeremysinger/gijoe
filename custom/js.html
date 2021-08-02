@@ -138,6 +138,7 @@ crossorigin="anonymous"></script>
 
 
         <script>
+          var timeout = false;
           var originalCode = `/* initial code */`;
           var saveCode =  `/* saved code */`;
           var tutorialFiles = parseInt(`/* tutorial_files */`);
@@ -173,6 +174,7 @@ crossorigin="anonymous"></script>
           var result = 'empty';
 
           var runtimeError = false;
+          autosaveArea.innerHTML = "<h4>Running...</h4>";
           
           try{
               clearConsole();
@@ -183,13 +185,25 @@ crossorigin="anonymous"></script>
                     submitCodeButton.disabled = false;
                   }
                 }
-                
+
+                if(!timeout) {
+                  autosaveArea.classList.remove("error");
+                  autosaveArea.classList.add("success");
+                  autosaveArea.innerHTML = "<h4>Running Completed</h4>";
+
+                } else {
+                  autosaveArea.classList.remove("success");
+                  autosaveArea.classList.add("error");
+                  autosaveArea.innerHTML = "<h4>Your code has timed out</h4>";
+                }
                 console.log( "---" );
 
               });
           }
           catch (err) { //only a catch like this can catch syntax errors for whatever reason, but it can't catch any other one
             runtimeError = true;
+            autosaveArea.classList.add("error");
+            autosaveArea.innerHTML = "<h4>Error</h4>";
             handleError(err);
           }  
           finally { 
