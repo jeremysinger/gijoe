@@ -79,9 +79,9 @@ crossorigin="anonymous"></script>
             <br>
         </div>
             
-          <div class="col">
-            <div id="autosave-area" class="success"></div>
-          </div>
+        <div class="col">
+          <div id="autosave-area" class="success"></div>
+        </div>
       </div>
           
     </div>
@@ -92,14 +92,15 @@ crossorigin="anonymous"></script>
     <div id="outputblock" class="row" style="padding: 10px; background-color: purple;">
 
       <div id="codeOutput" class="col" style="background-color: cornsilk; font-family: monospace; color: indigo;">
-	<b>Code evaluation</b><br/>
-	<div id="output">&nbsp;</div>
+        <b>Code evaluation</b><br/>
+        <div id="output">&nbsp;</div>
       </div>
 
       <div id="consoleOutput" class="col" style="background-color: azure; font-family: monospace; color: darkblue;">
-	<b>Console output</b><br/>
-	<div id="fakeConsole">&nbsp;</div>
-	</div>
+        <b>Console output</b><br/>
+        <div id="fakeConsole">&nbsp;</div>
+      </div>
+      
     </div>
 
     <div id="graphicsblock" style="padding: 10px; background-color: lightgray;">
@@ -216,6 +217,11 @@ crossorigin="anonymous"></script>
         }
         http.send(data);
       }
+
+      //scroll console to the last output
+      var fakeConsole = document.getElementById("fakeConsole");
+      fakeConsole.scrollTop = fakeConsole.scrollHeight;
+
       return;
     }
 
@@ -229,6 +235,7 @@ crossorigin="anonymous"></script>
         consoleElement.removeChild(consoleElement.childNodes[1]);
       }
     }
+    
     </script>
 
     <script>
