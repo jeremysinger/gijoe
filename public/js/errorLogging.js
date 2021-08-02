@@ -11,8 +11,6 @@ function handleError(err) {
 
     runtimeError = true;
 
-    console.log(runtimeError);
-
     if (err.name == "SyntaxError"){
         console.log("---"); //because the then function wrapping eval won't be executed and only the outer catch will handle Syntax errors
         output.innerHTML = `<font color='red'>ERROR: ${err}<br></br>HINT: ${hintMap[err.name]}</font>`;

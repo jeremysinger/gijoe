@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/static/css/base.css">
     <link rel="stylesheet" href="/static/css/code.css">
     <link rel="stylesheet" href="/static/css/output.css">
+    <link rel="stylesheet" href="/static/css/style.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -36,43 +37,54 @@ crossorigin="anonymous"></script>
 
   </head>
 
-  <body class="mx-5">
+  <nav id="header" class="navbar navbar-expand-lg p-3 d-flex flex-wrap">
+    <div id="header-logo" class="col-3 col-sm-4">
+      <a href="https://www.gla.ac.uk/">
+        <img id="logo" width="210" height="66" src="/static/static/university-of-glasgow-280.png" alt="University of Glasgow logo" class="d-none d-md-block">
+        <img id="small-logo" width="294" height="64" src="/static/static/university-of-glasgow-min.png" alt="University of Glasgow logo" class="d-none d-sm-block d-md-none">
+      </a>
+    </div>
 
-    <h3>Glasgow Interactive JavaScript Online Editor</h3>
+    <h3 class="text-center text-light col col-sm-4">Glasgow Interactive JavaScript Online Editor</h3>
+  </nav>
 
-    <p>
-      <!-- INSTRS -->
-    </p>
-    <p>
-      Now type your JavaScript program in the box below.
-    </p>
+  <body>
+
+    <div class="m-3">
+
+      <p>
+        <!-- INSTRS -->
+      </p>
+      <p>
+        Now type your JavaScript program in the box below.
+      </p>
 
     <div id="codeblock" class="row" style="padding: 10px; background-color: gray;">
-<div id="tutorialArea" class="col">
-  <h2 class="codeHeading">Tutorial Space</h2>
-  <div id="tutorialSpace"></div>
-  <div id="tutorialControls" class="codeControls">
-    <button id="tutorialBack">< Back</button>
-    <button id="tutorialForward">Forward ></button>
-  </div>
-</div>
-<div id="codeArea" class="col container">
-  <h2 class="codeHeading">Write Code Here </h2>
-  <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
-  <div class="row container">
-    <div class="handle codeControls col btn-group" role="group" aria-label="codeControls">
-        <button id="submitcode" class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
-        <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
-        <button class="button reset" onclick="resetSource()">reset code <span class="fa fa-undo" aria-hidden="true"></span></button>
-        <br>
+      <div id="tutorialArea" class="col">
+        <h2 class="codeHeading">Tutorial Space</h2>
+        <div id="tutorialSpace"></div>
+        <div id="tutorialControls" class="codeControls">
+          <button id="tutorialBack">< Back</button>
+          <button id="tutorialForward">Forward ></button>
+        </div>  
     </div>
-        
-      <div class="col">
-        <div id="autosave-area" class="success"></div>
+    <div id="codeArea" class="col container">
+      <h2 class="codeHeading">Write Code Here </h2>
+      <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
+      <div class="row container">
+        <div class="handle codeControls col btn-group" role="group" aria-label="codeControls">
+            <button id="submitcode" class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
+            <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
+            <button class="button reset" onclick="resetSource()">reset code <span class="fa fa-undo" aria-hidden="true"></span></button>
+            <br>
+        </div>
+            
+          <div class="col">
+            <div id="autosave-area" class="success"></div>
+          </div>
       </div>
-  </div>
-      
-</div>
+          
+    </div>
   </div>
   
 
@@ -101,15 +113,14 @@ crossorigin="anonymous"></script>
       <br />
       <div>
         <div class="row">
-          <p id="speedLabel" class="col-sm"> Turtle speed: </p>
-          <label id="slower-label" class="col-sm ">Slower</label>
-          <div id="slider" class="col">
-          
-            <div id="custom-handle" class="ui-slider-handle">
-            </div>
-            
+          <div id="speed-indicator"> 
+            <p id="speedLabel" class="col-2"> Turtle speed: </p>
           </div>
-          <label id="faster-label" class="col-sm">Faster</label>        
+          <label id="slower-label" class="col-2 ">Slower</label>
+          <div id="slider" class="col">
+            <div id="custom-handle" class="ui-slider-handle"></div>
+          </div>
+          <label id="faster-label" class="col-2">Faster</label>        
           
       </div>
       <br />
@@ -296,5 +307,7 @@ function log(x) {
 <script type="text/javascript" src="/static/js/getLineNumber.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+
+    </div>
   </body>
 </html>
