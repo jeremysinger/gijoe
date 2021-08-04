@@ -6,9 +6,36 @@ canvas {
     border: 2px dotted #564b47;
 }
 
+#header {
+    min-width: 320px;
+    padding: 0;
+    margin: 0;
+    background-color: #003865;
+}
 
+.button {
+    background-color: #003865;
+    color: snow;
+    border: none;
+    padding: 10px 15px;
+    margin: 0px 2px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+    transition-duration: 0.4s;
+}
 
+.button:hover {
+    background-color: #002341; /* Green */
+    color: white;
+}
 
+.button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
 
 .codeControls {
     padding: 20px;

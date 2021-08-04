@@ -1,6 +1,7 @@
-for (var i = 0; i < 10; i++) {
-  while (true) {
-    console.log("Hello World");
-    console.log("hello WORLD");
-  }
-}
+forward(10);
+
+left(90);
+
+forward(10);
+
+left(90);
