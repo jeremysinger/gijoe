@@ -2,13 +2,12 @@
     top: 50%;
     margin-top: -.6em;
     text-align: center;
-    line-height: 1.6em;
     color: white;
     background-color: rgb(128, 0, 127);
 }
 
 #slider{
-    width: 100%;
+    margin: 40px 5px;
     background: rgb(0,0,255);
     background: linear-gradient(90deg, rgba(0,0,255,1) 0%,rgba(255,0,0,1) 100%);
 }
@@ -20,9 +19,18 @@ label {
 #slower-label {
     margin-top: -.5em;
     text-align: right;
+    padding: 40px 5px;
+    width: auto;
 }
 
 #faster-label {
     margin-top: -.5em;
     text-align: left;
+    padding: 40px 5px;
+    width: auto;
+}
+
+#speedLabel{
+    margin-top: -.5em;
+    padding: 40px 0;
 }
