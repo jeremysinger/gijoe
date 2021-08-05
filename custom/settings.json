@@ -1,4 +1,5 @@
 {
     "tutorial": true,
-    "autoComplete": false
+    "autoComplete": false,
+    "loopLimit": 100
 }

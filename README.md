@@ -60,13 +60,16 @@ For creating labs we have the settings.json file to help you choose how you want
 ```json
 {
   tutorial: true,
-  autoComplete: false
+  autoComplete: false,
+  loopLimit: 100
 }
 ```
 
- There are currently two options that you can make use of these include
+There are currently two options that you can make use of these include
 
 * **tutorial** (default option true)
   * This determines whether or not you want the tutorial space to show during the lab. If you don't want the tutorial space to show up then just set this to false
 * **autoComplete** (default option false)
   * This turns on the auto complete option as you type.
+* **loopLimit** (default option 100)
+  * This is in the form of an integer. It states the maximum amount of loops you want before the code timesout.
