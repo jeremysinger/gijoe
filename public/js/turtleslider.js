@@ -13,15 +13,14 @@ $( function() {
             $("#speedLabel").html(`Turtle Speed: ${$( this ).slider( "value" )} ms`);
         },
         slide: function( event, ui ) {
-            var new_value = 2000 - ui.value;
-            $("#speedLabel").html(`Turtle Speed: ${new_value} ms`);
+            turtleSpeed = 2000 - ui.value;
+            $("#speedLabel").html(`Turtle Speed: ${turtleSpeed} ms`);
             if (ui.value % 8 == 0) {
                 red = ui.value / 8;
-                blue = new_value / 8;
+                blue = turtleSpeed / 8;
             }
             theColour = `rgb(${red}, 0, ${blue})`;
             $("#custom-handle").css("background-color", theColour);
-            //handle.text(new_value);
             
         }
     });
