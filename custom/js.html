@@ -67,7 +67,7 @@ crossorigin="anonymous"></script>
             <button class="button" id="tutorialBack"><< Back</button>
             <button class="button" id="tutorialForward">Forward >></button>
           </div>  
-      </div>
+        </div>
         <div id="codeArea" class="col container">
           <h2 class="codeHeading">Write Code Here </h2>
           <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
@@ -88,48 +88,58 @@ crossorigin="anonymous"></script>
         
       </div>
       
+      <div class="row">
 
+        
+        <div id="outputblock" class="col container py-3">
 
-        <div id="outputblock" class="row py-3">
-
-          <div id="codeOutput" class="col" style="background-color: cornsilk; font-family: monospace; color: indigo;">
+          <div id="codeOutput" class="row" style="background-color: cornsilk; font-family: monospace; color: indigo;">
             <b>Code evaluation</b><br/>
             <div id="output">&nbsp;</div>
           </div>
 
-          <div id="consoleOutput" class="col" style="background-color: azure; font-family: monospace; color: #003865;">
+          <div id="consoleOutput" class="row" style="background-color: azure; font-family: monospace; color: #003865;">
             <b>Console output</b><br/>
             <div id="fakeConsole">&nbsp;</div>
           </div>
           
         </div>
 
-        <div id="graphicsblock" style="padding: 10px; background-color: lightgray;">
-          <h3>Graphics canvas</h3>
-          <!-- This is for drawing the little green turtle, and it sits above... -->
-          <canvas style="background-color: white;" id="turtlecanvas" width="300" height="300"></canvas>
-          
-          <!-- ... this one, which is the image that the turtle is drawing. -->
-          <canvas id="imagecanvas" width="300" height="300" style="display:none"></canvas>
+        <div id="graphicsblock" style="padding: 10px; background-color: lightgray;" class="col container">
+          <h3 class="row  mx-3 px-2">Graphics canvas</h3>
+          <div class="row  mx-3">
 
-          <br />
-          <div>
-            <div class="row" style="height: 50px;">
-              <div id="speed-indicator" class="col-2"> 
+            <div class="col">
+              <!-- This is for drawing the little green turtle, and it sits above... -->
+              <canvas style="background-color: white;" id="turtlecanvas" width="300" height="300"></canvas>
+                                    
+              <!-- ... this one, which is the image that the turtle is drawing. -->
+              <canvas id="imagecanvas" width="300" height="300" style="display:none"></canvas>
+            </div>
+            <div class="col">
+              <div class="row px-2">
+                <label id="slower-label" class="col-1">Slower</label>
+                <div id="slider" class="col">
+                  <div id="custom-handle" class="ui-slider-handle"></div>
+                </div>
+                <label id="faster-label" class="col-1">Faster</label>        
+              </div>
+
+              <div class="row"> 
                 <p id="speedLabel" > Turtle speed: </p>
               </div>
-              <label id="slower-label" class="col-1">Slower</label>
-              <div id="slider" class="col-3">
-                <div id="custom-handle" class="ui-slider-handle"></div>
-              </div>
-              <label id="faster-label" class="col-1">Faster</label>        
-              
-          </div>
-          <br />
-          <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
-          <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
 
+              <div> 
+                <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
+                <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
+              </div>
+            </div>
+            
+          </div>
+          
         </div>
+
+      </div>
 
         <script>
         <!-- PREAMBLE CODE -->
