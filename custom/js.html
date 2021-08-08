@@ -90,21 +90,6 @@ crossorigin="anonymous"></script>
       
       <div class="row">
 
-        
-        <div id="outputblock" class="col container py-3">
-
-          <div id="codeOutput" class="row" style="background-color: cornsilk; font-family: monospace; color: indigo;">
-            <b>Code evaluation</b><br/>
-            <div id="output">&nbsp;</div>
-          </div>
-
-          <div id="consoleOutput" class="row" style="background-color: azure; font-family: monospace; color: #003865;">
-            <b>Console output</b><br/>
-            <div id="fakeConsole">&nbsp;</div>
-          </div>
-          
-        </div>
-
         <div id="graphicsblock" style="padding: 10px; background-color: lightgray;" class="col container">
           <h3 class="row  mx-3 px-2">Graphics canvas</h3>
           <div class="row  mx-3">
@@ -137,6 +122,21 @@ crossorigin="anonymous"></script>
             
           </div>
           
+        </div>
+
+        
+        <div class="col">
+          <div id="outputblock" class="row">
+            <div id="codeOutput" class="col" style="background-color: cornsilk; font-family: monospace; color: indigo;">
+              <b>Code evaluation</b><br/>
+              <div id="output">&nbsp;</div>
+            </div>
+  
+            <div id="consoleOutput" class="col" style="background-color: azure; font-family: monospace; color: #003865;">
+              <b>Console output</b><br/>
+              <div id="fakeConsole">&nbsp;</div>
+            </div>
+          </div>
         </div>
 
       </div>

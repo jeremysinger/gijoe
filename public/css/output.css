@@ -1,14 +1,17 @@
 #output {
-    overflow-y: scroll !important;
     min-height: 100px;
-    max-height: 450px;
+    max-height: 350px;
     resize: vertical;
+    overflow-y: scroll !important;
 }
 
 #fakeConsole {
     min-height: 100px;
-    max-height: 450px;
+    max-height: 350px;
     resize: vertical;
     overflow-y: scroll !important;
 }
 
+#outputblock{
+    height: 100%;
+}
