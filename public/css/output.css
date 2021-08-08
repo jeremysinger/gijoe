@@ -1,6 +1,7 @@
 #output {
     min-height: 100px;
     max-height: 350px;
+    height: 100%;
     resize: vertical;
     overflow-y: scroll !important;
 }
@@ -8,10 +9,19 @@
 #fakeConsole {
     min-height: 100px;
     max-height: 350px;
+    height: 100%;
     resize: vertical;
     overflow-y: scroll !important;
 }
 
-#outputblock{
+#outputwrap{
     height: 100%;
+}
+
+#outputblock{
+    min-width: 768px;
+}
+
+#graphicscontrols{
+    min-width: 200px;
 }

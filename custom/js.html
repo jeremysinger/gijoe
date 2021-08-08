@@ -90,7 +90,7 @@ crossorigin="anonymous"></script>
       
       <div class="row">
 
-        <div id="graphicsblock" style="padding: 10px; background-color: lightgray;" class="col container">
+        <div id="graphicsblock" style="padding: 10px; background-color: lightgray;" class="col container-md">
           <h3 class="row  mx-3 px-2">Graphics canvas</h3>
           <div class="row  mx-3">
 
@@ -101,7 +101,7 @@ crossorigin="anonymous"></script>
               <!-- ... this one, which is the image that the turtle is drawing. -->
               <canvas id="imagecanvas" width="300" height="300" style="display:none"></canvas>
             </div>
-            <div class="col">
+            <div id="graphicscontrols" class="col">
               <div class="row px-2">
                 <label id="slower-label" class="col-1">Slower</label>
                 <div id="slider" class="col">
@@ -125,8 +125,8 @@ crossorigin="anonymous"></script>
         </div>
 
         
-        <div class="col">
-          <div id="outputblock" class="row">
+        <div id="outputblock" class="col">
+          <div id="outputwrap" class="row">
             <div id="codeOutput" class="col" style="background-color: cornsilk; font-family: monospace; color: indigo;">
               <b>Code evaluation</b><br/>
               <div id="output">&nbsp;</div>
