@@ -8,8 +8,8 @@ const tutorialSpace = document.getElementById("tutorialSpace");
 
 //Parse the settings json file to see whether the tutorial settings were on
 function checkSettings() {
-    const settings = JSON.parse(tutorialSettings);
-    if (settings.tutorial) {
+    console.log(tutorialSettings);
+    if (tutorialSettings.tutorial) {
         getTutorial(1);
         tutorialArea.style.display = "block";
     } else {
@@ -42,7 +42,6 @@ backButton.addEventListener("click", () => {
 });
 
 function getTutorial(id) {
-    const settings = JSON.parse(tutorialSettings);
     const http = new XMLHttpRequest();
     http.open("GET", `/tutorial/${id}`);
 

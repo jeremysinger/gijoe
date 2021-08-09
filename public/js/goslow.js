@@ -15,7 +15,7 @@ function slowDownAt(codeBit, codeFragment){
 
 function goSlowMode(codeFragment){
     let variables = [];
-    let settings = JSON.parse(tutorialSettings);
+    let settings = tutorialSettings;
     let timeout = settings.loopLimit;
     codeFragment = `timeout = false;\n ${codeFragment}`;
     codeList = codeFragment.split("\n");

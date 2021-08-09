@@ -45,7 +45,24 @@ app.get('/', (req,res) => {
 								.replace("/* tutorial_settings */", settings)
 								.replace("/* saved code */", savecode)
 								.replace("/* tutorial_files */", files.length);
-								res.end(s);
+								settings = JSON.parse(settings);
+								if (settings.libraries.turtle) {
+									fs.readFile(workdir + "/turtleCanvas.html")
+									.then(turtleContent => {
+										let turtleString = turtleContent.toString();
+										s = s.replace("<!-- LIBRARY-CONTROLS -->", turtleString);
+										res.end(s);
+									})
+								} else if (settings.libraries.DOM) {
+									fs.readFile(workdir + "/DOMArea.html")
+									.then(domContent => {
+										let domString = domContent.toString();
+										s = s.replace("<!-- LIBRARY-CONTROLS -->", domString);
+										res.end(s);
+									})
+								} else {
+									res.end(s);
+								}
 							})
 						})
 					})

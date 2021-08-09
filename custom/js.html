@@ -91,40 +91,12 @@ crossorigin="anonymous"></script>
       <br>
       
       <div class="row">
-
-        <div id="graphicsblock" style="padding: 10px; background-color: rgb(0,83,152); color: snow;" class="col container-md">
-          <h3 class="row  mx-3 px-2">Graphics canvas</h3>
-          <div class="row  mx-3">
-
-            <div class="col">
-              <!-- This is for drawing the little green turtle, and it sits above... -->
-              <canvas style="background-color: white;" id="turtlecanvas" width="300" height="300"></canvas>
-                                    
-              <!-- ... this one, which is the image that the turtle is drawing. -->
-              <canvas id="imagecanvas" width="300" height="300" style="display:none"></canvas>
-            </div>
-            <div id="graphicscontrols" class="col">
-              <div class="row px-2">
-                <label id="slower-label" class="col-1">Slower</label>
-                <div id="slider" class="col">
-                  <div id="custom-handle" class="ui-slider-handle"></div>
-                </div>
-                <label id="faster-label" class="col-1">Faster</label>        
-              </div>
-
-              <div class="row"> 
-                <p id="speedLabel" > Turtle speed: </p>
-              </div>
-
-              <div> 
-                <a href="#" id="download" onclick="dlCanvas()" download="image.png"><button class="button save">download <span class="fa fa-download" aria-hidden="true"></span></button></a>&nbsp;
-                <button class="button reset" onclick="reset()">reset turtle <span class="fa fa-undo" aria-hidden="true"></span></button>
-              </div>
-            </div>
-            
-          </div>
+        <div id="library-area" style="padding: 10px; background-color: rgb(0,83,152); color: snow;" class="col container-md">
+          <!-- LIBRARY-CONTROLS -->
           
+
         </div>
+        
 
         
         <div id="outputblock" class="col">
@@ -154,7 +126,7 @@ crossorigin="anonymous"></script>
           var originalCode = `/* initial code */`;
           var saveCode =  `/* saved code */`;
           var tutorialFiles = parseInt(`/* tutorial_files */`);
-          var tutorialSettings = `/* tutorial_settings */`;
+          var tutorialSettings = JSON.parse(`/* tutorial_settings */`);
           var currentFile = 1;
           var turtleSpeed = 1000;
         

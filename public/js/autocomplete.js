@@ -1,5 +1,5 @@
 myCodeMirror.on("keyup", (cm, event) => {
-    let autoCompleteSetting = JSON.parse(tutorialSettings).autoComplete;
+    let autoCompleteSetting = tutorialSettings.autoComplete;
     /*
     Get the keys which are excluded from the auto complete functions
     these are:
