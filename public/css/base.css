@@ -50,3 +50,8 @@ code {
     color: white;
 }
 
+#renderedDOM {
+    background-color: white;
+    padding: 20px;
+}
+

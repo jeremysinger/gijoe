@@ -50,17 +50,20 @@ app.get('/', (req,res) => {
 									fs.readFile(workdir + "/turtleCanvas.html")
 									.then(turtleContent => {
 										let turtleString = turtleContent.toString();
-										s = s.replace("<!-- LIBRARY-CONTROLS -->", turtleString);
+										s = s.replace("<!-- LIBRARY-CONTROLS -->", turtleString)
+										.replace("/* library check */", true);
 										res.end(s);
 									})
 								} else if (settings.libraries.DOM) {
 									fs.readFile(workdir + "/DOMArea.html")
 									.then(domContent => {
 										let domString = domContent.toString();
-										s = s.replace("<!-- LIBRARY-CONTROLS -->", domString);
+										s = s.replace("<!-- LIBRARY-CONTROLS -->", domString)
+										.replace("/* library check */", true);
 										res.end(s);
 									})
 								} else {
+									s = s.replace("/* library check */", false);
 									res.end(s);
 								}
 							})
