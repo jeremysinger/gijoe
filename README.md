@@ -61,7 +61,11 @@ For creating labs we have the settings.json file to help you choose how you want
 {
   tutorial: true,
   autoComplete: false,
-  loopLimit: 100
+  loopLimit: 100,
+  libraries: {
+       turtle: true,
+       DOM: false
+  }  
 }
 ```
 
@@ -73,3 +77,6 @@ There are currently two options that you can make use of these include
   * This turns on the auto complete option as you type.
 * **loopLimit** (default option 100)
   * This is in the form of an integer. It states the maximum amount of loops you want before the code timesout.
+* **libraries** - This stores the libraries that are used during various parts of the the GIJOE course
+  * If you want to turn on a library then all you have to do is set the boolean for that libray to true. NOTE you can only use one of the libraries at a time
+  * If there are no libraries switched on then you will just get the console and the code evaluation
