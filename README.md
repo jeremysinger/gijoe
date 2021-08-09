@@ -11,6 +11,17 @@ to generate simple graphics with turtle libraries (which we support directly). T
 small programs are typical 'beginner' exercises, which we will embed in our
 Computational Thinking with JavaScript MOOC.
 
+## Lab Setup Instructions
+
+In order for your lab to be setup properly. You need the following requirements inside your zip folder. These are
+
+* **A "tutorials" folder** - This directory will contain the markdown files. For now we still have the system where you need to have multiple md files which are numbered from 1. So for example the first tutorial will be 1.md, the second tutorial will be 2.md etc
+* **A "savefiles" folder** - This directory contains the JavaScript that the user will edit. If you want any starter code for any of the md files that you have written then simply create a JavaScript file and name it with the same number as the corresponding markdown file. E.g. starter code for 1.md should be named 1.js. You don't need to have a file for every markdown file as a js file will be created when you first load the lab
+* **A settings.json file** - Please see the "Settings" header for more information on how to set this up
+* **A js.html file** - This is important this contains all of the HTML for the GIJOE installer. I might move this to outside the custom folder to make this easier.
+* **A preamble.js file** - This should contain all of the JS code for the libraries that are required (e.g. turtle). This will probably be moved soon to make things easier.
+* **instructions.txt** this file contains the instructions at the top
+
 ## Running Instructions
 
 ### Docker Installation
