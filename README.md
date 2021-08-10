@@ -66,16 +66,16 @@ created when the user opens the tutorial for the first time.
 
 ## Settings
 
-For creating labs we have the settings.json file to help you choose how you want your labs to be carried out. The settings.json file will look like this:
+For creating labs we have the settings.json file to help you choose how you want your labs to be carried out. The settings.json should look like this:
 
 ```json
 {
-  tutorial: true,
-  autoComplete: false,
-  loopLimit: 100,
-  libraries: {
-       turtle: true,
-       DOM: false
+  "tutorial": true,
+  "autoComplete": false,
+  "loopLimit": 100,
+  "libraries": {
+       "turtle": true,
+       "DOM": false
   }  
 }
 ```

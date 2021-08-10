@@ -13,7 +13,7 @@ const converter = new showdown.Converter({
 const PORT = 8080;
 const HOST = '0.0.0.0';
 const workdir = __dirname + "/custom";
-const appdir = __dirname + "/app";
+const appdir = __dirname + "/gijoe_app";
 
 const app = express();
 app.use("/static", express.static("public"));
