@@ -4,6 +4,7 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs').promises;
 const showdown = require("showdown");
+const path = require('path');
 const converter = new showdown.Converter({
 	tables: true,
 	strikethrough: true,
@@ -22,6 +23,7 @@ app.use(express.json());
 
 app.get('/', (req,res) => {
 	checkSaveExists();
+	checkTutorialFolderExists();
 	checkTutorialExists();
     fs.readFile(appdir + "/js.html")
 	.then(contents => {
@@ -168,9 +170,28 @@ function checkSaveExists() {
 		})
 }
 
+function checkTutorialFolderExists() {
+	const tutorialDir = workdir + "/tutorials";
+
+	fs.readdir(tutorialDir)
+	.then(files => {
+		return true;
+	})
+	.catch(error => {
+		fs.mkdir(tutorialDir, (err) => {
+			if (err) {
+				return console.error(err);
+			}
+			console.log("TUTORIAL DIRECTORY CREATED");
+			return true;
+		})
+	});
+}
+
+
 function checkTutorialExists() {
-	const tutorialPath = workdir + "/tutorials/1.md";
-	
+	const tutorialDir = workdir + "/tutorials";
+	const tutorialPath = `${tutorialDir}/1.md`;
 	
 	fs.readFile(tutorialPath)
 	.then(result => {
