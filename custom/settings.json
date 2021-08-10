@@ -1,5 +1,5 @@
 {
-    "tutorial": false,
+    "tutorial": true,
     "autoComplete": true,
     "loopLimit": 100,
     "libraries": {

@@ -55,9 +55,6 @@ crossorigin="anonymous"></script>
       <p>
         <!-- INSTRS -->
       </p>
-      <p>
-        Now type your JavaScript program in the box below.
-      </p>
 
       <div id="codeblock" class="row " style="padding: 10px; background-color: rgb(0,83,152);">
         <div id="tutorialArea" class="col">
@@ -138,6 +135,13 @@ crossorigin="anonymous"></script>
             librarySpace.style.display = "none";
           } else {
             librarySpace.style.display = "block";
+          }
+
+          var tutorialControls = document.getElementById("tutorialControls");
+          if (tutorialFiles === 1) {
+            tutorialControls.style.display = "none";
+          } else {
+            tutorialControls.style.display = "block";
           }
 
         

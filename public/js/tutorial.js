@@ -24,7 +24,7 @@ forwardButton.addEventListener("click", () => {
     currentFile++;
     getTutorial(currentFile);
     updateCodeMirror(currentFile);
-    if (currentFile === tutorialFiles) {
+    if (currentFile >= tutorialFiles) {
         forwardButton.disabled = true;
     }
 });
@@ -52,8 +52,9 @@ function getTutorial(id) {
             tutorialSpace.innerHTML = data;
             makeCodeMirrorInstances();
             //hljs.highlightAll();
+            return true;
         } else {
-            console.log("DATA NOT FOUND");
+            return false;
         }
 
     }
