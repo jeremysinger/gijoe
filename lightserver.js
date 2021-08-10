@@ -13,6 +13,7 @@ const converter = new showdown.Converter({
 const PORT = 8080;
 const HOST = '0.0.0.0';
 const workdir = __dirname + "/custom";
+const appdir = __dirname + "/app";
 
 const app = express();
 app.use("/static", express.static("public"));
@@ -22,15 +23,15 @@ app.use(express.json());
 app.get('/', (req,res) => {
 	checkSaveExists();
 	checkTutorialExists();
-    fs.readFile(workdir + "/js.html")
+    fs.readFile(appdir + "/js.html")
 	.then(contents => {
 	    res.setHeader("Content-Type", "text/html");
 	    res.writeHead(200);
 	    fs.readFile(workdir + "/instructions.txt")
 		.then(instrs => {
-		    fs.readFile(workdir + "/initialcode.js")
+		    fs.readFile(appdir + "/initialcode.js")
 			.then(initcode => {
-			    fs.readFile(workdir + "/preamble.js")
+			    fs.readFile(appdir + "/turtle.js")
 				.then(preamble => {
 					fs.readFile(workdir + "/settings.json")
 					.then(settings => {
@@ -47,7 +48,7 @@ app.get('/', (req,res) => {
 								.replace("/* tutorial_files */", files.length);
 								settings = JSON.parse(settings);
 								if (settings.libraries.turtle) {
-									fs.readFile(workdir + "/turtleCanvas.html")
+									fs.readFile(appdir + "/turtleCanvas.html")
 									.then(turtleContent => {
 										let turtleString = turtleContent.toString();
 										s = s.replace("<!-- LIBRARY-CONTROLS -->", turtleString)
@@ -55,7 +56,7 @@ app.get('/', (req,res) => {
 										res.end(s);
 									})
 								} else if (settings.libraries.DOM) {
-									fs.readFile(workdir + "/DOMArea.html")
+									fs.readFile(appdir + "/DOMArea.html")
 									.then(domContent => {
 										let domString = domContent.toString();
 										s = s.replace("<!-- LIBRARY-CONTROLS -->", domString)
