@@ -19,16 +19,13 @@ function goSlowMode(codeFragment){
     let timeout = settings.loopLimit;
     codeFragment = `timeout = false;\n ${codeFragment}`;
     codeList = codeFragment.split("\n");
-    console.log(codeList);
     var indexes = [];
     var infiniteLoopChecker;
     for (var i = 0; i < codeList.length; i++) {
-        console.log(i);
         if ((codeList[i].includes("for") && !codeList[i].includes("forward")) || codeList[i].includes("while")) {
             indexes.push(i);
         }
     }
-    console.log(indexes);
     let the_index;
     for (var j = 0; j < indexes.length; j++) {
         the_index = indexes[j];

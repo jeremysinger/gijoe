@@ -52,7 +52,7 @@ crossorigin="anonymous"></script>
 
     <div class="m-3">
 
-      <p>
+      <p id="intro">
         <!-- INSTRS -->
       </p>
 
@@ -125,6 +125,7 @@ crossorigin="anonymous"></script>
           var tutorialFiles = parseInt(`/* tutorial_files */`);
           var tutorialSettings = JSON.parse(`/* tutorial_settings */`);
           var libraries = JSON.parse(`/* library check */`);
+          var goSlow = JSON.parse("/* go slow */");
           console.log(libraries)
           var currentFile = 1;
           var turtleSpeed = 1000;
@@ -161,7 +162,12 @@ crossorigin="anonymous"></script>
         async function executeCodeBlock() {
 
           codeInput = myCodeMirror.getValue();
-          codeFragment = goSlowMode(codeInput);
+          if (goSlow) {
+            codeFragment = goSlowMode(codeInput);
+          } else {
+            codeFragment = codeInput;
+          }
+          
 
           //goSlowButton and submitcodeButton should not be clickable while execution is happening
           const submitCodeButton = document.getElementById("submitcode");
@@ -303,6 +309,7 @@ crossorigin="anonymous"></script>
         var pastLog = document.createElement("p"); 
         var newLog = document.getElementById("fakeConsole");
         console.log = function (message) {
+          console.trace();
           var newElement = document.createElement("p");  
           newElement.appendChild(document.createTextNode(message));
           newLog.appendChild(pastLog);

@@ -1,2 +1,5 @@
-var newValue = document.getElementById("new-area");
-newValue.style.color = "green";
+var helloWorld = document.getElementById("hello-world");
+
+helloWorld.innerHTML = "<h4>Hello World</h4>";
+
+

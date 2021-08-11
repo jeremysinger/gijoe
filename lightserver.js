@@ -54,7 +54,8 @@ app.get('/', (req,res) => {
 									.then(turtleContent => {
 										let turtleString = turtleContent.toString();
 										s = s.replace("<!-- LIBRARY-CONTROLS -->", turtleString)
-										.replace("/* library check */", true);
+										.replace("/* library check */", true)
+										.replace("/* go slow */", true);
 										res.end(s);
 									})
 								} else if (settings.libraries.DOM) {
@@ -62,11 +63,15 @@ app.get('/', (req,res) => {
 									.then(domContent => {
 										let domString = domContent.toString();
 										s = s.replace("<!-- LIBRARY-CONTROLS -->", domString)
-										.replace("/* library check */", true);
+										.replace("/* library check */", true)
+										.replace("/* go slow */", false);
+										//Get the HTML file
+										fs.readFile(`${workdir}/htmlFiles/exercise.html`)
 										res.end(s);
 									})
 								} else {
-									s = s.replace("/* library check */", false);
+									s = s.replace("/* library check */", false)
+									.replace("/* go slow */", false);
 									res.end(s);
 								}
 							})
@@ -82,8 +87,6 @@ app.get('/', (req,res) => {
 	    return;
 	});
 });
-
-
 
 //This will be the POST request that will save to the savefile folder
 app.post(`/autosave/:id`, (req, res) => {
@@ -204,7 +207,6 @@ function checkTutorialFolderExists() {
 	});
 }
 
-
 function checkTutorialExists() {
 	const tutorialDir = workdir + "/tutorials";
 	const tutorialPath = `${tutorialDir}/1.md`;
@@ -218,6 +220,7 @@ function checkTutorialExists() {
 		return true;
 	})
 }
+
 
 app.listen(PORT, HOST);
 console.log(`running on http://${HOST}:${PORT}`);
