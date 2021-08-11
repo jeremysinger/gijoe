@@ -158,6 +158,22 @@ app.get(`/savefile/:id`, (req, res) => {
 		})
 });
 
+app.get(`/htmlfile`, (req, res) => {
+	const savefile = `${workdir}/htmlFiles/exercise.html`;
+	fs.readFile(savefile)
+	.then(file => {
+		res.setHeader("Content-Type", "text/html");
+		res.writeHead(200);
+		res.end(file);
+		return;
+	})
+	.catch(error => {
+		res.writeHead(404);
+		res.end("DATA NOT FOUND");
+		return;
+	})
+});
+
 function checkSaveExists() {
 	const savePath = workdir + "/savefiles/1.js";
 	fs.readFile(savePath)

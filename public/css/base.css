@@ -53,5 +53,11 @@ code {
 #renderedDOM {
     background-color: white;
     padding: 20px;
+    color: black;
+    max-height: 600px;
+    min-height: 300px;
+    overflow-x: none;
+    resize: vertical;
+    overflow-y: scroll;
 }
 
