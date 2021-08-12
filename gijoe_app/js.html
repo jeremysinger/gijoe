@@ -167,6 +167,7 @@ crossorigin="anonymous"></script>
           } else {
             codeFragment = codeInput;
           }
+          codeFragment = preventInfiniteLooping(codeFragment);
           
 
           //goSlowButton and submitcodeButton should not be clickable while execution is happening
@@ -329,6 +330,7 @@ crossorigin="anonymous"></script>
       <script type="text/javascript" src="/static/js/autosave.js"></script>
       <script type="text/javascript" src="/static/js/turtleslider.js"></script>
       <script type="text/javascript" src="/static/js/goslow.js"></script>
+      <script type="text/javascript" src="/static/js/preventLooping.js"></script>
       <script type="text/javascript" src="/static/js/autocomplete.js"></script>
       <script type="text/javascript" src="/static/js/outputResize.js"></script>
       <script type="text/javascript" src="/static/js/errorLogging.js"></script>
