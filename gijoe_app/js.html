@@ -125,7 +125,7 @@ crossorigin="anonymous"></script>
           var tutorialFiles = parseInt(`/* tutorial_files */`);
           var tutorialSettings = JSON.parse(`/* tutorial_settings */`);
           var libraries = JSON.parse(`/* library check */`);
-          var goSlow = JSON.parse("/* go slow */");
+          var async = JSON.parse("/* go slow */");
           console.log(libraries)
           var currentFile = 1;
           var turtleSpeed = 1000;
@@ -162,7 +162,7 @@ crossorigin="anonymous"></script>
         async function executeCodeBlock() {
 
           codeInput = myCodeMirror.getValue();
-          if (goSlow) {
+          if (async) {
             codeFragment = goSlowMode(codeInput);
           } else {
             codeFragment = codeInput;
@@ -187,7 +187,8 @@ crossorigin="anonymous"></script>
           
           try{
               clearConsole();
-              result = eval(codeFragment).catch( handleError ).then( function () {  //only a catch like this can catch most errors
+              if (async) {
+                result = eval(codeFragment).catch( handleError ).then( function () {  //only a catch like this can catch most errors
 
                 if(isGoSlowOn){
                   if(submitCodeButton.disabled) {
@@ -207,7 +208,11 @@ crossorigin="anonymous"></script>
                 }
                 console.log( "---" );
 
-              });
+                });
+              } else {
+                result = eval(codeFragment);
+              }
+              
           }
           catch (err) { //only a catch like this can catch syntax errors for whatever reason, but it can't catch any other one
             runtimeError = true;

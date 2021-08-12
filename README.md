@@ -11,6 +11,13 @@ to generate simple graphics with turtle libraries (which we support directly). T
 small programs are typical 'beginner' exercises, which we will embed in our
 Computational Thinking with JavaScript MOOC.
 
+## Libraries
+
+Currently GIJOE has support for two libraries these include
+
+* **Turtle** - this library contains a small turtle (represented by a triangle) as it moves around a canvas. Source code for this library can be found in the [turtle.js](https://git.dcs.gla.ac.uk/guss/jsmooc/-/blob/main/gijoe_app/turtle.js) file within the gijoe_app directory on this repository
+* **DOM Experimentation Zone** - This is an area for a student to practice their DOM manipulation skills. Simply add an htmlFiles directory containing an exercise.html file to the custom file to play around with it. This creates an HTML editor alongside a representation of what that HTML looks like when rendered. (Please see the Lab Setup Instructions heading to see how to make use of this)
+
 ## Lab Setup Instructions
 
 In order for your lab to be setup properly. You need the following requirements inside your zip folder. These are
@@ -21,6 +28,10 @@ In order for your lab to be setup properly. You need the following requirements 
 * **instructions.txt** this file contains the instructions at the top
 
 **As of the 10th August 2021, the js.html and preamble.js files are now in a seperate directory and you do not need to include this in the folders.**
+
+### Lab Setup if DOM is turned on
+
+If you wish to make use of the DOM library then you need one extra folder within the custom folder. This is the htmlFiles folder. Currently you only need one file which is called **exercise.html** . This will contain the HTML code for the exercise.
 
 ## Running Instructions
 
