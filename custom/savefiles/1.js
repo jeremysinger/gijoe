@@ -1,8 +1,9 @@
-for (var i = 0; i < 20; i++) {
-  while(true) {
-    forward(i);
-    left(5);
-  }
+var helloWorld = document.getElementById("hello-world");
+var i = 0;
+while (true) {
+  helloWorld.innerHTML = "<h1>Hello World</h1>";
+  console.log(i);
+  i++;
 }
 
 
