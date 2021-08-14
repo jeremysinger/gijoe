@@ -27,6 +27,12 @@ canvas {
     transition-duration: 0.4s;
 }
 
+input[type=button] {
+    background-color: #00386500;
+    color: snow;
+    border: none;
+}
+
 .button:hover {
     background-color: #002341; /* Green */
     color: white;

@@ -67,18 +67,24 @@ crossorigin="anonymous"></script>
         </div>
         <div id="codeArea" class="col container">
           <h2 class="codeHeading">Write Code Here </h2>
-          <textarea id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
-          <div class="row container">
-            <div class="handle codeControls col btn-group" role="group" aria-label="codeControls">
-                <button id="submitcode" class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
-                <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
-                <button class="button reset" onclick="resetSource()">reset code <span class="fa fa-undo" aria-hidden="true"></span></button>
-                <br>
+          <form method='post' action='http://jsfiddle.net/api/post/mootools/1.3/dependencies/more/' target='check'>
+
+            <textarea name='js' id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
+            <div class="row container">
+              <div class="handle codeControls col btn-group" role="group" aria-label="codeControls">
+                  <button id="submitcode" class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
+                  <button class="button share"><input type='button' value='share'/> <span class="fa fa-share" aria-hidden="true"></span> </button>
+                  <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
+                  <button class="button reset" onclick="resetSource()">reset code <span class="fa fa-undo" aria-hidden="true"></span></button>
+                  <br>
+              </div>
+                  
+              <div class="col">
+                <div id="autosave-area" class="success"></div>
+              </div>
             </div>
-                
-            <div class="col">
-              <div id="autosave-area" class="success"></div>
-            </div>
+
+          </form>
           </div>
               
         </div>
