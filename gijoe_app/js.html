@@ -72,14 +72,14 @@ crossorigin="anonymous"></script>
             <textarea name='js' id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
             <div class="row container">
               <div class="handle codeControls col btn-group" role="group" aria-label="codeControls">
-                  <button id="submitcode" class="button submit" onclick="executeCodeBlock()">run code <span class="fa fa-play" aria-hidden="true"></span></button>
-                  <button class="button share"><input type='button' value='share'/> <span class="fa fa-share" aria-hidden="true"></span> </button>
-                  <button class="button save" onclick="dlSource()">download code <span class="fa fa-download" aria-hidden="true"></span></button>
-                  <button class="button reset" onclick="resetSource()">reset code <span class="fa fa-undo" aria-hidden="true"></span></button>
+                  <button id="submitcode" class="button submit" onclick="executeCodeBlock()"><span class="fa fa-play" aria-hidden="true"></span> Run </button>
+                  <button class="button reset" onclick="resetSource()"><span class="fa fa-undo" aria-hidden="true"></span> Reset </button>
+                  <button class="button save" onclick="dlSource()"> <span class="fa fa-download" aria-hidden="true"></span> Download </button>
+                  <button class="button share"> <span class="fa fa-share" aria-hidden="true"></span> <input type='button' value='Share'/> </button>
                   <br>
               </div>
                   
-              <div class="col">
+              <div class="col-4">
                 <div id="autosave-area" class="success"></div>
               </div>
             </div>
