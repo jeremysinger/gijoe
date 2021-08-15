@@ -68,15 +68,19 @@ crossorigin="anonymous"></script>
         </div>
         <div id="codeArea" class="col container">
           <h2 class="codeHeading">Write Code Here </h2>
-          <form method='post' action='http://jsfiddle.net/api/post/mootools/1.3/dependencies/more/' target='check'>
+            
+            <form id="sharedcode" method='post' action='http://jsfiddle.net/api/post/mootools/1.3/dependencies/more/' target='check'>
 
-            <textarea name='js' id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
+              <textarea name='js' id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
+            
+            </form>
             <div class="row container">
               <div class="handle codeControls col btn-group" role="group" aria-label="codeControls">
+
                   <button id="submitcode" class="button submit" onclick="executeCodeBlock()"><span class="fa fa-play" aria-hidden="true"></span> Run </button>
                   <button class="button reset" onclick="resetSource()"><span class="fa fa-undo" aria-hidden="true"></span> Reset </button>
                   <button class="button save" onclick="dlSource()"> <span class="fa fa-download" aria-hidden="true"></span> Download </button>
-                  <button class="button share"> <span class="fa fa-share" aria-hidden="true"></span> <input type='button' value='Share'/> </button>
+                  <button class="button share" form="sharedcode"> <span class="fa fa-share" aria-hidden="true"></span> Share </button>
                   <br>
               </div>
                   
@@ -85,7 +89,6 @@ crossorigin="anonymous"></script>
               </div>
             </div>
 
-          </form>
           </div>
               
         </div>
