@@ -40,16 +40,16 @@ function autosaveDisplay(state, statusCode) {
     const dateArray = [date.getHours(), date.getMinutes(), date.getSeconds()];
     let timestamp = formatTimeStamp(dateArray);
     if (statusCode == 201) {
-        autosaveArea.classList.add("success");
-        autosaveArea.classList.remove("error");
+        // autosaveArea.classList.add("success");
+        // autosaveArea.classList.remove("error");
         autosaveArea.innerHTML = "<h4>Autosaved Successfully at " + timestamp + "</h4>";
     } else if (statusCode == 0) {
-        autosaveArea.classList.add("error");
-        autosaveArea.classList.remove("success");
+        // autosaveArea.classList.add("error");
+        // autosaveArea.classList.remove("success");
         autosaveArea.innerHTML = "<h4>Autosave Failed. No connection to the server found</h4>";
     } else {
-        autosaveArea.classList.add("error");
-        autosaveArea.classList.remove("success");
+        // autosaveArea.classList.add("error");
+        // autosaveArea.classList.remove("success");
         autosaveArea.innerHTML = "<h4>Autosave Failed at " + timestamp + "</h4>";
     }
 }

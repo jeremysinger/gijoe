@@ -19,11 +19,11 @@
 }
 
 #codeOutput{
-    min-width: 768px;
+    min-width: 300px;
 }
 
 #consoleOutput{
-    min-width: 768px;
+    min-width: 300px;
 }
 
 #graphicscontrols{
