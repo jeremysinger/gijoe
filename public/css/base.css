@@ -27,6 +27,10 @@ canvas {
     transition-duration: 0.4s;
 }
 
+.submit {
+    background-color: #006522;
+}
+
 input[type=button] {
     background-color: #00386500;
     color: snow;
@@ -34,7 +38,12 @@ input[type=button] {
 }
 
 .button:hover {
-    background-color: #002341; /* Green */
+    background-color: #002341; 
+    color: white;
+}
+
+.submit:hover {
+    background-color: #003512;
     color: white;
 }
 

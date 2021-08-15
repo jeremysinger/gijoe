@@ -18,7 +18,11 @@
     height: 100%;
 }
 
-#outputblock{
+#codeOutput{
+    min-width: 768px;
+}
+
+#consoleOutput{
     min-width: 768px;
 }
 
