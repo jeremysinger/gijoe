@@ -3,7 +3,7 @@ const domRender = document.getElementById("renderedDOM");
 
 function setUpArea() {
     var http = new XMLHttpRequest();
-    http.open("GET", "/htmlfile", false);
+    http.open("GET", "/htmlfile");
     http.onload = function() {
         var data = http.responseText;
         domRender.innerHTML = data;
@@ -17,7 +17,8 @@ function setUpArea() {
 
 function setUpCodeMirror() {
     var htmlCodeMirror = CodeMirror.fromTextArea(htmlEditor, {
-        mode:  "html",
+        mode: "application/xml",
+        htmlMode: true,
         lineNumbers: true,
         lineWrapping: true,
         readOnly: true
