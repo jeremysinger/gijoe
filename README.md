@@ -23,6 +23,7 @@ Currently GIJOE has support for two libraries these include
 In order for your lab to be setup properly. You need the following requirements inside your zip folder. These are
 
 * **A "tutorials" folder** - This directory will contain the markdown files. For now we still have the system where you need to have multiple md files which are numbered from 1. So for example the first tutorial will be 1.md, the second tutorial will be 2.md etc
+* **COMING SOON** soon you will only need a tutorials.md file. We are currently implementing it and it will be on the coursera course shortly
 * **A "savefiles" folder** - This directory contains the JavaScript that the user will edit. If you want any starter code for any of the md files that you have written then simply create a JavaScript file and name it with the same number as the corresponding markdown file. E.g. starter code for 1.md should be named 1.js. You don't need to have a file for every markdown file as a js file will be created when you first load the lab
 * **A settings.json file** - Please see the "Settings" header for more information on how to set this up
 * **instructions.txt** this file contains the instructions at the top

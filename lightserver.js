@@ -15,6 +15,8 @@ const PORT = 8080;
 const HOST = '0.0.0.0';
 const workdir = __dirname + "/custom";
 const appdir = __dirname + "/gijoe_app";
+let markdownList = [];
+splitMarkdown();
 
 const app = express();
 app.use("/static", express.static("public"));
@@ -39,42 +41,39 @@ app.get('/', (req,res) => {
 					.then(settings => {
 						fs.readFile(workdir + "/savefiles/1.js")
 						.then(savecode => {
-							fs.readdir(workdir + "/tutorials")
-							.then(files => {
-								let s = contents.toString()
-								.replace("<!-- INSTRS -->", instrs)
-								.replace("/* initial code */", initcode)
-								.replace("<!-- PREAMBLE CODE -->", preamble)
-								.replace("/* tutorial_settings */", settings)
-								.replace("/* saved code */", savecode)
-								.replace("/* tutorial_files */", files.length);
-								settings = JSON.parse(settings);
-								if (settings.libraries.turtle) {
-									fs.readFile(appdir + "/turtleCanvas.html")
-									.then(turtleContent => {
-										let turtleString = turtleContent.toString();
-										s = s.replace("<!-- LIBRARY-CONTROLS -->", turtleString)
-										.replace("/* library check */", true)
-										.replace("/* go slow */", true);
-										res.end(s);
-									})
-								} else if (settings.libraries.DOM) {
-									fs.readFile(appdir + "/DOMArea.html")
-									.then(domContent => {
-										let domString = domContent.toString();
-										s = s.replace("<!-- LIBRARY-CONTROLS -->", domString)
-										.replace("/* library check */", true)
-										.replace("/* go slow */", false);
-										//Get the HTML file
-										fs.readFile(`${workdir}/htmlFiles/exercise.html`)
-										res.end(s);
-									})
-								} else {
-									s = s.replace("/* library check */", false)
-									.replace("/* go slow */", false);
+							let s = contents.toString()
+							.replace("<!-- INSTRS -->", instrs)
+							.replace("/* initial code */", initcode)
+							.replace("<!-- PREAMBLE CODE -->", preamble)
+							.replace("/* tutorial_settings */", settings)
+							.replace("/* saved code */", savecode)
+							.replace("/* tutorial_files */", markdownList.length);
+							settings = JSON.parse(settings);
+							if (settings.libraries.turtle) {
+								fs.readFile(appdir + "/turtleCanvas.html")
+								.then(turtleContent => {
+									let turtleString = turtleContent.toString();
+									s = s.replace("<!-- LIBRARY-CONTROLS -->", turtleString)
+									.replace("/* library check */", true)
+									.replace("/* go slow */", true);
 									res.end(s);
-								}
-							})
+								})
+							} else if (settings.libraries.DOM) {
+								fs.readFile(appdir + "/DOMArea.html")
+								.then(domContent => {
+									let domString = domContent.toString();
+									s = s.replace("<!-- LIBRARY-CONTROLS -->", domString)
+									.replace("/* library check */", true)
+									.replace("/* go slow */", false);
+									//Get the HTML file
+									fs.readFile(`${workdir}/htmlFiles/exercise.html`)
+									res.end(s);
+								})
+							} else {
+								s = s.replace("/* library check */", false)
+								.replace("/* go slow */", false);
+								res.end(s);
+							}
 						})
 					})
 				})
@@ -105,19 +104,18 @@ app.post(`/autosave/:id`, (req, res) => {
 });
 
 app.get(`/tutorial/:id`, (req, res) => {
-	fs.readFile(`${workdir}/tutorials/${req.params.id}.md`)
-		.then(contents => {
-			let HTML = converter.makeHtml(contents.toString());
-			res.setHeader("Content-Type", "text/html");
-			res.writeHead(200);
-			res.end(HTML);
-			return;
-		})
-		.catch(err => {
-			res.writeHead(404);
-			res.end("FILE NOT FOUND");
-			return;
-		})
+	var id = req.params.id - 1;
+	try {
+		let HTML = converter.makeHtml(markdownList[id]);
+		res.setHeader("Content-Type", "text/html");
+		res.writeHead(200);
+		res.end(HTML);
+		return;
+	} catch (err) {
+		res.writeHead(404);
+		res.end("FILE NOT FOUND");
+		return;
+	}
 });
 
 app.get(`/savefile/:id`, (req, res) => {
@@ -219,6 +217,18 @@ function checkTutorialExists() {
 		fs.writeFile(tutorialPath ,"# Generic Tutorial File");
 		return true;
 	})
+}
+
+function splitMarkdown() {
+	fs.readFile(workdir + "/tutorials.md")
+		.then(markdown => {
+			markdown = markdown.toString();
+			markdownList = markdown.split("##NEXT##")
+				.map(markdown => markdown.trim());
+		})
+		.catch(error => {
+			console.log("NO MD FILE FOUND");
+		})
 }
 
 
