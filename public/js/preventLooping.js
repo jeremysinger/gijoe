@@ -8,7 +8,7 @@ function preventInfiniteLooping(codeFragment) {
     var indexes = [];
     var infiniteLoopChecker;
     for (var i = 0; i < codeList.length; i++) {
-        if ((codeList[i].includes("for") && !codeList[i].includes("forward")) || codeList[i].includes("while")) {
+        if (((codeList[i].includes("for(") || codeList[i].includes("for (")) && !codeList[i].includes("forward")) || (codeList[i].includes("while(") || codeList[i].includes("while ("))) {
             indexes.push(i);
         }
     }
