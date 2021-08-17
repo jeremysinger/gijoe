@@ -61,6 +61,21 @@ We are intending to run GIJOE in the online labs for our
 upcoming Coursera specialization entitled *Computational
 Thinking with JavaScript*.
 
+## Tutorials
+
+All tutorials must be written within the tutorials file. The
+website takes in markdown files and each tutorial file must
+be numbered in order. E.g. 1.md, 2.md etc. In order to parse
+through the markdown we are making use of the showdown library.
+For documentation of the syntax click [here](http://demo.showdownjs.com)
+
+If you want to have a specific code base with your tutorial
+please enter js files in the savefiles directory and name the
+files with the same number as the markdown files within the tutorial
+file. e.g. 1.md will have the savefile 1.js. Don't worry if you
+don't have a js file for each md file as they will be automatically
+created when the user opens the tutorial for the first time.
+
 ## Brief Guide to the most common types of Markdown
 
 ### Text
@@ -90,8 +105,8 @@ Hello World
 There are other things you can do with text.
 
 * For **bold** text we can write `**BOLD TEXT**`
-* For ~strikethrough~ text we can write `~~STRIKE~~`
-* For italics then we can write `ITALICS`
+* For ~~strikethrough~~ text we can write `~~STRIKE~~`
+* For *italics* then we can write `ITALICS`
 
 ### Images and links
 For links we use `[]()` syntax to make a link. For example if I want to
@@ -112,21 +127,51 @@ For example we would need to write this
 ```
 
 ### Ordered and Unordered Lists
+For an unordered list then all you need to do
+is enter an asterix for every term. For example:
 
-## Tutorials
+```markdown
+* Hello
+* World
+```
+Would render as
+* Hello
+* World
 
-All tutorials must be written within the tutorials file. The
-website takes in markdown files and each tutorial file must
-be numbered in order. E.g. 1.md, 2.md etc. In order to parse
-through the markdown we are making use of the showdown library.
-For documentation of the syntax click [here](http://demo.showdownjs.com)
+For ordered list you simply use numbers for example
+```markdown
+1. Hello
+2. World
+```
+Would render as 
+1. Hello
+2. World
 
-If you want to have a specific code base with your tutorial
-please enter js files in the savefiles directory and name the
-files with the same number as the markdown files within the tutorial
-file. e.g. 1.md will have the savefile 1.js. Don't worry if you
-don't have a js file for each md file as they will be automatically
-created when the user opens the tutorial for the first time.
+### Tables
+For tables there is another piece of useful markdown syntax. In order to write a table
+just use this syntax here
+
+```markdown
+| Hello | World |
+|:------|------:|
+|Hello  |World  |
+```
+This would render as
+| Hello | World |
+|:------|------:|
+|Hello  |World  |
+
+You can use as many columns as you like all you have to do is add more lines on the same line
+
+```markdown
+| Hello | World | !  |
+|:------|-------|---:|
+| Hello |World  |!   |
+```
+This would render as 
+| Hello | World | !  |
+|:------|-------|---:|
+| Hello |World  |!   |
 
 ## Settings
 
