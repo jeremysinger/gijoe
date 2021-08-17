@@ -87,6 +87,12 @@ And would render like this
 ## Hello World
 Hello World
 
+There are other things you can do with text.
+
+* For **bold** text we can write `**BOLD TEXT**`
+* For ~strikethrough~ text we can write `~~STRIKE~~`
+* For italics then we can write `ITALICS`
+
 ### Images and links
 For links we use `[]()` syntax to make a link. For example if I want to
 link to the University of Glasgow website we would write down this
@@ -104,6 +110,8 @@ For example we would need to write this
 ```markdown
 ![Alternative Text](IMAGE ADDRESS HERE)
 ```
+
+### Ordered and Unordered Lists
 
 ## Tutorials
 
