@@ -16,7 +16,8 @@ const HOST = '0.0.0.0';
 const workdir = __dirname + "/custom";
 const appdir = __dirname + "/gijoe_app";
 let markdownList = [];
-splitMarkdown();
+
+
 
 const app = express();
 app.use("/static", express.static("public"));
@@ -24,9 +25,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get('/', (req,res) => {
+	splitMarkdown();
 	checkSaveExists();
-	checkTutorialFolderExists();
-	checkTutorialExists();
     fs.readFile(appdir + "/js.html")
 	.then(contents => {
 	    res.setHeader("Content-Type", "text/html");
@@ -187,39 +187,22 @@ function checkSaveExists() {
 		})
 }
 
-function checkTutorialFolderExists() {
-	const tutorialDir = workdir + "/tutorials";
+function checkTutorialFileExists() {
+	const tutorialFile = workdir + "/tutorials.md";
 
-	fs.readdir(tutorialDir)
-	.then(files => {
+	fs.readFile(tutorialFile)
+	.then(file => {
 		return true;
 	})
 	.catch(error => {
-		fs.mkdir(tutorialDir, (err) => {
-			if (err) {
-				return console.error(err);
-			}
-			console.log("TUTORIAL DIRECTORY CREATED");
-			return true;
-		})
+		fs.writeFile(tutorialFile, "# GENERIC TUTORIAL FILE");
+		console.log("Tutorial File Created");
+		return true;
 	});
 }
 
-function checkTutorialExists() {
-	const tutorialDir = workdir + "/tutorials";
-	const tutorialPath = `${tutorialDir}/1.md`;
-	
-	fs.readFile(tutorialPath)
-	.then(result => {
-		return true;
-	})
-	.catch(error => {
-		fs.writeFile(tutorialPath ,"# Generic Tutorial File");
-		return true;
-	})
-}
-
 function splitMarkdown() {
+	checkTutorialFileExists();
 	fs.readFile(workdir + "/tutorials.md")
 		.then(markdown => {
 			markdown = markdown.toString();
