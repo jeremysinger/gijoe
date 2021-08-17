@@ -1,3 +1,7 @@
+#codeBlock {
+    font-size: 15px;
+}
+
 #tutorialSpace {
     background-color: white;
     padding: 10px;
@@ -6,7 +10,6 @@
     height: 300px;
     min-height: 300px;
     max-height: 600px;
-    font-size: 15px;
 }
 
 #tutorialSpace::-webkit-scrollbar {
@@ -29,37 +32,37 @@
     background-clip: padding-box;
 }
 
-#tutorialSpace h1 {
+#codeBlock h1 {
     font-size: 4em;
 }
 
-#tutorialSpace h2 {
+#codeBlock h2 {
     font-size: 3.5em;
 }
 
-#tutorialSpace h3 {
+#codeBlock h3 {
     font-size: 3em;
 }
 
-#tutorialSpace h4 {
+#codeBlock h4 {
     font-size: 2.5em;
 }
 
-#tutorialSpace h5 {
+#codeBlock h5 {
     font-size: 2em;
 }
 
-#tutorialSpace p {
+#codeBlock p {
     width: 50ch;
     max-width: 100%;
 }
 
-#tutorialSpace table {
+#codeBlock table {
     table-layout: fixed;
     width: 100%;
 }
 
-#tutorialSapce table tr {
+#tutorialSpace table tr {
     border: 3px solid black;
 }
 

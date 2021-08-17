@@ -4,5 +4,8 @@ while (true) {
   i++;
 }
 
+console.log("Hello World");
+console.log("Hello World");
+
 
 
