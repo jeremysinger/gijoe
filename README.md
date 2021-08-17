@@ -61,6 +61,50 @@ We are intending to run GIJOE in the online labs for our
 upcoming Coursera specialization entitled *Computational
 Thinking with JavaScript*.
 
+## Brief Guide to the most common types of Markdown
+
+### Text
+
+For any paragraph text just simply type as if you are writing a .txt file or a Word Document. For h1-6 tags you simply use the # symbol for the size of the header. For example
+
+```markdown
+# Hello World
+
+## Hello World
+
+Hello World
+```
+Would look like this in HTML
+```html
+<h1>Hello World</h1>
+
+<h2>Hello World</h2>
+
+<p>Hello World</p>
+```
+And would render like this
+# Hello World
+## Hello World
+Hello World
+
+### Images and links
+For links we use `[]()` syntax to make a link. For example if I want to
+link to the University of Glasgow website we would write down this
+
+```markdown
+[Glasgow University](https://www.gla.ac.uk)
+```
+In the HTML file it will render like this:
+
+[Glasgow University](https://www.gla.ac.uk)
+
+For images the syntax is similar to the links we use the `![]()`
+
+For example we would need to write this
+```markdown
+![Alternative Text](IMAGE ADDRESS HERE)
+```
+
 ## Tutorials
 
 All tutorials must be written within the tutorials file. The
