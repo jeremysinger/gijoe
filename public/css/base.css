@@ -76,3 +76,7 @@ code {
     overflow-y: scroll;
 }
 
+#dom-controls {
+    padding: 10px;
+}
+

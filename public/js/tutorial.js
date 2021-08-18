@@ -100,7 +100,7 @@ function resizeTutorialArea() {
     if (codeMirrorEl.offsetTop == tutorialSpace.offsetTop) {
         var width = tutorialSpace.style.width;
         var newHeight = myCodeMirror.getWrapperElement().offsetHeight;
-        tutorialSpace.style.height = newHeight;
+        tutorialSpace.style.height = `${newHeight}px`;
     }
 }
 
