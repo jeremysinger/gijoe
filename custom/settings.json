@@ -1,9 +1,10 @@
 {
-    "tutorial": true,
+    "tutorial": true, 
+    "intro": false,
     "autoComplete": true,
     "loopLimit": 100,
     "libraries": {
         "turtle": false,
         "DOM": true
-    }
+    } 
 }

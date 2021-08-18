@@ -5,15 +5,24 @@ const backButton = document.getElementById("tutorialBack");
 backButton.disabled = true;
 const tutorialArea = document.getElementById("tutorialArea");
 const tutorialSpace = document.getElementById("tutorialSpace");
+const introInstructions = document.getElementById("intro");
 
 //Parse the settings json file to see whether the tutorial settings were on
 function checkSettings() {
-    console.log(tutorialSettings);
+    console.log(tutorialSettings); //TODO
     if (tutorialSettings.tutorial) {
         getTutorial(1);
         tutorialArea.style.display = "block";
     } else {
         tutorialArea.style.display = "none";
+    }
+}
+
+function introHider() {
+    if (tutorialSettings.intro) {
+        introInstructions.style.display = "block";
+    } else {
+        introInstructions.style.display = "none";
     }
 }
 
@@ -113,3 +122,4 @@ codeResize.observe(codeMirrorEl);
 
 
 checkSettings();
+introHider();
