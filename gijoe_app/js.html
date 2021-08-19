@@ -60,7 +60,7 @@ crossorigin="anonymous"></script>
 
       <div id="codeblock" class="row py-3 px-4" style=" background-color: rgb(0,83,152);">
         <div id="tutorialArea" class="col">
-          <h1 class="codeHeading">Tutorial Space</h1>
+          <h2 class="codeHeading">Tutorial Space</h2>
           <div id="tutorialSpace"></div>
           <div id="tutorialControls" class="codeControls">
             <button class="button" id="tutorialBack"><< Back</button>
@@ -69,7 +69,7 @@ crossorigin="anonymous"></script>
         </div>
         <div id="codeArea" class="col container">
           <div class="row row-cols-auto">
-            <h1 class="codeHeading col">Write Code Here </h1>
+            <h2 class="codeHeading col">Write Code Here </h2>
             <div class="col">
               <div id="autosave-area" class="success"></div>
             </div>  
@@ -121,6 +121,8 @@ crossorigin="anonymous"></script>
           </div>
         </div>
 
+        <p id=resetCode></p>
+
       </div>
 
         <script>
@@ -134,6 +136,7 @@ crossorigin="anonymous"></script>
           var originalCode = `/* initial code */`;
           var saveCode =  `/* saved code */`;
           var tutorialFiles = parseInt(`/* tutorial_files */`);
+          var initcodeFiles = parseInt(`/* initcode_files */`);
           var tutorialSettings = JSON.parse(`/* tutorial_settings */`);
           var libraries = JSON.parse(`/* library check */`);
           var async = JSON.parse("/* go slow */");
@@ -266,7 +269,9 @@ crossorigin="anonymous"></script>
         }
 
         function resetSource() {
-          myCodeMirror.setValue(originalCode);
+          //Get list of init codes, get the right one with the var currentFile, if the currentFile number item does not exist then do not allow to reset :) or reset to a boilerplate
+          currentCode = originalCode;
+          myCodeMirror.setValue(currentCode);
         }
 
         function clearConsole() {

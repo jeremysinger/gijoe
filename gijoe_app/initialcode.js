@@ -1,5 +1,9 @@
-// sample JavaScript code
+// GENERIC INITIALCODE FILE
 
-console.log("Hello World!");
+/* <!-- NEXT --> */
 
-// end JavaScript code
+log(1);
+
+/* <!-- NEXT --> */
+
+WebGLShaderPrecisionFormat;

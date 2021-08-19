@@ -16,6 +16,7 @@ const HOST = '0.0.0.0';
 const workdir = __dirname + "/custom";
 const appdir = __dirname + "/gijoe_app";
 let markdownList = [];
+let initcodeList = [];
 
 
 
@@ -26,6 +27,7 @@ app.use(express.json());
 
 app.get('/', (req,res) => {
 	splitMarkdown();
+	splitInitcode();
 	checkSaveExists();
     fs.readFile(appdir + "/js.html")
 	.then(contents => {
@@ -47,7 +49,8 @@ app.get('/', (req,res) => {
 							.replace("<!-- PREAMBLE CODE -->", preamble)
 							.replace("/* tutorial_settings */", settings)
 							.replace("/* saved code */", savecode)
-							.replace("/* tutorial_files */", markdownList.length);
+							.replace("/* tutorial_files */", markdownList.length)
+							.replace("/* initcode_files */", initcodeList.length);
 							settings = JSON.parse(settings);
 							if (settings.libraries.turtle) {
 								fs.readFile(appdir + "/turtleCanvas.html")
@@ -110,6 +113,21 @@ app.get(`/tutorial/:id`, (req, res) => {
 		res.setHeader("Content-Type", "text/html");
 		res.writeHead(200);
 		res.end(HTML);
+		return;
+	} catch (err) {
+		res.writeHead(404);
+		res.end("FILE NOT FOUND");
+		return;
+	}
+});
+
+app.get(`/initcode/:id`, (req, res) => {
+	var id = req.params.id - 1;
+	try {
+		var data = JSON.stringify({code: initcodeList[id].toString()});
+		res.setHeader("Content-Type", "application/json");
+		res.writeHead(200);
+		res.end(data);
 		return;
 	} catch (err) {
 		res.writeHead(404);
@@ -214,6 +232,32 @@ function splitMarkdown() {
 		})
 }
 
+function checkInitcodeFileExists() {
+	const InitcodeFile = appdir + "/initialcode.js";
+
+	fs.readFile(InitcodeFile)
+	.then(file => {
+		return true;
+	})
+	.catch(error => {
+		fs.writeFile(InitcodeFile, "// GENERIC INITIALCODE FILE");
+		console.log("Initcode File Created");
+		return true;
+	});
+}
+
+function splitInitcode() {
+	checkInitcodeFileExists();
+	fs.readFile(appdir + "/initialcode.js")
+		.then(code => {
+			code = code.toString();
+			initcodeList = code.split("/* <!-- NEXT --> */")
+				.map(code => code.trim());
+		})
+		.catch(error => {
+			console.log("NO INITIALCODE FILE FOUND");
+		})
+}
 
 app.listen(PORT, HOST);
 console.log(`running on http://${HOST}:${PORT}`);

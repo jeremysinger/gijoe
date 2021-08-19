@@ -6,12 +6,14 @@ backButton.disabled = true;
 const tutorialArea = document.getElementById("tutorialArea");
 const tutorialSpace = document.getElementById("tutorialSpace");
 const introInstructions = document.getElementById("intro");
+const resetCode = document.getElementById("resetCode");
 
 //Parse the settings json file to see whether the tutorial settings were on
 function checkSettings() {
-    console.log(tutorialSettings); //TODO
+    console.log(tutorialSettings); 
     if (tutorialSettings.tutorial) {
         getTutorial(1);
+        getInitcode(currentFile);
         tutorialArea.style.display = "block";
     } else {
         tutorialArea.style.display = "none";
@@ -32,6 +34,7 @@ forwardButton.addEventListener("click", () => {
     }
     currentFile++;
     getTutorial(currentFile);
+    getInitcode(currentFile);
     updateCodeMirror(currentFile);
     if (currentFile >= tutorialFiles) {
         forwardButton.disabled = true;
@@ -44,6 +47,7 @@ backButton.addEventListener("click", () => {
     }
     currentFile--;
     getTutorial(currentFile);
+    getInitcode(currentFile);
     updateCodeMirror(currentFile);    
     if (currentFile === 1) {
         backButton.disabled = true;
@@ -61,6 +65,26 @@ function getTutorial(id) {
             tutorialSpace.innerHTML = data;
             makeCodeMirrorInstances();
             //hljs.highlightAll();
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    http.send();
+}
+
+function getInitcode(id) {
+    const http = new XMLHttpRequest();
+    http.open("GET", `/initcode/${id}`);
+
+    http.onload = function() {
+        
+        if (http.status === 200) {
+            let data = http.responseText;
+            resetCode.innerHTML = data;
+            //makeCodeMirrorInstances();
             return true;
         } else {
             return false;
