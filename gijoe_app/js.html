@@ -121,7 +121,7 @@ crossorigin="anonymous"></script>
           </div>
         </div>
 
-        <p id=resetCode></p>
+        <p id=resetCode></p> <!-- Useful in order to manage the reset functionality -->
 
       </div>
 
@@ -270,7 +270,7 @@ crossorigin="anonymous"></script>
 
         function resetSource() {
           //Get list of init codes, get the right one with the var currentFile, if the currentFile number item does not exist then do not allow to reset :) or reset to a boilerplate
-          currentCode = originalCode;
+          currentCode = resetCode.innerHTML;
           myCodeMirror.setValue(currentCode);
         }
 

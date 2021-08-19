@@ -124,7 +124,8 @@ app.get(`/tutorial/:id`, (req, res) => {
 app.get(`/initcode/:id`, (req, res) => {
 	var id = req.params.id - 1;
 	try {
-		var data = JSON.stringify({code: initcodeList[id].toString()});
+		// console.log(initcodeList[id].toString());
+		var data = initcodeList[id];
 		res.setHeader("Content-Type", "application/json");
 		res.writeHead(200);
 		res.end(data);
