@@ -1,5 +1,5 @@
-#codeBlock {
-    font-size: 15px;
+.codeArea  {
+    font-size: 10px;
 }
 
 #tutorialSpace {
@@ -32,29 +32,34 @@
     background-clip: padding-box;
 }
 
-#codeBlock h1 {
+.codeArea h1 {
     font-size: 4em;
 }
 
-#codeBlock h2 {
+.codeArea h2 {
     font-size: 3.5em;
 }
 
-#codeBlock h3 {
+.codeArea h3 {
     font-size: 3em;
 }
 
-#codeBlock h4 {
+.codeArea h4 {
     font-size: 2.5em;
 }
 
-#codeBlock h5 {
+.codeArea h5 {
     font-size: 2em;
 }
 
-#codeBlock p {
+.codeArea p {
     width: 50ch;
     max-width: 100%;
+    font-size: 1.5em;
+}
+
+.codeArea table {
+    font-size: 1.4em;
 }
 
 #codeBlock table {
