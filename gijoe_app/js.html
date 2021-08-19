@@ -215,10 +215,14 @@ crossorigin="anonymous"></script>
                   autosaveArea.classList.add("success");
                   autosaveArea.innerHTML = "<h4>Running Completed</h4>";
 
+                  outputArea.style.display = "none";
+
                 } else {
                   autosaveArea.classList.remove("success");
                   autosaveArea.classList.add("error");
                   autosaveArea.innerHTML = "<h4>Your code has timed out</h4>";
+
+                  //TODO: give hint about the infinite loops
                 }
                 console.log( "---" );
 
@@ -229,6 +233,8 @@ crossorigin="anonymous"></script>
                 autosaveArea.classList.remove("error");
                 autosaveArea.classList.add("success");
                 autosaveArea.innerHTML = "<h4>Running Completed</h4>";
+
+                outputArea.style.display = "none";
 
                 console.log( "---" );
               }
