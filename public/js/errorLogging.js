@@ -6,10 +6,14 @@ hintMap = {
 }
 
 let output = document.getElementById("output");
+let outputArea = document.getElementById("codeOutput");
 
 function handleError(err) {
 
     runtimeError = true;
+
+    //show the output area so that the hints can be displayed
+    outputArea.style.display = "block";
 
     if (err.name == "SyntaxError"){
         console.log("---"); //because the then function wrapping eval won't be executed and only the outer catch will handle Syntax errors
