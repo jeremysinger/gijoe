@@ -225,6 +225,12 @@ crossorigin="anonymous"></script>
                 });
               } else {
                 result = eval(codeFragment);
+
+                autosaveArea.classList.remove("error");
+                autosaveArea.classList.add("success");
+                autosaveArea.innerHTML = "<h4>Running Completed</h4>";
+
+                console.log( "---" );
               }
               
           }
