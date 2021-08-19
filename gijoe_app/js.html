@@ -39,7 +39,7 @@ crossorigin="anonymous"></script>
   </head>
 
   <nav id="header" class="navbar navbar-expand-lg p-3 d-flex flex-wrap">
-    <div id="header-logo" class="col-3 col-sm-4">
+    <div id="header-logo" class="col-3 col-sm-4 px-2">
       <a href="https://www.gla.ac.uk/">
         <img id="logo" width="210" height="66" src="/static/static/university-of-glasgow-280.png" alt="University of Glasgow logo" class="d-none d-md-block">
         <img id="small-logo" width="294" height="64" src="/static/static/university-of-glasgow-min.png" alt="University of Glasgow logo" class="d-none d-sm-block d-md-none">
@@ -272,6 +272,7 @@ crossorigin="anonymous"></script>
           //Get list of init codes, get the right one with the var currentFile, if the currentFile number item does not exist then do not allow to reset :) or reset to a boilerplate
           currentCode = resetCode.innerHTML;
           myCodeMirror.setValue(currentCode);
+          autosave();
         }
 
         function clearConsole() {
