@@ -222,7 +222,8 @@ crossorigin="anonymous"></script>
                   autosaveArea.classList.add("error");
                   autosaveArea.innerHTML = "<h4>Your code has timed out</h4>";
 
-                  //TODO: give hint about the infinite loops
+                  outputArea.style.display = "block";
+                  output.innerHTML = `<font color='red'>ERROR: InfiniteLoop<br></br>HINT: ${hintMap["InfiniteLoop"]}</font>`;
                 }
                 console.log( "---" );
 
@@ -230,11 +231,20 @@ crossorigin="anonymous"></script>
               } else {
                 result = eval(codeFragment);
 
-                autosaveArea.classList.remove("error");
-                autosaveArea.classList.add("success");
-                autosaveArea.innerHTML = "<h4>Running Completed</h4>";
+                if(!timeout) {
+                  autosaveArea.classList.remove("error");
+                  autosaveArea.classList.add("success");
+                  autosaveArea.innerHTML = "<h4>Running Completed</h4>";
 
-                outputArea.style.display = "none";
+                  outputArea.style.display = "none";
+                } else {
+                  autosaveArea.classList.remove("success");
+                  autosaveArea.classList.add("error");
+                  autosaveArea.innerHTML = "<h4>Your code has timed out</h4>";
+
+                  outputArea.style.display = "block";
+                  output.innerHTML = `<font color='red'>ERROR: InfiniteLoop<br></br>HINT: ${hintMap["InfiniteLoop"]}</font>`;
+                }
 
                 console.log( "---" );
               }
@@ -253,7 +263,7 @@ crossorigin="anonymous"></script>
               }
             }
             // console.log(runtimeError);
-            if(!runtimeError){
+            if(!runtimeError && !timeout){
               document.getElementById('output').innerHTML = 'Your code executed successfully. ';  //'<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
             }
           }

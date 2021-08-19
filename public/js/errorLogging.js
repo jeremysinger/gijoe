@@ -3,6 +3,7 @@ hintMap = {
     "TypeError": "make sure that you're accessing the right method",
     "SyntaxError": "check for missing or open brackets, or missing parentheses or punctuation", 
     "RangeError": "A RangeError is thrown when trying to pass a value as an argument to a function that does not allow a range that includes the value.",
+    "InfiniteLoop": "Be careful about loops where the breaking condition will never be met. You might end up caught in an infinite loop!"
 }
 
 let output = document.getElementById("output");

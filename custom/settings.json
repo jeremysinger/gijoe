@@ -1,7 +1,7 @@
 {
     "tutorial": true, 
     "intro": false,
-    "autoComplete": true,
+    "autoComplete": false,
     "loopLimit": 100,
     "libraries": {
         "turtle": false,

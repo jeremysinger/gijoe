@@ -1,1 +1,3 @@
-// GENERIC INITIALCODE FILE
+while(true){
+	log(1);
+}
