@@ -17,6 +17,7 @@ Currently GIJOE has support for two libraries these include
 
 * **Turtle** - this library contains a small turtle (represented by a triangle) as it moves around a canvas. Source code for this library can be found in the [turtle.js](https://git.dcs.gla.ac.uk/guss/jsmooc/-/blob/main/gijoe_app/turtle.js) file within the gijoe_app directory on this repository
 * **DOM Experimentation Zone** - This is an area for a student to practice their DOM manipulation skills. Simply add an htmlFiles directory containing an exercise.html file to the custom file to play around with it. This creates an HTML editor alongside a representation of what that HTML looks like when rendered. (Please see the Lab Setup Instructions heading to see how to make use of this)
+* **CSV Library** - COMING SOON. A new library for dealing with CSV files
 
 ## Lab Setup Instructions
 
@@ -184,7 +185,8 @@ For creating labs we have the settings.json file to help you choose how you want
   "loopLimit": 100,
   "libraries": {
        "turtle": true,
-       "DOM": false
+       "DOM": false,
+       "csv": false
   }  
 }
 ```

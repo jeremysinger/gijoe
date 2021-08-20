@@ -37,47 +37,65 @@ app.get('/', (req,res) => {
 		.then(instrs => {
 		    fs.readFile(appdir + "/initialcode.js")
 			.then(initcode => {
-			    fs.readFile(appdir + "/turtle.js")
-				.then(preamble => {
-					fs.readFile(workdir + "/settings.json")
-					.then(settings => {
-						fs.readFile(workdir + "/savefiles/1.js")
-						.then(savecode => {
-							let s = contents.toString()
-							.replace("<!-- INSTRS -->", instrs)
-							.replace("/* initial code */", initcode)
-							.replace("<!-- PREAMBLE CODE -->", preamble)
-							.replace("/* tutorial_settings */", settings)
-							.replace("/* saved code */", savecode)
-							.replace("/* tutorial_files */", markdownList.length)
-							.replace("/* initcode_files */", initcodeList.length);
-							settings = JSON.parse(settings);
-							if (settings.libraries.turtle) {
-								fs.readFile(appdir + "/turtleCanvas.html")
-								.then(turtleContent => {
-									let turtleString = turtleContent.toString();
-									s = s.replace("<!-- LIBRARY-CONTROLS -->", turtleString)
-									.replace("/* library check */", true)
-									.replace("/* go slow */", true);
-									res.end(s);
-								})
-							} else if (settings.libraries.DOM) {
-								fs.readFile(appdir + "/DOMArea.html")
-								.then(domContent => {
-									let domString = domContent.toString();
-									s = s.replace("<!-- LIBRARY-CONTROLS -->", domString)
-									.replace("/* library check */", true)
-									.replace("/* go slow */", false);
-									//Get the HTML file
-									fs.readFile(`${workdir}/htmlFiles/exercise.html`)
-									res.end(s);
-								})
-							} else {
-								s = s.replace("/* library check */", false)
+				fs.readFile(workdir + "/settings.json")
+				.then(settings => {
+					fs.readFile(workdir + "/savefiles/1.js")
+					.then(savecode => {
+						let s = contents.toString()
+						.replace("<!-- INSTRS -->", instrs)
+						.replace("/* initial code */", initcode)
+						.replace("/* tutorial_settings */", settings)
+						.replace("/* saved code */", savecode)
+						.replace("/* tutorial_files */", markdownList.length)
+						.replace("/* initcode_files */", initcodeList.length);
+						settings = JSON.parse(settings);
+						if (settings.libraries.turtle) {
+							fs.readFile(appdir + "/turtleCanvas.html")
+							.then(turtleContent => {
+								let turtleString = turtleContent.toString();
+								s = s.replace("<!-- LIBRARY-CONTROLS -->", turtleString)
+								.replace("/* library check */", true)
+								.replace("/* go slow */", true);
+								fs.readFile(appdir + "/turtle.js")
+									.then(code => {
+										s = s.replace("<!-- PREAMBLE CODE -->", code);
+										res.end(s);
+										return;
+									});
+							});
+						} else if (settings.libraries.DOM) {
+							fs.readFile(appdir + "/DOMArea.html")
+							.then(domContent => {
+								let domString = domContent.toString();
+								s = s.replace("<!-- LIBRARY-CONTROLS -->", domString)
+								.replace("/* library check */", true)
 								.replace("/* go slow */", false);
+								//Get the HTML file
+								fs.readFile(`${workdir}/htmlFiles/exercise.html`)
 								res.end(s);
-							}
-						})
+								return;
+							});
+						} else if (settings.libraries.csv) {
+							fs.readFile(appdir + "/CSVArea.html")
+							.then(csvContent => {
+								let csvString = csvContent.toString();
+								s = s.replace("<!-- LIBRARY-CONTROLS -->", csvString)
+								.replace("/* library check */", true)
+								.replace("/* go slow */", false);
+								fs.readFile(appdir + "/papaparse.min.js")
+								.then(code => {
+									s = s.replace("<!-- PREAMBLE CODE -->", code);
+									res.end(s);
+									return;
+								});
+							});
+
+						} else {
+							s = s.replace("/* library check */", false)
+							.replace("/* go slow */", false);
+							res.end(s);
+							return;
+						}
 					})
 				})
 			})
