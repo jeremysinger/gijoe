@@ -1,0 +1,33 @@
+#csv-display {
+    color: black;
+    background-color: white;
+    padding: 10px;
+}
+
+#csv-area table {
+    font-size: 1.4em;
+}
+
+#csv-area table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+#csv-area table tr {
+    border: 3px solid black;
+}
+
+#csv-area table td {
+    border: 2px solid black;
+    width: 45ch;
+    max-width: 100%;
+    padding: 10px;
+    text-align: left !important; 
+}
+
+#csv-area table th {
+    background-color: lightgray;
+    font-size: 0.8em;
+    padding: 10px;
+    text-align: center !important;
+}
