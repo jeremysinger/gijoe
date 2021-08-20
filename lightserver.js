@@ -85,8 +85,13 @@ app.get('/', (req,res) => {
 								fs.readFile(appdir + "/papaparse.min.js")
 								.then(code => {
 									s = s.replace("<!-- PREAMBLE CODE -->", code);
-									res.end(s);
-									return;
+									fs.readdir(workdir + "/csv_files")
+									.then(files => {
+										var options = files.map(file => `<option value='${file}'>${file}</option>`);
+										s = s.replace("<!-- OPTIONS -->", options);
+										res.end(s);
+										return;
+									})
 								});
 							});
 
@@ -194,6 +199,25 @@ app.get(`/savefile/:id`, (req, res) => {
 					return;
 				});
 		})
+});
+
+//PATH FOR PRE-LOADED CSV FILES
+app.get(`/csv/:filename`, (req, res) => {
+	const filePath = `${workdir}/csv_files/${req.params.filename}`;
+	fs.readFile(filePath)
+	.then(content => {
+		var s = content.toString();
+		res.setHeader("Content-Type", "text/text");
+		res.writeHead(200);
+		res.end(s);
+		return;
+	})
+	.catch(csvError => {
+		console.log(csvError);
+		res.writeHead(404);
+		res.end("FILE NOT FOUND");
+		return;
+	});
 });
 
 app.get(`/htmlfile`, (req, res) => {
