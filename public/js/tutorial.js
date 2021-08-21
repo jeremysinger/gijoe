@@ -9,8 +9,7 @@ const introInstructions = document.getElementById("intro");
 const resetCode = document.getElementById("resetCode");
 
 //Parse the settings json file to see whether the tutorial settings were on
-function checkSettings() {
-    console.log(tutorialSettings); 
+function checkSettings() { 
     if (tutorialSettings.tutorial) {
         getTutorial(1);
         getInitcode(currentFile);

@@ -141,7 +141,7 @@ crossorigin="anonymous"></script>
           var tutorialSettings = JSON.parse(`/* tutorial_settings */`);
           var libraries = JSON.parse(`/* library check */`);
           var async = JSON.parse("/* go slow */");
-          console.log(libraries)
+          // console.log(libraries)
           var currentFile = 1;
           var turtleSpeed = 1000;
 
@@ -263,26 +263,25 @@ crossorigin="anonymous"></script>
                 submitCodeButton.disabled = false;
               }
             }
-            // console.log(runtimeError);
             if(!runtimeError && !timeout){
               document.getElementById('output').innerHTML = 'Your code executed successfully. ';  //'<br /> -> your result is: '+ '<font color="green">'+result+'</font>';
             }
           }
 
-          function resetSource() {
-            myCodeMirror.setValue(originalCode);
-            var data = JSON.stringify({
-              code: originalCode
-            });
-            var http = new XMLHttpRequest();
-            http.open("POST", "/autosave");
-            http.setRequestHeader("Content-Type", "application/json");
-            http.onload = function() {
-              var autosaveArea = document.getElementById("autosave-area");
-              autosaveArea.innerHTML = "<h4>Code Successfully Reset</h4>";
-            }
-            http.send(data);
-          }
+          // function resetSource() {
+          //   myCodeMirror.setValue(originalCode);
+          //   var data = JSON.stringify({
+          //     code: originalCode
+          //   });
+          //   var http = new XMLHttpRequest();
+          //   http.open("POST", "/autosave");
+          //   http.setRequestHeader("Content-Type", "application/json");
+          //   http.onload = function() {
+          //     var autosaveArea = document.getElementById("autosave-area");
+          //     autosaveArea.innerHTML = "<h4>Code Successfully Reset</h4>";
+          //   }
+          //   http.send(data);
+          // }
 
           //scroll console to the last output
           var fakeConsole = document.getElementById("fakeConsole");
