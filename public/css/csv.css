@@ -11,16 +11,20 @@
 #csv-area table {
     table-layout: fixed;
     width: 100%;
+    white-space: normal;
+    word-wrap: break-word;
 }
 
 #csv-area table tr {
     border: 3px solid black;
+    padding: 5px;
 }
 
 #csv-area table td {
     border: 2px solid black;
     width: 45ch;
     max-width: 100%;
+    font-size: 0.8em;
     padding: 10px;
     text-align: left !important; 
 }
