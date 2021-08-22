@@ -35,3 +35,16 @@
     padding: 10px;
     text-align: center !important;
 }
+
+#stringCsvInput {
+    resize: none;
+    overflow-y: scroll;
+    overflow-x: none;
+    padding: 10px;
+    width: 100%;
+}
+
+#csvControls {
+    padding: 10px;
+    min-height: 200px;
+}

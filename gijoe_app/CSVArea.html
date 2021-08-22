@@ -2,16 +2,28 @@
     <div class="row">
         <h1>CSV Area</h1>
     </div>
-    <div class="row">
-        <div class="col">
+    <div>
+        <label for="select-input">Select Input</label>
+        <select id="select-input">
+            <option value="string">String</option>
+            <option value="uploadFile">Upload File</option>
+            <option value="selectFile">Select File</option>
+        </select>
+    </div>
+    <div class="row" id="csvControls">
+        <div id="fileUpload">
             <label for="upload-file">Upload CSV File</label>
             <input name="upload-file" id="upload-file" type="file" accept=".csv" />
         </div>
-        <div class="col">
+        <div id="fileSelect">
             <label for="select-file">Select CSV File</label>
             <select id="select-file">
                 <!-- OPTIONS -->
             </select>
+        </div>
+        <div id="enterString">
+            <label for="stringCsvInput">Input String</label><br />
+            <textarea id="stringCsvInput" rows=3 cols=40></textarea>
         </div>
     </div>
     <div id="csv-display" class="row">

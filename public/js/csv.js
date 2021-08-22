@@ -1,6 +1,28 @@
+const fileUploadDiv = document.getElementById("fileUpload");
+const fileSelectDiv = document.getElementById("fileSelect");
+const enterStringDiv = document.getElementById("enterString");
+
+const csvInput = document.getElementById("select-input");
 const csvDisplay = document.getElementById("csv-display");
 const csvSelect = document.getElementById("select-file");
 const csvUpload = document.getElementById("upload-file");
+
+fileUploadDiv.style.display = "none";
+fileSelectDiv.style.display = "none";
+
+let visDict = {
+    "string": ["block", "none", "none"],
+    "uploadFile": ["none", "block", "none"],
+    "selectFile": ["none", "none", "block"]
+}
+
+csvInput.addEventListener("change", (e) => {
+    let value = csvInput.value;
+    let displayList = visDict[value];
+    enterStringDiv.style.display = displayList[0];
+    fileUploadDiv.style.display = displayList[1];
+    fileSelectDiv.style.display = displayList[2];
+})
 
 csvUpload.addEventListener("change", (e) => {
     let files = e.target.files;
