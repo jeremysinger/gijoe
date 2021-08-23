@@ -94,3 +94,17 @@ code {
     display: none;
 }
 
+#toggleAutoComplete {
+    
+    height: 20px;
+    width: 20px;
+}
+
+#autoCompleteDiv {
+    margin: 10px;
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+
+}
+
