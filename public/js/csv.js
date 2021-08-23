@@ -58,26 +58,17 @@ csvSelect.addEventListener("change", (e) => {
 });
 
 function loadCSV(file) {
+    csvString = file.trim();
     let theData = Papa.parse(file).data;
     let theTable = document.createElement("table");
     const header = theData[0];
-    headerRow = document.createElement("tr");
-    header.map(item => {
-        let headerItem = document.createElement("th");
-        headerItem.innerHTML = item;
-        headerRow.appendChild(headerItem);
-    });
+    let headerRow = createTableRow(header, "th");
     let maxCols = header.length;
     theTable.appendChild(headerRow);
     
     for (var i = 1; i < 4 && i < theData.length; i++) {
-        theRow = document.createElement("tr");
         rowData = theData[i];
-        rowData.map(item => {
-            let itemElement = document.createElement("td");
-            itemElement.innerHTML = item;
-            theRow.appendChild(itemElement);
-        });
+        theRow = createTableRow(rowData, "td");
         theTable.appendChild(theRow);
         if (rowData.length > maxCols) {
             maxCols = rowData.length;
@@ -95,6 +86,16 @@ function loadCSV(file) {
     }
     removeAllChildNodes(csvDisplay);
     csvDisplay.appendChild(theTable);
+}
+
+function createTableRow(data, tableElement) {
+    theRow = document.createElement("tr");
+    data.map(item => {
+        let itemElement = document.createElement(tableElement);
+        itemElement.innerHTML = item;
+        theRow.appendChild(itemElement);
+    });
+    return theRow
 }
 
 function removeAllChildNodes(parent) {
