@@ -26,7 +26,7 @@
     max-width: 100%;
     font-size: 0.8em;
     padding: 10px;
-    text-align: left !important; 
+    text-align: center !important; 
 }
 
 #csv-area table th {
@@ -42,6 +42,10 @@
     overflow-x: none;
     padding: 10px;
     width: 100%;
+}
+
+.end-row {
+    overflow: hidden;
 }
 
 #csvControls {
