@@ -61,7 +61,14 @@ crossorigin="anonymous"></script>
 
       <div id="codeblock" class="row py-3 px-4 codeArea" style=" background-color: rgb(0,83,152);">
         <div id="tutorialArea" class="col">
-          <h1 class="codeHeading">Tutorial Space</h1>
+          <div class="row">
+            <div class="col-xl">
+              <h1 class="codeHeading">Tutorial Space</h1>
+            </div>
+            <div class="col-sm">
+              <h2 id="progressBar" class="codeHeading"></h2>
+            </div>
+          </div>
           <div id="tutorialSpace"></div>
           <div id="tutorialControls" class="codeControls">
             <button class="button" id="tutorialBack"><< Back</button>
@@ -137,6 +144,8 @@ crossorigin="anonymous"></script>
 
         <script>
           var timeout = false;
+          var progressBar = document.getElementById("progressBar");
+          console.log(progressBar);
           var originalCode = `/* initial code */`;
           var saveCode =  `/* saved code */`;
           var tutorialFiles = parseInt(`/* tutorial_files */`);
@@ -145,8 +154,8 @@ crossorigin="anonymous"></script>
           var libraries = JSON.parse(`/* library check */`);
           var async = JSON.parse("/* go slow */");
           var csvString = "";
-          // console.log(libraries)
           var currentFile = 1;
+          progressBar.innerHTML = `${currentFile} / ${tutorialFiles}`;
           var turtleSpeed = 1000;
 
           var librarySpace = document.getElementById("library-area");

@@ -47,7 +47,7 @@ csvUpload.addEventListener("change", (e) => {
 
 csvSelect.addEventListener("change", (e) => {
     if (csvSelect.value != "select") {
-        csvDisplay.innerHTML = "<h1>Loading</h1>";
+        csvDisplay.innerHTML = "<h4>Loading</h4>";
         var http = new XMLHttpRequest();
         http.open("GET", `/csv/${csvSelect.value}`);
         http.onload = function() {

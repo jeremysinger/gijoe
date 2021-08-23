@@ -65,6 +65,16 @@ code {
     color: white;
 }
 
+#progressBar {
+    text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+    #progressBar {
+        text-align: left;
+    }
+}
+
 #renderedDOM {
     background-color: white;
     padding: 20px;
