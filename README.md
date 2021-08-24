@@ -186,7 +186,8 @@ For creating labs we have the settings.json file to help you choose how you want
   "libraries": {
        "turtle": true,
        "DOM": false,
-       "csv": false
+       "csv": false,
+       "csvAndTurtle": false
   }  
 }
 ```
