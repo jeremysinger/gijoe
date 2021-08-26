@@ -79,7 +79,7 @@ crossorigin="anonymous"></script>
           <div class="row row-cols-auto">
             <h1 class="codeHeading col">Write Code Here </h1>
             <div class="col">
-              <div id="autosave-area" class="success"></div>
+              <div id="autosave-area"></div>
             </div>  
           </div>
             
@@ -121,14 +121,14 @@ crossorigin="anonymous"></script>
         
 
         
-        <div id="outputblock" class="col container-md">
-          <div id="outputwrap" class="row">
+        <div id="outputblock" class="col container-md" style="background-color: azure;">
+          <div id="outputwrap" class="row" style="background-color: azure;">
             <div id="codeOutput" class="col" style="background-color: rgb(246, 255, 255); font-family: monospace; color: #003865;">
               <b>Code evaluation</b><br/>
               <div id="output">&nbsp;</div>
             </div>
   
-            <div id="consoleOutput" class="col" style="background-color: azure; font-family: monospace; color: #003865;">
+            <div id="consoleOutput" class="col" style=" font-family: monospace; color: #003865; height:fit-content;">
               <b>Console output</b><br/>
               <div id="fakeConsole">&nbsp;</div>
             </div>
@@ -136,7 +136,7 @@ crossorigin="anonymous"></script>
         </div>
 
         <p id=resetCode></p> <!-- Useful in order to manage the reset functionality -->
-        <!-- <p id="test"> hi </p> -->
+        <p id="test" class="hidden"> hi </p>
 
       </div>
 
@@ -236,11 +236,8 @@ crossorigin="anonymous"></script>
                 }
 
                 if(!timeout) {
-                  autosaveArea.classList.remove("error");
-                  autosaveArea.classList.add("success");
                   autosaveArea.innerHTML = "<h4>Well done!</h4>";
-
-                  outputArea.style.display = "none";
+                  outputSuccess();
 
                 } else {
                   autosaveArea.classList.remove("success");
@@ -257,11 +254,8 @@ crossorigin="anonymous"></script>
                 result = eval(codeFragment);
 
                 if(!timeout) {
-                  autosaveArea.classList.remove("error");
-                  autosaveArea.classList.add("success");
                   autosaveArea.innerHTML = "<h4>Well done!</h4>";
-
-                  outputArea.style.display = "none";
+                  outputSuccess();
                 } else {
                   autosaveArea.classList.remove("success");
                   autosaveArea.classList.add("error");

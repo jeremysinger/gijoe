@@ -1,6 +1,7 @@
 const codeOutput = document.getElementById("fakeConsole");
 const consoleOutput = document.getElementById("output");
-const outputBlock = document.getElementById("outputblock")
+const outputBlock = document.getElementById("outputblock");
+const outputWrap = document.getElementById("outputwrap");
 
 function resizeCodeOutput() {
     var new_height = consoleOutput.style.height;
@@ -21,6 +22,23 @@ function outputPaddingAdjuster() {
     } 
 }
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function outputSuccess() {
+    outputWrap.style.transitionDuration = "0.3s";
+    // codeOutput.style.transitionDuration = "0.3s";
+    outputWrap.style.backgroundColor = "rgb(0, 140, 255)";
+    // codeOutput.classList.add("successTransition");
+    outputArea.style.display = "none";
+    sleep(300).then(function () {
+        // outputWrap.classList.remove("successTransition");
+        outputWrap.style.backgroundColor = "azure";
+        // codeOutput.classList.remove("successTransition");
+    });
+}
+
 new ResizeObserver(resizeCodeOutput).observe(consoleOutput);
 new ResizeObserver(resizeConsoleOutput).observe(codeOutput);
-outputPaddingAdjuster()
+outputPaddingAdjuster();
