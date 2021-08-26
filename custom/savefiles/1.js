@@ -1,1 +1,2 @@
-forward(10);
+// GENERIC INITIALCODE FILE
+console.log(csvData);

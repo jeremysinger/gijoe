@@ -61,7 +61,14 @@ crossorigin="anonymous"></script>
 
       <div id="codeblock" class="row py-3 px-4 codeArea" style=" background-color: rgb(0,83,152);">
         <div id="tutorialArea" class="col">
-          <h1 class="codeHeading">Tutorial Space</h1>
+          <div class="row">
+            <div class="col-xl">
+              <h1 class="codeHeading">Tutorial Space</h1>
+            </div>
+            <div class="col-sm">
+              <h2 id="progressBar" class="codeHeading"></h2>
+            </div>
+          </div>
           <div id="tutorialSpace"></div>
           <div id="tutorialControls" class="codeControls">
             <button class="button" id="tutorialBack"><< Back</button>
@@ -89,6 +96,11 @@ crossorigin="anonymous"></script>
                 <button class="button reset" onclick="resetSource()"><span class="fa fa-undo" aria-hidden="true"></span> Reset </button>
                 <button class="button save" onclick="dlSource()"> <span class="fa fa-download" aria-hidden="true"></span> Download </button>
                 <button class="button share" form="sharedcode"> <span class="fa fa-share" aria-hidden="true"></span> Share </button>
+                <div id="autoCompleteDiv">
+                  <input type="checkbox" id="toggleAutoComplete" name="autoComplete">
+                  <label for="autoComplete">Auto Complete</label>
+                </div>
+                
                 <br>
             </div>
                 
@@ -135,7 +147,10 @@ crossorigin="anonymous"></script>
 
 
         <script>
+          var csvTurtle = document.getElementById("csvTurtle");
           var timeout = false;
+          var progressBar = document.getElementById("progressBar");
+          console.log(progressBar);
           var originalCode = `/* initial code */`;
           var saveCode =  `/* saved code */`;
           var tutorialFiles = parseInt(`/* tutorial_files */`);
@@ -143,8 +158,9 @@ crossorigin="anonymous"></script>
           var tutorialSettings = JSON.parse(`/* tutorial_settings */`);
           var libraries = JSON.parse(`/* library check */`);
           var async = JSON.parse("/* go slow */");
-          // console.log(libraries)
+          var csvString = "";
           var currentFile = 1;
+          progressBar.innerHTML = `${currentFile} / ${tutorialFiles}`;
           var turtleSpeed = 1000;
 
           var librarySpace = document.getElementById("library-area");
@@ -153,6 +169,12 @@ crossorigin="anonymous"></script>
             librarySpace.style.display = "none";
           } else {
             librarySpace.style.display = "block";
+          }
+
+          if (tutorialSettings.libraries.csvAndTurtle) {
+            csvTurtle.style.display = "block";
+          } else {
+            csvTurtle.style.display = "none";
           }
 
           var tutorialControls = document.getElementById("tutorialControls");

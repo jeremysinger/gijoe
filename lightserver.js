@@ -95,6 +95,35 @@ app.get('/', (req,res) => {
 								});
 							});
 
+						} else if (settings.libraries.csvAndTurtle) {
+							fs.readFile(appdir + "/CSVArea.html")
+							.then(csvContent => {
+								let csvString = csvContent.toString();
+								s = s.replace("<!-- LIBRARY-CONTROLS -->", csvString)
+								.replace("/* library check */", true)
+								.replace("/* go slow */", true);
+								fs.readFile(appdir + "/papaparse.min.js")
+								.then(code => {
+									let theCode = code;
+									fs.readFile(appdir + "/turtle.js")
+									.then(turtleCode => {
+										theCode = theCode + turtleCode;
+										s = s.replace("<!-- PREAMBLE CODE -->", theCode);
+										fs.readFile(appdir + "/turtleCanvas.html")
+										.then(turtleContent => {
+											let turtleString = turtleContent.toString();
+											s = s.replace("<!-- TURTLE AREA-->", turtleString);
+											fs.readdir(workdir + "/csv_files")
+											.then(files => {
+												var options = files.map(file => `<option value='${file}'>${file}</option>`);
+												s = s.replace("<!-- OPTIONS -->", options);
+												res.end(s);
+												return;
+											})
+										})
+									})
+								})
+							})
 						} else {
 							s = s.replace("/* library check */", false)
 							.replace("/* go slow */", false);

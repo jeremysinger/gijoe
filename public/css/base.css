@@ -65,6 +65,16 @@ code {
     color: white;
 }
 
+#progressBar {
+    text-align: center;
+}
+
+@media screen and (max-width: 1200px) {
+    #progressBar {
+        text-align: left;
+    }
+}
+
 #renderedDOM {
     background-color: white;
     padding: 20px;
@@ -82,5 +92,19 @@ code {
 
 .hidden {
     display: none;
+}
+
+#toggleAutoComplete {
+    
+    height: 20px;
+    width: 20px;
+}
+
+#autoCompleteDiv {
+    margin: 10px;
+    padding: 10px;
+    font-size: 15px;
+    color: white;
+
 }
 
