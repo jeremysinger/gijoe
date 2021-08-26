@@ -38,7 +38,7 @@ If you wish to make use of the DOM library then you need one extra folder within
 
 ### Lab Setup if the CSV library is turned on
 
-If you are wanting to have pre-loaded csv files in your lab then simply create a csvFiles directory and place any csv file that you want to work with in the directory
+If you are wanting to have pre-loaded csv files in your lab then simply create a **csvFiles** directory and place any csv file that you want to work with in the directory
 
 ## Running Instructions
 

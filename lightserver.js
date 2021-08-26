@@ -35,7 +35,7 @@ app.get('/', (req,res) => {
 	    res.writeHead(200);
 	    fs.readFile(workdir + "/instructions.txt")
 		.then(instrs => {
-		    fs.readFile(appdir + "/initialcode.js")
+		    fs.readFile(workdir + "/initialcode.js")
 			.then(initcode => {
 				fs.readFile(workdir + "/settings.json")
 				.then(settings => {
@@ -206,6 +206,7 @@ app.get(`/turtlecode`, (req, res) => {
 
 app.get(`/savefile/:id`, (req, res) => {
 	const savePath = `${workdir}/savefiles/${req.params.id}.js`;
+	console.log(savePath);
 	const defaultSaveFile = `/* Default savefile */`;
 	fs.readFile(savePath)
 		.then(contents => {
@@ -216,32 +217,32 @@ app.get(`/savefile/:id`, (req, res) => {
 			return;
 		})
 		.catch(err => {
+			var theId = parseInt(req.params.id);
 			const tutorialPath = `${workdir}/tutorials/${req.params.id}.md`;
-			fs.readFile(tutorialPath)
-				.then(tutorial => {
-					fs.writeFile(savePath, defaultSaveFile)
-						.then(file => {
-							fs.readFile(savePath)
-								.then(content => {
-									const data = JSON.stringify({code: content.toString()});
-									res.setHeader("Content-Type", "application/json");
-									res.writeHead(200);
-									res.end(data);
-									return;
-								});
-						})
-						.catch(writeFileError => {
-							console.log(writeFileError);
-							res.writeHead(404);
-							res.end(writeFileError);
+			if(markdownList[theId - 1]) {
+				fs.writeFile(savePath, initcodeList[theId - 1])
+				.then(file => {
+					fs.readFile(savePath)
+						.then(content => {
+							const data = JSON.stringify({code: content.toString()});
+							res.setHeader("Content-Type", "application/json");
+							res.writeHead(200);
+							res.end(data);
 							return;
-						})
+						});
 				})
-				.catch(error => {
+				.catch(writeFileError => {
+					console.log(writeFileError);
 					res.writeHead(404);
-					res.end("FILE NOT FOUND");
+					res.end(writeFileError);
 					return;
 				});
+			} else {
+				res.writeHead(404);
+				res.end("FILE NOT FOUND");
+				return;
+			}
+			
 		})
 });
 
@@ -320,7 +321,7 @@ function splitMarkdown() {
 }
 
 function checkInitcodeFileExists() {
-	const InitcodeFile = appdir + "/initialcode.js";
+	const InitcodeFile = workdir + "/initialcode.js";
 
 	fs.readFile(InitcodeFile)
 	.then(file => {
@@ -350,11 +351,12 @@ function checkTurtlecodeExists() {
 
 function splitInitcode() {
 	checkInitcodeFileExists();
-	fs.readFile(appdir + "/initialcode.js")
+	fs.readFile(workdir + "/initialcode.js")
 		.then(code => {
 			code = code.toString();
 			initcodeList = code.split("/* <!-- NEXT --> */")
 				.map(code => code.trim());
+			console.log(initcodeList);
 		})
 		.catch(error => {
 			console.log("NO INITIALCODE FILE FOUND");

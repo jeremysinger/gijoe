@@ -1,4 +1,5 @@
 // GENERIC INITIALCODE FILE
+log("Hello World");
 
 /* <!-- NEXT --> */
 
