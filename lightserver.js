@@ -27,6 +27,7 @@ app.use(express.json());
 app.get('/', (req,res) => {
 	splitMarkdown();
 	splitInitcode();
+	createSavefileDir();
 	getTurtlecode();
 	checkSaveExists();
     fs.readFile(appdir + "/js.html")
@@ -39,7 +40,7 @@ app.get('/', (req,res) => {
 			.then(initcode => {
 				fs.readFile(workdir + "/settings.json")
 				.then(settings => {
-					fs.readFile(workdir + "/savefiles/1.js")
+					fs.readFile(appdir + "/savefiles/1.js")
 					.then(savecode => {
 						let s = contents.toString()
 						.replace("<!-- INSTRS -->", instrs)
@@ -144,7 +145,7 @@ app.get('/', (req,res) => {
 
 //This will be the POST request that will save to the savefile folder
 app.post(`/autosave/:id`, (req, res) => {
-	const savePath = `${workdir}/savefiles/${req.params.id}.js`;
+	const savePath = `${appdir}/savefiles/${req.params.id}.js`;
 	try {
 		fs.writeFile(savePath, req.body.code, err => {
 			if (err) {
@@ -205,7 +206,7 @@ app.get(`/turtlecode`, (req, res) => {
 });
 
 app.get(`/savefile/:id`, (req, res) => {
-	const savePath = `${workdir}/savefiles/${req.params.id}.js`;
+	const savePath = `${appdir}/savefiles/${req.params.id}.js`;
 	console.log(savePath);
 	const defaultSaveFile = `/* Default savefile */`;
 	fs.readFile(savePath)
@@ -375,6 +376,35 @@ function getTurtlecode() {
 		.catch(error => {
 			console.log("NO TURTLECODE FILE FOUND");
 		})
+}
+
+function createFirstSaveFile() {
+	if (initcodeList[0]) {
+		fs.writeFile(savefilesDir + "/1.js", initcodeList[0]);
+	} else {
+		fs.writeFile(savefilesDir + "/1.js", "/* Default Javascript file */");
+	}
+	return;
+}
+
+function createSavefileDir() {
+	var savefilesDir = appdir + "/savefiles"
+	fs.readdir(savefilesDir)
+	.then(saveFiles => {
+		fs.readFile(savefilesDir + "/1.js")
+		.then(files => {
+			return true;
+		})
+		.catch(error => {
+			createFirstSaveFile();
+			return true;
+		});
+	})
+	.catch(error => {
+		fs.mkdir(savefilesDir);
+		createFirstSaveFile();
+		return true;
+	})
 }
 
 app.listen(PORT, HOST);

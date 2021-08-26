@@ -1,2 +1,3 @@
-// GENERIC INITIALCODE FILE
-console.log("csvData");
+/* Default Javascript file */
+
+console.log("Hello World");
