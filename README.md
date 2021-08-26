@@ -119,4 +119,17 @@ There are currently two options that you can make use of these include
 
 ## The initialcode.js file
 
-This is the new file for including the start of the exercise code. Following on from the fact that the tutorials would come from one file we thought it would be best if the same happened to the js files. The savefile directory will soon be moving out from the custom folder
+This is the new file for including the start of the exercise code. Following on from the fact that the tutorials would come from one file we thought it would be best if the same happened to the js files. The savefile directory will soon be moving out from the custom folder. All you have to do is write some Javascript code in the initialcode.js file and to seperate it by typing `/* <!-- NEXT --> */`. This will tell gijoe when the javascript will move on to the next file. An example initialcode.js file should look something like this:
+
+```javascript
+// GENERIC INITIALCODE FILE
+log("Hello World");
+
+/* <!-- NEXT --> */
+
+log(1);
+
+/* <!-- NEXT --> */
+
+WebGLShaderPrecisionFormat;
+```
