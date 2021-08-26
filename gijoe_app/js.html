@@ -171,9 +171,9 @@ crossorigin="anonymous"></script>
             librarySpace.style.display = "block";
           }
 
-          if (tutorialSettings.libraries.csvAndTurtle) {
+          if (csvTurtle && tutorialSettings.libraries.csvAndTurtle) {
             csvTurtle.style.display = "block";
-          } else {
+          } else if (csvTurtle) {
             csvTurtle.style.display = "none";
           }
 
