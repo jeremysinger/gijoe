@@ -4,9 +4,9 @@
     "autoComplete": true,
     "loopLimit": 100,
     "libraries": {
-        "turtle": false,
+        "turtle": true,
         "DOM": false,
         "csv": false,
-        "csvAndTurtle": true
+        "csvAndTurtle": false
     } 
 }
