@@ -1,3 +1,2 @@
-log(csvString);
-csvData = Papa.parse(csvString);
-log(csvData.data);
+// GENERIC INITIALCODE FILE
+console.log("csvData");
