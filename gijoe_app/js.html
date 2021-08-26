@@ -377,13 +377,26 @@ crossorigin="anonymous"></script>
         var oldLog = console.log;
         var pastLog = document.createElement("p"); 
         var newLog = document.getElementById("fakeConsole");
+        var newElement;
         console.log = function (message) {
+          if(typeof(message) === "string") {
+            messageList = message.split("\n");
+            for (var i = 0; i < messageList.length; i++) {
+              newElement = document.createElement("p");
+              newElement.appendChild(document.createTextNode(messageList[i]));
+              //newLog.appendChild(pastLog);
+              newLog.appendChild(newElement);
+              //pastLog.appendChild(newElement);
+            }
+          } else {
+            newElement = document.createElement("p");
+            newElement.appendChild(document.createTextNode(message));
+            newLog.appendChild(pastLog);
+            newLog.appendChild(newElement);
+            pastLog.appendChild(newElement);
+          }
+          
           console.trace();
-          var newElement = document.createElement("p");  
-          newElement.appendChild(document.createTextNode(message));
-          newLog.appendChild(pastLog);
-          newLog.appendChild(newElement);
-          pastLog.appendChild(newElement);
           oldLog.apply(console, arguments);
         };
       })();
