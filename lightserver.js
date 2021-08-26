@@ -17,8 +17,7 @@ const workdir = __dirname + "/custom";
 const appdir = __dirname + "/gijoe_app";
 let markdownList = [];
 let initcodeList = [];
-
-
+let turtlecode = "";
 
 const app = express();
 app.use("/static", express.static("public"));
@@ -28,6 +27,7 @@ app.use(express.json());
 app.get('/', (req,res) => {
 	splitMarkdown();
 	splitInitcode();
+	getTurtlecode();
 	checkSaveExists();
     fs.readFile(appdir + "/js.html")
 	.then(contents => {
@@ -149,6 +149,21 @@ app.get(`/initcode/:id`, (req, res) => {
 	try {
 		// console.log(initcodeList[id].toString());
 		var data = initcodeList[id];
+		res.setHeader("Content-Type", "application/json");
+		res.writeHead(200);
+		res.end(data);
+		return;
+	} catch (err) {
+		res.writeHead(404);
+		res.end("FILE NOT FOUND");
+		return;
+	}
+});
+
+//TODO TC
+app.get(`/turtlecode`, (req, res) => {
+	try {
+		var data = turtlecode;
 		res.setHeader("Content-Type", "application/json");
 		res.writeHead(200);
 		res.end(data);
@@ -289,6 +304,21 @@ function checkInitcodeFileExists() {
 	});
 }
 
+//TODO TC
+function checkTurtlecodeExists() {
+	const InitcodeFile = appdir + "/turtle.js";
+
+	fs.readFile(InitcodeFile)
+	.then(file => {
+		return true;
+	})
+	.catch(error => {
+		fs.writeFile(InitcodeFile, "// GENERIC TURTLECODE FILE");
+		console.log("Turtlecode File Created");
+		return true;
+	});
+}
+
 function splitInitcode() {
 	checkInitcodeFileExists();
 	fs.readFile(appdir + "/initialcode.js")
@@ -299,6 +329,20 @@ function splitInitcode() {
 		})
 		.catch(error => {
 			console.log("NO INITIALCODE FILE FOUND");
+		})
+}
+
+//TODO TC
+function getTurtlecode() {
+	checkTurtlecodeExists();
+	fs.readFile(appdir + "/turtle.js")
+		.then(code => {
+			code = code.toString();
+			turtlecode = code.trim();
+			//up until here it works
+		})
+		.catch(error => {
+			console.log("NO TURTLECODE FILE FOUND");
 		})
 }
 
