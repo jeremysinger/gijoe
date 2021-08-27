@@ -19,6 +19,8 @@ let markdownList = [];
 let initcodeList = [];
 let turtlecode = "";
 
+
+
 const app = express();
 app.use("/static", express.static("public"));
 app.use(express.urlencoded({ extended: false }));
@@ -27,7 +29,7 @@ app.use(express.json());
 app.get('/', (req,res) => {
 	splitMarkdown();
 	splitInitcode();
-	createSavefileDir();
+	
 	getTurtlecode();
 	checkSaveExists();
     fs.readFile(appdir + "/js.html")
@@ -221,7 +223,13 @@ app.get(`/savefile/:id`, (req, res) => {
 			var theId = parseInt(req.params.id);
 			const tutorialPath = `${workdir}/tutorials/${req.params.id}.md`;
 			if(markdownList[theId - 1]) {
-				fs.writeFile(savePath, initcodeList[theId - 1])
+				var theValue;
+				if (initcodeList[theId - 1]) {
+					theValue = initcodeList[theId - 1];
+				} else {
+					theValue = "/* Default Javascript file */";
+				}
+				fs.writeFile(savePath, theValue)
 				.then(file => {
 					fs.readFile(savePath)
 						.then(content => {
@@ -326,6 +334,7 @@ function checkInitcodeFileExists() {
 
 	fs.readFile(InitcodeFile)
 	.then(file => {
+		console.log("INIT FILE FOUND");
 		return true;
 	})
 	.catch(error => {
@@ -351,6 +360,7 @@ function checkTurtlecodeExists() {
 }
 
 function splitInitcode() {
+	console.log("Init function called");
 	checkInitcodeFileExists();
 	fs.readFile(workdir + "/initialcode.js")
 		.then(code => {
@@ -358,6 +368,7 @@ function splitInitcode() {
 			initcodeList = code.split("/* <!-- NEXT --> */")
 				.map(code => code.trim());
 			console.log(initcodeList);
+			createSavefileDir();
 		})
 		.catch(error => {
 			console.log("NO INITIALCODE FILE FOUND");
@@ -378,11 +389,12 @@ function getTurtlecode() {
 		})
 }
 
-function createFirstSaveFile() {
+function createFirstSaveFile(dir) {
+	console.log(initcodeList);
 	if (initcodeList[0]) {
-		fs.writeFile(savefilesDir + "/1.js", initcodeList[0]);
+		fs.writeFile(dir + "/1.js", initcodeList[0]);
 	} else {
-		fs.writeFile(savefilesDir + "/1.js", "/* Default Javascript file */");
+		fs.writeFile(dir + "/1.js", "/* Default Javascript file */");
 	}
 	return;
 }
@@ -396,13 +408,14 @@ function createSavefileDir() {
 			return true;
 		})
 		.catch(error => {
-			createFirstSaveFile();
+			console.log("1.js does not exist creating 1.js");
+			createFirstSaveFile(savefilesDir);
 			return true;
 		});
 	})
 	.catch(error => {
 		fs.mkdir(savefilesDir);
-		createFirstSaveFile();
+		createFirstSaveFile(savefilesDir);
 		return true;
 	})
 }
