@@ -29,10 +29,6 @@ app.use(express.json());
 app.get('/', (req,res) => {
 	splitMarkdown();
 	splitInitcode();
-<<<<<<< HEAD
-=======
-	
->>>>>>> 28e17ac4cb4776f027e2f1de3fd2251c98db1c16
 	getTurtlecode();
 	checkSaveExists();
     fs.readFile(appdir + "/js.html")
@@ -223,6 +219,7 @@ app.get(`/savefile/:id`, (req, res) => {
 		})
 		.catch(err => {
 			const tutorialPath = `${workdir}/tutorials/${req.params.id}.md`;
+			var theId = parseInt(req.params.id);
 			if(markdownList[theId - 1]) {
 				var theValue;
 				if (initcodeList[theId - 1]) {
@@ -246,7 +243,12 @@ app.get(`/savefile/:id`, (req, res) => {
 					res.end("FILE NOT FOUND");
 					return;
 				});
-		})
+			} else {
+				res.writeHead(404);
+				res.end("FILE NOT FOUND");
+				return;
+			}
+		});
 });
 
 //PATH FOR PRE-LOADED CSV FILES
