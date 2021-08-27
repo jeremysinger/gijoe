@@ -72,7 +72,80 @@ For any paragraph text just simply type as if you are writing a .txt file or a W
 # Hello World
 
 ## Hello World
+
+Hello World
 ```
+Would look like this in HTML
+```html
+<h1>Hello World</h1>
+
+<h2>Hello World</h2>
+
+<p>Hello World</p>
+```
+And would render like this
+# Hello World
+## Hello World
+Hello World
+
+There are other things you can do with text.
+
+* For **bold** text we can write `**BOLD TEXT**`
+* For ~~strikethrough~~ text we can write `~~STRIKE~~`
+* For *italics* then we can write `ITALICS`
+
+### Images and links
+For links we use `[]()` syntax to make a link. For example if I want to
+link to the University of Glasgow website we would write down this
+
+```markdown
+[Glasgow University](https://www.gla.ac.uk)
+```
+In the HTML file it will render like this:
+
+[Glasgow University](https://www.gla.ac.uk)
+
+For images the syntax is similar to the links we use the `![]()`
+
+For example we would need to write this
+```markdown
+![Alternative Text](IMAGE ADDRESS HERE)
+```
+
+### Ordered and Unordered Lists
+For an unordered list then all you need to do
+is enter an asterix for every term. For example:
+
+```markdown
+* Hello
+* World
+```
+Would render as
+* Hello
+* World
+
+For ordered list you simply use numbers for example
+```markdown
+1. Hello
+2. World
+```
+Would render as 
+1. Hello
+2. World
+
+### Tables
+For tables there is another piece of useful markdown syntax. In order to write a table
+just use this syntax here
+
+```markdown
+| Hello | World |
+|:------|------:|
+|Hello  |World  |
+```
+This would render as
+| Hello | World |
+|:------|------:|
+|Hello  |World  |
 
 ## Tutorials
 
