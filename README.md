@@ -35,6 +35,11 @@ In order for your lab to be setup properly. You need the following requirements 
 
 If you wish to make use of the DOM library then you need one extra folder within the custom folder. This is the htmlFiles folder. Currently you only need one file which is called **exercise.html** . This will contain the HTML code for the exercise.
 
+### Lab Setup if the CSV library is turned on
+
+If you are wanting to have pre-loaded csv files in your lab then simply create a **csvFiles** directory and place any csv file that you want to work with in the directory
+
+
 ## Running Instructions
 
 ### Docker Installation
