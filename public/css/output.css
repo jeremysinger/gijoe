@@ -30,13 +30,3 @@
 #graphicscontrols{
     min-width: 200px;
 }
-
-.successTransition{
-    background-color: rgb(0, 140, 255);
-    transition-duration: 0.1s;
-}
-
-.success{
-    background-color: azure;
-    transition-duration: 0.1s;
-}

@@ -29,7 +29,10 @@ app.use(express.json());
 app.get('/', (req,res) => {
 	splitMarkdown();
 	splitInitcode();
+<<<<<<< HEAD
+=======
 	
+>>>>>>> 28e17ac4cb4776f027e2f1de3fd2251c98db1c16
 	getTurtlecode();
 	checkSaveExists();
     fs.readFile(appdir + "/js.html")
@@ -42,7 +45,7 @@ app.get('/', (req,res) => {
 			.then(initcode => {
 				fs.readFile(workdir + "/settings.json")
 				.then(settings => {
-					fs.readFile(appdir + "/savefiles/1.js")
+					fs.readFile(workdir + "/savefiles/1.js")
 					.then(savecode => {
 						let s = contents.toString()
 						.replace("<!-- INSTRS -->", instrs)
@@ -147,7 +150,7 @@ app.get('/', (req,res) => {
 
 //This will be the POST request that will save to the savefile folder
 app.post(`/autosave/:id`, (req, res) => {
-	const savePath = `${appdir}/savefiles/${req.params.id}.js`;
+	const savePath = `${workdir}/savefiles/${req.params.id}.js`;
 	try {
 		fs.writeFile(savePath, req.body.code, err => {
 			if (err) {
@@ -208,8 +211,7 @@ app.get(`/turtlecode`, (req, res) => {
 });
 
 app.get(`/savefile/:id`, (req, res) => {
-	const savePath = `${appdir}/savefiles/${req.params.id}.js`;
-	console.log(savePath);
+	const savePath = `${workdir}/savefiles/${req.params.id}.js`;
 	const defaultSaveFile = `/* Default savefile */`;
 	fs.readFile(savePath)
 		.then(contents => {
@@ -220,7 +222,6 @@ app.get(`/savefile/:id`, (req, res) => {
 			return;
 		})
 		.catch(err => {
-			var theId = parseInt(req.params.id);
 			const tutorialPath = `${workdir}/tutorials/${req.params.id}.md`;
 			if(markdownList[theId - 1]) {
 				var theValue;
@@ -238,20 +239,13 @@ app.get(`/savefile/:id`, (req, res) => {
 							res.writeHead(200);
 							res.end(data);
 							return;
-						});
+						})
 				})
-				.catch(writeFileError => {
-					console.log(writeFileError);
+				.catch(error => {
 					res.writeHead(404);
-					res.end(writeFileError);
+					res.end("FILE NOT FOUND");
 					return;
 				});
-			} else {
-				res.writeHead(404);
-				res.end("FILE NOT FOUND");
-				return;
-			}
-			
 		})
 });
 
