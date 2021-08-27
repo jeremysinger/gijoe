@@ -121,14 +121,14 @@ crossorigin="anonymous"></script>
         
 
         
-        <div id="outputblock" class="col container-md">
-          <div id="outputwrap" class="row">
+        <div id="outputblock" class="col container-md" style="background-color: azure;">
+          <div id="outputwrap" class="row" style="background-color: azure;">
             <div id="codeOutput" class="col" style="background-color: rgb(246, 255, 255); font-family: monospace; color: #003865;">
               <b>Code evaluation</b><br/>
               <div id="output">&nbsp;</div>
             </div>
   
-            <div id="consoleOutput" class="col" style="background-color: azure; font-family: monospace; color: #003865;">
+            <div id="consoleOutput" class="col" style="font-family: monospace; color: #003865;">
               <b>Console output</b><br/>
               <div id="fakeConsole">&nbsp;</div>
             </div>
@@ -240,7 +240,7 @@ crossorigin="anonymous"></script>
                   autosaveArea.classList.add("success");
                   autosaveArea.innerHTML = "<h4>Well done!</h4>";
 
-                  outputArea.style.display = "none";
+                  outputSuccess()
 
                 } else {
                   autosaveArea.classList.remove("success");
@@ -261,7 +261,7 @@ crossorigin="anonymous"></script>
                   autosaveArea.classList.add("success");
                   autosaveArea.innerHTML = "<h4>Well done!</h4>";
 
-                  outputArea.style.display = "none";
+                  outputSuccess()
                 } else {
                   autosaveArea.classList.remove("success");
                   autosaveArea.classList.add("error");

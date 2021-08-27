@@ -330,7 +330,6 @@ function checkInitcodeFileExists() {
 
 	fs.readFile(InitcodeFile)
 	.then(file => {
-		console.log("INIT FILE FOUND");
 		return true;
 	})
 	.catch(error => {
@@ -356,14 +355,12 @@ function checkTurtlecodeExists() {
 }
 
 function splitInitcode() {
-	console.log("Init function called");
 	checkInitcodeFileExists();
 	fs.readFile(workdir + "/initialcode.js")
 		.then(code => {
 			code = code.toString();
 			initcodeList = code.split("/* <!-- NEXT --> */")
 				.map(code => code.trim());
-			console.log(initcodeList);
 			createSavefileDir();
 		})
 		.catch(error => {
