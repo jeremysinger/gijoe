@@ -384,9 +384,9 @@ crossorigin="anonymous"></script>
             for (var i = 0; i < messageList.length; i++) {
               newElement = document.createElement("p");
               newElement.appendChild(document.createTextNode(messageList[i]));
-              //newLog.appendChild(pastLog);
+              newLog.appendChild(pastLog);
               newLog.appendChild(newElement);
-              //pastLog.appendChild(newElement);
+              pastLog.appendChild(newElement);
             }
           } else {
             newElement = document.createElement("p");
