@@ -1,3 +1,2 @@
-/* Default Javascript file */
-
-console.log("Hello World");
+// GENERIC INITIALCODE FILE
+log("Hello World");
