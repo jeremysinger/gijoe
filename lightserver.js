@@ -41,7 +41,7 @@ app.get('/', (req,res) => {
 			.then(initcode => {
 				fs.readFile(workdir + "/settings.json")
 				.then(settings => {
-					fs.readFile(workdir + "/savefiles/1.js")
+					fs.readFile(appdir + "/savefiles/1.js")
 					.then(savecode => {
 						let s = contents.toString()
 						.replace("<!-- INSTRS -->", instrs)
@@ -146,7 +146,7 @@ app.get('/', (req,res) => {
 
 //This will be the POST request that will save to the savefile folder
 app.post(`/autosave/:id`, (req, res) => {
-	const savePath = `${workdir}/savefiles/${req.params.id}.js`;
+	const savePath = `${appdir}/savefiles/${req.params.id}.js`;
 	try {
 		fs.writeFile(savePath, req.body.code, err => {
 			if (err) {
@@ -207,7 +207,7 @@ app.get(`/turtlecode`, (req, res) => {
 });
 
 app.get(`/savefile/:id`, (req, res) => {
-	const savePath = `${workdir}/savefiles/${req.params.id}.js`;
+	const savePath = `${appdir}/savefiles/${req.params.id}.js`;
 	const defaultSaveFile = `/* Default savefile */`;
 	fs.readFile(savePath)
 		.then(contents => {
@@ -218,7 +218,6 @@ app.get(`/savefile/:id`, (req, res) => {
 			return;
 		})
 		.catch(err => {
-			const tutorialPath = `${workdir}/tutorials/${req.params.id}.md`;
 			var theId = parseInt(req.params.id);
 			if(markdownList[theId - 1]) {
 				var theValue;
@@ -287,7 +286,7 @@ app.get(`/htmlfile`, (req, res) => {
 });
 
 function checkSaveExists() {
-	const savePath = workdir + "/savefiles/1.js";
+	const savePath = appdir + "/savefiles/1.js";
 	fs.readFile(savePath)
 		.then(result => {
 			return true;
@@ -334,7 +333,6 @@ function checkInitcodeFileExists() {
 	})
 	.catch(error => {
 		fs.writeFile(InitcodeFile, "// GENERIC INITIALCODE FILE");
-		console.log("Initcode File Created");
 		return true;
 	});
 }
@@ -349,7 +347,6 @@ function checkTurtlecodeExists() {
 	})
 	.catch(error => {
 		fs.writeFile(InitcodeFile, "// GENERIC TURTLECODE FILE");
-		console.log("Turtlecode File Created");
 		return true;
 	});
 }
@@ -393,9 +390,12 @@ function createFirstSaveFile(dir) {
 }
 
 function createSavefileDir() {
-	var savefilesDir = appdir + "/savefiles"
+	console.log("CREATE SAVEFILE CALLED");
+	var savefilesDir = appdir + "/savefiles";
+	console.log(savefilesDir);
 	fs.readdir(savefilesDir)
 	.then(saveFiles => {
+		console.log("Reading savefiles directory")
 		fs.readFile(savefilesDir + "/1.js")
 		.then(files => {
 			return true;
@@ -407,10 +407,11 @@ function createSavefileDir() {
 		});
 	})
 	.catch(error => {
+		console.log("Error Found creating the savefiles directory")
 		fs.mkdir(savefilesDir);
 		createFirstSaveFile(savefilesDir);
 		return true;
-	})
+	});
 }
 
 app.listen(PORT, HOST);

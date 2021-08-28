@@ -1,2 +1,0 @@
-// GENERIC INITIALCODE FILE
-log("Hello World");
