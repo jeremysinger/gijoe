@@ -36,6 +36,7 @@ crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="/static/css/turtleslider.css">
+    <link rel="stylesheet" href="/static/css/progressbar.css">
 
   </head>
 
@@ -65,7 +66,22 @@ crossorigin="anonymous"></script>
             <div class="col-xl">
               <h1 class="codeHeading">Tutorial Space</h1>
             </div>
-            <div class="col-sm">
+            <div class="pbsection">
+              <div id="pb">
+                <div class="step">
+                  <div class="bullets">1</div>
+                </div>
+                <div class="step">
+                  <div class="bullets">2</div>
+                </div>
+                <div class="step">
+                  <div class="bullets">3</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- old stuff -->
+            <div class="col-sm hidden">
               <h2 id="progressBar" class="codeHeading"></h2>
             </div>
           </div>
@@ -131,6 +147,7 @@ crossorigin="anonymous"></script>
             <div id="consoleOutput" class="col" style="font-family: monospace; color: #003865;">
               <b>Console output</b><br/>
               <div id="fakeConsole">&nbsp;</div>
+              <div id="testConsole">&nbsp;</div>
             </div>
           </div>
         </div>
@@ -378,8 +395,12 @@ crossorigin="anonymous"></script>
         var pastLog = document.createElement("p"); 
         var newLog = document.getElementById("fakeConsole");
         var newElement;
+        var test = document.getElementById("testConsole");
         console.log = function (message) {
           if(typeof(message) === "string") {
+            if(message != ""){
+              test.innerHTML = message;
+            }
             messageList = message.split("\n");
             for (var i = 0; i < messageList.length; i++) {
               newElement = document.createElement("p");
@@ -410,6 +431,7 @@ crossorigin="anonymous"></script>
       <script type="text/javascript" src="/static/js/autosave.js"></script>
       <script type="text/javascript" src="/static/js/turtleslider.js"></script>
       <script type="text/javascript" src="/static/js/goslow.js"></script>
+      <script type="text/javascript" src="/static/js/progressbar.js"></script>
       <script type="text/javascript" src="/static/js/preventLooping.js"></script>
       <script type="text/javascript" src="/static/js/autocomplete.js"></script>
       <script type="text/javascript" src="/static/js/outputResize.js"></script>
