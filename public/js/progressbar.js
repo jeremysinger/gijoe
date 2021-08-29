@@ -23,7 +23,7 @@ Btnnext.addEventListener('click',  ()  =>  {
         line.style.width = lineWidth + "px";
     
         // Insert the created element
-        bullets[current].after(line);
+        bullets[current].appendChild(line);
     }
 
     current  +=  1;
@@ -31,6 +31,12 @@ Btnnext.addEventListener('click',  ()  =>  {
 });
 
 Btnprevious.addEventListener('click',  ()  =>  {
+
+    if(current!=max+1){
+        let test = bullets[current-1].childNodes[1];
+        test.remove();
+    }
+
     bullets[current  -  1].classList.remove('completed');
     current  -=  1;
 });
