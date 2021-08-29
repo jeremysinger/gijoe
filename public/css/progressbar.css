@@ -11,7 +11,6 @@
     align-items: flex-start;
     width: 80%;
     margin: 0 auto;
-    padding-right: 20%;
 }
 
 .step {
@@ -19,12 +18,13 @@
 }
 
 .bullets {
-    border: 1px solid azure;
+    /* border: 1px solid azure; */
     height: 24px;
     width: 24px;
     font-size: medium;
     border-radius: 100%;
     color: azure;
+    background-color: #003865;
     display: inline-block;
     position: relative;
     transition: background-color 500ms;
@@ -32,27 +32,27 @@
 }
 
 .bullets.completed {
-    color: #0011ff;
+    color: #003865;
     background-color: azure;
 }
 
-/* .bullets.completed::after {
-    content: "";
-    position: absolute;
-    right: -115px;
-    bottom: 8px;
-    height: 5px;
-    width: 115px;
-    background-color: azure;
-} */
-
 .line {
     position: absolute;
-    margin-left: 23px;
+    margin-left: 24px;
     margin-top: -12px;
     height: 5px;
     /* width: 115px; */
     background-color: azure;
+}
+
+.emptyline {
+    position: absolute;
+    margin-left: 24px;
+    margin-top: -12px;
+    height: 5px;
+    /* width: 115px; */
+    background-color: #003865;
+    border: 0px;
 }
 
 .bullets.completed.last::after {
