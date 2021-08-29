@@ -216,6 +216,9 @@ crossorigin="anonymous"></script>
           
 
         async function executeCodeBlock() {
+          if (tutorialSettings.libraries.DOM) {
+            resetDOM();
+          }
 
           codeInput = myCodeMirror.getValue();
           if (async) {

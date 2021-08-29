@@ -1,10 +1,14 @@
 const htmlEditor = document.getElementById("htmlArea");
 const domRender = document.getElementById("renderedDOM");
-const resetDOM = document.getElementById("reset-DOM");
+const resetDOMButton = document.getElementById("reset-DOM");
 let data;
 
-resetDOM.addEventListener("click", () => {
+function resetDOM() {
     domRender.innerHTML = data;
+}
+
+resetDOMButton.addEventListener("click", () => {
+    resetDOM();
 });
 
 function setUpArea() {

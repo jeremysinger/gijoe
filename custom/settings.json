@@ -5,8 +5,8 @@
     "loopLimit": 100,
     "libraries": {
         "turtle": false,
-        "DOM": false,
+        "DOM": true,
         "csv": false,
-        "csvAndTurtle": true
+        "csvAndTurtle": false
     } 
 }

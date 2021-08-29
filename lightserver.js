@@ -178,7 +178,6 @@ app.get(`/tutorial/:id`, (req, res) => {
 app.get(`/initcode/:id`, (req, res) => {
 	var id = req.params.id - 1;
 	try {
-		// console.log(initcodeList[id].toString());
 		var data = initcodeList[id];
 		res.setHeader("Content-Type", "application/json");
 		res.writeHead(200);
@@ -262,7 +261,6 @@ app.get(`/csv/:filename`, (req, res) => {
 		return;
 	})
 	.catch(csvError => {
-		console.log(csvError);
 		res.writeHead(404);
 		res.end("FILE NOT FOUND");
 		return;
@@ -380,7 +378,6 @@ function getTurtlecode() {
 }
 
 function createFirstSaveFile(dir) {
-	console.log(initcodeList);
 	if (initcodeList[0]) {
 		fs.writeFile(dir + "/1.js", initcodeList[0]);
 	} else {
