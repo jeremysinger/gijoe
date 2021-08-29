@@ -34,10 +34,9 @@ Currently GIJOE has support for two libraries these include
 
 In order for your lab to be setup properly. You need the following requirements inside your zip folder. These are
 
-* **A "tutorials" folder** - This directory will contain the markdown files. For now we still have the system where you need to have multiple md files which are numbered from 1. So for example the first tutorial will be 1.md, the second tutorial will be 2.md etc
-* **A "tutorials.md" file** - This is a markdown file to contain all of the tutorial stuff. For full documentation please check the "tutorials.md" section in the documentation.
-* **An initialcode.js file** this will be the replacement for the savefiles directory as they will be moved in the gijoe_app directory. Full documentation for this file can be found in the **initialCode file** part of the documentation.
-* **A settings.json file** - Please see the "Settings" header for more information on how to set this up
+* **A "tutorials.md" file** - This is a markdown file to contain all of the tutorial stuff. For full documentation please check the [**"tutorials.md"**](#tutorials.md) section in the documentation.
+* **An initialcode.js file** this will be the replacement for the savefiles directory as they will be moved in the gijoe_app directory. Full documentation for this file can be found in the [**initialCode file**](#initialcode.js) part of the documentation.
+* **A settings.json file** - Please see the [**settings.json**](#settings.json) header for more information on how to set this up
 * **instructions.txt** this file contains the instructions at the top
 
 **As of the 10th August 2021, the js.html and preamble.js files are now in a seperate directory and you do not need to include this in the folders.**
