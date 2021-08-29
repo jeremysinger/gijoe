@@ -1,3 +1,15 @@
+# Contents
+
+* [What is GIJOE](#what-is-gijoe)
+* [Libraries](#libraries)
+* [Lab Setup Instructions](#lab-setup-instructions)
+  * [If DOM is on](#lab-setup-if-dom-is-turned-on)
+  * [If CSV is on](#lab-setup-if-the-csv-library-is-turned-on)
+* [Running Instructions](#running-instructions)
+* [Markdown Guide](#markdown-guide)
+* [Custom Folder Files](#custom-folder-files)
+
+
 # Glasgow Interactive JavaScript Online Editor
 
 ## What is GIJOE?
@@ -23,8 +35,7 @@ Currently GIJOE has support for two libraries these include
 In order for your lab to be setup properly. You need the following requirements inside your zip folder. These are
 
 * **A "tutorials" folder** - This directory will contain the markdown files. For now we still have the system where you need to have multiple md files which are numbered from 1. So for example the first tutorial will be 1.md, the second tutorial will be 2.md etc
-* **COMING SOON** soon you will only need a tutorials.md file. We are currently implementing it and it will be on the coursera course shortly
-* **A "savefiles" folder** - This directory contains the JavaScript that the user will edit. If you want any starter code for any of the md files that you have written then simply create a JavaScript file and name it with the same number as the corresponding markdown file. E.g. starter code for 1.md should be named 1.js. You don't need to have a file for every markdown file as a js file will be created when you first load the lab **This will be removed and replaced by an initialcode.js file at the end of the coding period**
+* **A "tutorials.md" file** - This is a markdown file to contain all of the tutorial stuff. For full documentation please check the "tutorials.md" section in the documentation.
 * **An initialcode.js file** this will be the replacement for the savefiles directory as they will be moved in the gijoe_app directory. Full documentation for this file can be found in the **initialCode file** part of the documentation.
 * **A settings.json file** - Please see the "Settings" header for more information on how to set this up
 * **instructions.txt** this file contains the instructions at the top
@@ -67,7 +78,7 @@ We are intending to run GIJOE in the online labs for our
 upcoming Coursera specialization entitled *Computational
 Thinking with JavaScript*.
 
-## Brief Guide to the most common types of Markdown
+## Markdown Guide
 
 ### Text
 
@@ -152,24 +163,32 @@ This would render as
 |:------|------:|
 |Hello  |World  |
 
-## Tutorials
+## Custom Folder Files
 
-All tutorials must be written within the tutorials file. The
-website takes in markdown files and each tutorial file must
-be numbered in order. E.g. 1.md, 2.md etc. In order to parse
-through the markdown we are making use of the showdown library.
-For documentation of the syntax click [here](http://demo.showdownjs.com)
 
-If you want to have a specific code base with your tutorial
-please enter js files in the savefiles directory and name the
-files with the same number as the markdown files within the tutorial
-file. e.g. 1.md will have the savefile 1.js. Don't worry if you
-don't have a js file for each md file as they will be automatically
-created when the user opens the tutorial for the first time.
+### tutorials.md
 
-## Settings
+For tutorials you must include all of the text for each tutorial in the **tutorials.md** file. In the previous edition we had a tutorials directory where each tutorial page would have its own markdown file e.g. **1.md, 2.md, 3.md etc**. Now with the tutorials.md file you simply need to type in `##NEXT##` to split up the file. For example a tutorials.md file should look like this
 
-For creating labs we have the settings.json file to help you choose how you want your labs to be carried out. The settings.json should look like this:
+```markdown
+# Tutorial 1
+
+Tutorial 1 Stuff
+##NEXT##
+# Tutorial 2
+
+Tutorial 2 Stuff
+##NEXT##
+# Tutorial 3
+
+Tutorial 3 Stuff
+```
+
+The markdown is rendered using the showdown library. Therefore every part of markdown that showdown supports is supported with GIJOE. For a list of markdown syntax that is supported, check out the [Showdown Documentation](http://demo.showdownjs.com).
+
+### settings.json
+
+For creating labs we have the **settings.json** file to help you choose how you want your labs to be carried out. The settings.json should look like this:
 
 ```json
 {
@@ -195,7 +214,7 @@ There are currently two options that you can make use of these include
   * If you want to turn on a library then all you have to do is set the boolean for that libray to true. NOTE you can only use one of the libraries at a time
   * If there are no libraries switched on then you will just get the console and the code evaluation
 
-## The initialcode.js file
+### The initialcode.js file
 
 This is the new file for including the start of the exercise code. Following on from the fact that the tutorials would come from one file we thought it would be best if the same happened to the js files. The savefile directory will soon be moving out from the custom folder. All you have to do is write some Javascript code in the initialcode.js file and to seperate it by typing `/* <!-- NEXT --> */`. This will tell gijoe when the javascript will move on to the next file. An example initialcode.js file should look something like this:
 
