@@ -36,7 +36,7 @@
     background-color: azure;
 }
 
-.bullets.completed::after {
+/* .bullets.completed::after {
     content: "";
     position: absolute;
     right: -115px;
@@ -44,5 +44,18 @@
     height: 5px;
     width: 115px;
     background-color: azure;
+} */
+
+.line {
+    position: absolute;
+    margin-left: 24px;
+    margin-top: -14px;
+    height: 5px;
+    /* width: 115px; */
+    background-color: azure;
 }
 
+.bullets.completed.last::after {
+    content: "";
+    background-color: rgba(255, 0, 0, 0);
+}
