@@ -1,5 +1,5 @@
-let blue = 128;
-let red = 127;
+let blue = 64;
+let red = 191;
 let theColour;
 
 $( function() {
@@ -7,7 +7,7 @@ $( function() {
     $( "#slider" ).slider({
         min: 0,
         max: 2000,
-        value: 1000,
+        value: 1500,
         create: function() {
             //handle.text( $( this ).slider( "value" ) ); superflous according to customer
             $("#speedLabel").html(`Turtle Speed: ${$( this ).slider( "value" )} ms`);
