@@ -17,7 +17,6 @@ function resizeConsoleOutput() {
  * and have extra padding on the left
  */
 function outputPaddingAdjuster() {
-    console.log($(window).width());
     if (!tutorialSettings.libraries.turtle && !tutorialSettings.libraries.DOM && !tutorialSettings.libraries.csv && !tutorialSettings.libraries.csvAndTurtle) {
         outputBlock.style.paddingLeft = "40px";
     } 
