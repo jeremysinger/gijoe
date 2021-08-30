@@ -2,7 +2,7 @@
     /* text-align: center; */
     max-width: 100%;
     margin: 0 auto;
-    padding-top: 20px;
+    padding-top: 10px;
 }
 
 #pb {
@@ -19,8 +19,8 @@
 
 .bullets {
     /* border: 1px solid azure; */
-    height: 24px;
-    width: 24px;
+    height: 36px;
+    width: 36px;
     font-size: medium;
     border-radius: 100%;
     color: azure;
@@ -28,7 +28,7 @@
     display: inline-block;
     position: relative;
     transition: background-color 500ms;
-    line-height: 21px;
+    line-height: 34px;
 }
 
 .bullets.completed {
@@ -38,14 +38,13 @@
 
 .bullets.currentstep {
     color: azure;
-    border: 2px solid azure;
-    background-color: #003865;
+    background-color: rgb(0, 140, 255);
 }
 
 .line {
     position: absolute;
-    margin-left: 24px;
-    margin-top: -12px;
+    margin-left: 36px;
+    margin-top: -18px;
     height: 5px;
     /* width: 115px; */
     background-color: azure;
@@ -53,8 +52,8 @@
 
 .emptyline {
     position: absolute;
-    margin-left: 24px;
-    margin-top: -12px;
+    margin-left: 36px;
+    margin-top: -18px;
     height: 5px;
     /* width: 115px; */
     background-color: #003865;

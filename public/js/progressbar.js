@@ -15,7 +15,7 @@ Btnnext.addEventListener('click',  ()  =>  {
     if(current != max){
         let currentX = bullets[current].getBoundingClientRect().left;
         let nextX = bullets[current+1].getBoundingClientRect().left;
-        let lineWidth = nextX - currentX - 24; 
+        let lineWidth = nextX - currentX - 36; 
     
         // Create a new element to add
         const line = document.createElement("div");
@@ -24,6 +24,9 @@ Btnnext.addEventListener('click',  ()  =>  {
     
         // Insert the created element
         bullets[current].appendChild(line);
+
+        bullets[current].classList.remove('currentstep');
+        bullets[current+1].classList.add('currentstep');
     }
 
     current  +=  1;
@@ -41,24 +44,20 @@ Btnprevious.addEventListener('click',  ()  =>  {
         //add empty progress line
         let currentX = bullets[current].getBoundingClientRect().left;
         let prevX = bullets[current-1].getBoundingClientRect().left;
-        let lineWidth = currentX - prevX - 24; 
+        let lineWidth = currentX - prevX - 36; 
     
         // Create a new element to add
         const line = document.createElement("div");
         line.classList.add("emptyline");
         line.style.width = lineWidth + "px";
     
-        bullets[current-1].appendChild(line);
+        bullets[current - 1].appendChild(line);
+
+        bullets[current].classList.remove('currentstep');
     }
 
-    // if(current!=max+1){
-
-    //     const test = bullets[current-1].childNodes[1];
-    //     test.classList.add("emptyline");
-    //     test.classList.remove("line");
-    // }
-
-    bullets[current  -  1].classList.remove('completed');
+    bullets[current - 1].classList.add('currentstep');
+    bullets[current - 1].classList.remove('completed');
     current  -=  1;
 });
 
