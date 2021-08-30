@@ -18,7 +18,7 @@ This is the third JavaScript tutorial page
 
 
 | Hello | World |
-| - | - |
+| :------- | -------: |
 | I love coding | Turtle and DOM in one package |
 
 ##NEXT##
