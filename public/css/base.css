@@ -108,3 +108,8 @@ code {
 
 }
 
+@media screen and (min-width: 1000px) {
+    .pane {
+        max-width: 50% !important;
+    }
+}
