@@ -46,7 +46,6 @@
     margin-left: 36px;
     margin-top: -18px;
     height: 5px;
-    /* width: 115px; */
     background-color: azure;
 }
 
@@ -55,12 +54,7 @@
     margin-left: 36px;
     margin-top: -18px;
     height: 5px;
-    /* width: 115px; */
     background-color: #003865;
-    border: 0px;
+    border: 2px solid #003865;
 }
 
-.bullets.completed.last::after {
-    content: "";
-    background-color: rgba(255, 0, 0, 0);
-}
