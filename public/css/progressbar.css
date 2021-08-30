@@ -36,6 +36,12 @@
     background-color: azure;
 }
 
+.bullets.currentstep {
+    color: azure;
+    border: 2px solid azure;
+    background-color: #003865;
+}
+
 .line {
     position: absolute;
     margin-left: 24px;
