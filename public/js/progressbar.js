@@ -63,11 +63,13 @@ Btnprevious.addEventListener('click',  ()  =>  {
 
 function addPb(){
     let step = "";
+
     for(let i = 0; i<tutorialFiles; i++){
         step = step + "<div class=\"step\"><div class=\"bullets\">" + (i+1) + "</div></div>";
     }
 
     pb.innerHTML = step;
+
 }
 
 function addEmptyLines(){
@@ -86,6 +88,8 @@ function addEmptyLines(){
     
         bullets[i].appendChild(line);
     }
+    
+    bullets[0].classList.add('currentstep');
 }
 
 function sleep(ms) {
