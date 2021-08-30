@@ -6,6 +6,11 @@
     overflow-y: scroll !important;
 }
 
+#outputblock h3 {
+    font-family: var(--bs-font-sans-serif);
+    font-weight: 500;
+}
+
 #fakeConsole {
     min-height: 100px;
     max-height: 350px;
