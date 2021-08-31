@@ -17,8 +17,8 @@ canvas {
     background-color: #003865;
     color: snow;
     border: none;
-    padding: 10px 15px;
-    height: 65px;
+    padding: 0px 15px;
+    height: 55px;
     margin: 0px 2px;
     text-align: center;
     text-decoration: none;
@@ -54,7 +54,9 @@ input[type=button] {
 }
 
 .codeControls {
-    padding: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 20px;
 }
 
 code {
