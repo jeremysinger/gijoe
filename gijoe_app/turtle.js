@@ -27,7 +27,7 @@ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND 
 // javascript when accessing the
 // document object, so we'll need to hard-wire that into HTML code.
 
-// It seems that 500 x 500 has been hard-wired in here (see the
+// It seems that 300 x 300 has been hard-wired in here (see the
 // code below in the draw function).  I think we should make that more
 // flexible in the future - but right now, let's go with this.
 
@@ -170,7 +170,7 @@ function draw() {
         turtleContext.restore();
     }
 
-    turtleContext.drawImage(imageCanvas, 0, 0, 500, 500, 0, 0, 500, 500);
+    turtleContext.drawImage(imageCanvas, 0, 0, 300, 300, 0, 0, 300, 300);
     
 }
 
