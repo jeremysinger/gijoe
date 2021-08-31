@@ -35,7 +35,6 @@ forwardButton.addEventListener("click", () => {
     getTutorial(currentFile);
     getInitcode(currentFile);
     updateCodeMirror(currentFile);
-    progressBar.innerHTML = `${currentFile} / ${tutorialFiles}`;
     if (currentFile >= tutorialFiles) {
         forwardButton.disabled = true;
     }
@@ -49,7 +48,6 @@ backButton.addEventListener("click", () => {
     getTutorial(currentFile);
     getInitcode(currentFile);
     updateCodeMirror(currentFile);
-    progressBar.innerHTML = `${currentFile} / ${tutorialFiles}`;    
     if (currentFile === 1) {
         backButton.disabled = true;
     }

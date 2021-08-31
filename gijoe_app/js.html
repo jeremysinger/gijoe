@@ -66,7 +66,7 @@ crossorigin="anonymous"></script>
             <div class="col-4">
               <h1 class="codeHeading">Instructions</h1>
             </div>
-            <div class="col pbsection">
+            <div id="pbsection" class="col pbsection">
               <div id="pb">
                 <div class="step">
                   <div class="bullets">1</div>
@@ -81,8 +81,8 @@ crossorigin="anonymous"></script>
             </div>
 
             <!-- old stuff -->
-            <div class="col-sm hidden">
-              <h2 id="progressBar" class="codeHeading"></h2>
+            <div class="col-1">
+              <h2 id="progressBarAlt" class="codeHeading"></h2>
             </div>
           </div>
           <div id="tutorialSpace"></div>
@@ -165,8 +165,8 @@ crossorigin="anonymous"></script>
         <script>
           var csvTurtle = document.getElementById("csvTurtle");
           var timeout = false;
-          var progressBar = document.getElementById("progressBar");
-          console.log(progressBar);
+          var progressBarAlt = document.getElementById("progressBarAlt");
+          console.log(progressBarAlt);
           var originalCode = `/* initial code */`;
           var saveCode =  `/* saved code */`;
           var tutorialFiles = parseInt(`/* tutorial_files */`);
@@ -176,7 +176,6 @@ crossorigin="anonymous"></script>
           var async = JSON.parse("/* go slow */");
           var csvString = "";
           var currentFile = 1;
-          progressBar.innerHTML = `${currentFile} / ${tutorialFiles}`;
           var turtleSpeed = 1000;
 
           var librarySpace = document.getElementById("library-area");

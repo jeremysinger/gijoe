@@ -2,6 +2,8 @@ const  Btnprevious  =  document.getElementById('tutorialBack');
 const  Btnnext  =  document.getElementById('tutorialForward');
 // const  Btnsubmit  =  document.getElementById('Submit');
 const pb = document.getElementById("pb");
+const progressbar = document.getElementById("pbsection");
+
 
 let current = 0;
 const max = tutorialFiles+1;
@@ -11,8 +13,8 @@ const max = tutorialFiles+1;
 Btnnext.addEventListener('click',  ()  =>  {
     const  bullets  =  [...document.querySelectorAll('.bullets')];
 
-    bullets[current].classList.add('completed');
-    if(current != max){
+    if(current != max && (tutorialFiles>2 && tutorialFiles<11)){
+        bullets[current].classList.add('completed');
         let currentX = bullets[current].getBoundingClientRect().left;
         let nextX = bullets[current+1].getBoundingClientRect().left;
         let lineWidth = nextX - currentX - 36; 
@@ -30,13 +32,16 @@ Btnnext.addEventListener('click',  ()  =>  {
     }
 
     current  +=  1;
+
+    progressBarAlt.innerHTML = `${current+1} / ${tutorialFiles}`;
+
     Btnprevious.style.display  =  'inline';
 });
 
 Btnprevious.addEventListener('click',  ()  =>  {    
     const  bullets  =  [...document.querySelectorAll('.bullets')];
 
-    if(current!=max+1){
+    if(current!=max+1 && (tutorialFiles>2 && tutorialFiles<11)){
         //get rid of completed line
         let test = bullets[current-1].childNodes[1];
         test.remove();
@@ -55,20 +60,41 @@ Btnprevious.addEventListener('click',  ()  =>  {
 
         bullets[current].classList.remove('currentstep');
     }
+    
+    if(tutorialFiles>2 && tutorialFiles<11){
 
-    bullets[current - 1].classList.add('currentstep');
-    bullets[current - 1].classList.remove('completed');
+        bullets[current - 1].classList.add('currentstep');
+        bullets[current - 1].classList.remove('completed');
+    }
+
     current  -=  1;
+
+    progressBarAlt.innerHTML = `${current+1} / ${tutorialFiles}`;
+
 });
 
 function addPb(){
-    let step = "";
 
-    for(let i = 0; i<tutorialFiles; i++){
-        step = step + "<div class=\"step\"><div class=\"bullets\">" + (i+1) + "</div></div>";
+    if(tutorialFiles<2){
+        progressBarAlt.classList.add("hidden");
+        progressbar.classList.add("hidden");
     }
+    else if(tutorialFiles<11){
+        progressBarAlt.classList.add("hidden");
 
-    pb.innerHTML = step;
+        let step = "";
+
+        for(let i = 0; i<tutorialFiles; i++){
+            step = step + "<div class=\"step\"><div class=\"bullets\">" + (i+1) + "</div></div>";
+        }
+    
+        pb.innerHTML = step;
+    }
+    else {
+        progressBarAlt.innerHTML = `${current+1} / ${tutorialFiles}`;
+        progressbar.classList.add("hidden");
+        progressBarAlt.classList.remove("hidden");
+    }
 
 }
 

@@ -21,8 +21,4 @@ This is the third JavaScript tutorial page
 | :------- | -------: |
 | I love coding | Turtle and DOM in one package |
 
-##NEXT##
 
-# Tutorial 4
-
-This is to test what happens if there are more tutorial parts than the
