@@ -4,7 +4,6 @@ const test = document.getElementById('test')
 const js = form.elements['js'];
 const html = form.elements['html'];
 
-const tc = " //He needs sum melk."; 
 
 function readJsFile()
 {
@@ -16,7 +15,6 @@ function readJsFile()
         if (http.status === 200) {
             let data = http.responseText;
             test.innerHTML = data;
-            tc = data; //this is the problem child
             return true;
         } else {
             console.log(http.status)
