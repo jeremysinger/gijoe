@@ -397,6 +397,11 @@ function setFont(font) {
     imageContext.font = font;
 }
 
+function setFontColor(color) {
+    // assume color param is correct CSS color string
+    imageContext.fillStyle = color;
+}
+
 function message(text) {
     console.log(text);
 }
