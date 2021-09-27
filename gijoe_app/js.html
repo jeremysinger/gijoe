@@ -220,7 +220,12 @@ crossorigin="anonymous"></script>
 
           codeInput = myCodeMirror.getValue();
           if (async) {
-            codeFragment = goSlowMode(codeInput);
+            /* @jsinger we automatically make user
+             * function definitions to be async,
+             * so they can be called in user code
+             */
+            codeFragment = codeInput.replace(/function /gi, 'async function ');
+            codeFragment = goSlowMode(codeFragment);
           } else {
             codeFragment = codeInput;
           }
