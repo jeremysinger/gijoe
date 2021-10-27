@@ -2,5 +2,6 @@
 node_modules/*
 savefiles/
 tutorials/
-
 *.zip
+.DS_Store
+custom/.DS_Store
