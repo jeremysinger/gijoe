@@ -29,6 +29,7 @@
     position: relative;
     transition: background-color 500ms;
     line-height: 34px;
+    cursor: pointer;
 }
 
 .bullets.completed {

@@ -7,70 +7,68 @@ const progressbar = document.getElementById("pbsection");
 
 let current = 0;
 const max = tutorialFiles+1;
-// let barLength = bullets.style.
+/* max is one more the the number of tutorial files, these are 1-indexed */
 
 
-Btnnext.addEventListener('click',  ()  =>  {
-    const  bullets  =  [...document.querySelectorAll('.bullets')];
+function updateCurrentButtonTo(newCurrent) {
+    // note current and newCurrent are 0-indexed
+    if (newCurrent+1>=max) {
+        throw new Error("no such tutorial step");
+    }
+    const bullets = [...document.querySelectorAll('.bullets')];
 
     if(current != max && (tutorialFiles>2 && tutorialFiles<11)){
         bullets[current].classList.add('completed');
-        let currentX = bullets[current].getBoundingClientRect().left;
-        let nextX = bullets[current+1].getBoundingClientRect().left;
-        let lineWidth = nextX - currentX - 36; 
-    
-        // Create a new element to add
-        const line = document.createElement("div");
-        line.classList.add("line");
-        line.style.width = lineWidth + "px";
-    
-        // Insert the created element
-        bullets[current].appendChild(line);
 
+	if (Math.abs(newCurrent-current) == 1) {
+	    // consecutive buttons
+            let currentX = bullets[current].getBoundingClientRect().left;
+            let nextX = bullets[newCurrent].getBoundingClientRect().left;
+            let lineWidth = Math.abs(nextX - currentX) - 36;
+	    let goingBack = (newCurrent < current);
+            // Create a new element to add
+            const line = document.createElement("div");
+            line.classList.add(goingBack?"emptyline":"line");
+            line.style.width = lineWidth + "px";
+	    
+            // Insert the created element
+            bullets[(goingBack?newCurrent:current)].appendChild(line);
+	}
         bullets[current].classList.remove('currentstep');
-        bullets[current+1].classList.add('currentstep');
+        bullets[newCurrent].classList.add('currentstep');
     }
 
-    current  +=  1;
+    current  =  newCurrent;
+    currentFile = current+1;  // files are 1-based, buttons are 0-based
+    getTutorial(currentFile);
+    getInitcode(currentFile);
+    updateCodeMirror(currentFile);
 
     progressBarAlt.innerHTML = `${current+1} / ${tutorialFiles}`;
 
-    Btnprevious.style.display  =  'inline';
+
+    // check both buttons, are we at either end of step sequence?
+    if (current == max-2) {
+	// horrific indexing here! FIXME!
+        Btnnext.disabled = true;
+    }
+    else {
+	Btnnext.disabled = false;
+    }
+    if (current == 0) {
+	Btnprevious.disabled = true;
+    }
+    else {
+	Btnprevious.disabled = false;
+    }
+}
+
+Btnnext.addEventListener('click',  ()  =>  {
+    updateCurrentButtonTo(current+1);
 });
 
-Btnprevious.addEventListener('click',  ()  =>  {    
-    const  bullets  =  [...document.querySelectorAll('.bullets')];
-
-    if(current!=max+1 && (tutorialFiles>2 && tutorialFiles<11)){
-        //get rid of completed line
-        let test = bullets[current-1].childNodes[1];
-        test.remove();
-
-        //add empty progress line
-        let currentX = bullets[current].getBoundingClientRect().left;
-        let prevX = bullets[current-1].getBoundingClientRect().left;
-        let lineWidth = currentX - prevX - 36; 
-    
-        // Create a new element to add
-        const line = document.createElement("div");
-        line.classList.add("emptyline");
-        line.style.width = lineWidth + "px";
-    
-        bullets[current - 1].appendChild(line);
-
-        bullets[current].classList.remove('currentstep');
-    }
-    
-    if(tutorialFiles>2 && tutorialFiles<11){
-
-        bullets[current - 1].classList.add('currentstep');
-        bullets[current - 1].classList.remove('completed');
-    }
-
-    current  -=  1;
-
-    progressBarAlt.innerHTML = `${current+1} / ${tutorialFiles}`;
-
+Btnprevious.addEventListener('click',  ()  =>  {
+    updateCurrentButtonTo(current-1);
 });
 
 function addPb(){
@@ -118,10 +116,22 @@ function addEmptyLines(){
     bullets[0].classList.add('currentstep');
 }
 
+function addBulletEvents() {
+    const  bullets  =  [...document.querySelectorAll('.bullets')];
+
+    for(let i = 0; i < bullets.length; i++){
+	let bullet = bullets[i];
+	let stepNumber = i+1;
+	bullet.addEventListener('click',  ()  =>  { updateCurrentButtonTo(i);
+						  });
+    }
+}
+
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 addPb();
+addBulletEvents();
 sleep(5).then(addEmptyLines);
 

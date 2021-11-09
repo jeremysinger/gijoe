@@ -27,32 +27,6 @@ function introHider() {
     }
 }
 
-forwardButton.addEventListener("click", () => {
-    if(backButton.disabled) {
-        backButton.disabled = false;
-    }
-    currentFile++;
-    getTutorial(currentFile);
-    getInitcode(currentFile);
-    updateCodeMirror(currentFile);
-    if (currentFile >= tutorialFiles) {
-        forwardButton.disabled = true;
-    }
-});
-
-backButton.addEventListener("click", () => {
-    if (forwardButton.disabled) {
-        forwardButton.disabled = false;
-    }
-    currentFile--;
-    getTutorial(currentFile);
-    getInitcode(currentFile);
-    updateCodeMirror(currentFile);
-    if (currentFile === 1) {
-        backButton.disabled = true;
-    }
-});
-
 function getTutorial(id) {
     const http = new XMLHttpRequest();
     http.open("GET", `/tutorial/${id}`);
