@@ -27,10 +27,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 app.get('/', (req,res) => {
-	splitMarkdown();
-	splitInitcode();
-	getTurtlecode();
-	checkSaveExists();
+    splitMarkdown().then(_ => {
+	splitInitcode().then(_ => {
+	    checkSaveExists();
+	});
+    });
+
+    getTurtlecode();
     fs.readFile(appdir + "/js.html")
 	.then(contents => {
 	    res.setHeader("Content-Type", "text/html");
@@ -289,50 +292,34 @@ function checkSaveExists() {
 		.then(result => {
 			return true;
 		})
-		.catch(error => {
-			fs.writeFile(savePath, "/* Generic Javascript Code */");
-			return true;
-		})
-}
-
-function checkTutorialFileExists() {
-	const tutorialFile = workdir + "/tutorials.md";
-
-	fs.readFile(tutorialFile)
-	.then(file => {
-		return true;
-	})
-	.catch(error => {
-		fs.writeFile(tutorialFile, "# GENERIC TUTORIAL FILE");
-		console.log("Tutorial File Created");
-		return true;
-	});
+	        .catch(error => {
+	            console.log('no 1.js savefile ... creating');
+	            let content = "/* Generic Javascript Code */";
+	            if (initcodeList[0]) {
+		        content =  initcodeList[0];
+	            }
+	            else {
+		        console.log('unable to access initcodeList');
+	            }
+	            fs.writeFile(savePath, content);
+	            return true;
+	        })
 }
 
 function splitMarkdown() {
-	checkTutorialFileExists();
-	fs.readFile(workdir + "/tutorials.md")
-		.then(markdown => {
-			markdown = markdown.toString();
-			markdownList = markdown.split("##NEXT##")
-				.map(markdown => markdown.trim());
-		})
-		.catch(error => {
-			console.log("NO MD FILE FOUND");
-		})
-}
-
-function checkInitcodeFileExists() {
-	const InitcodeFile = workdir + "/initialcode.js";
-
-	fs.readFile(InitcodeFile)
-	.then(file => {
-		return true;
-	})
-	.catch(error => {
-		fs.writeFile(InitcodeFile, "// GENERIC INITIALCODE FILE");
-		return true;
-	});
+    return new Promise((resolve, reject) => {
+        fs.readFile(workdir + "/tutorials.md")
+        .then(markdown => {
+            markdown = markdown.toString();
+            markdownList = markdown.split("##NEXT##")
+            .map(markdown => markdown.trim());
+            resolve();
+        })
+        .catch(error => {
+            console.error("splitMarkdown error " + err);
+            reject();
+        })
+    });
 }
 
 //TODO TC
@@ -350,17 +337,20 @@ function checkTurtlecodeExists() {
 }
 
 function splitInitcode() {
-	checkInitcodeFileExists();
-	fs.readFile(workdir + "/initialcode.js")
-		.then(code => {
-			code = code.toString();
-			initcodeList = code.split("/* <!-- NEXT --> */")
-				.map(code => code.trim());
-			createSavefileDir();
-		})
-		.catch(error => {
-			console.log("NO INITIALCODE FILE FOUND");
-		})
+    return new Promise((resolve, reject) => {
+        fs.readFile(workdir + "/initialcode.js")
+        .then( code => {
+            code = code.toString();
+            initcodeList = code.split("/* <!-- NEXT --> */")
+            .map(code => code.trim());
+            createSavefileDir();
+            resolve();
+        })
+        .catch (error => {
+            console.error('splitInitcode error: ' + err);
+            reject();
+        })
+    });
 }
 
 //TODO TC
@@ -398,13 +388,13 @@ function createSavefileDir() {
 			return true;
 		})
 		.catch(error => {
-			console.log("1.js does not exist creating 1.js");
+			console.log("1.js does not exist, creating 1.js");
 			createFirstSaveFile(savefilesDir);
 			return true;
 		});
 	})
 	.catch(error => {
-		console.log("Error Found creating the savefiles directory")
+		console.error("Error creating the savefiles directory")
 		fs.mkdir(savefilesDir);
 		createFirstSaveFile(savefilesDir);
 		return true;
