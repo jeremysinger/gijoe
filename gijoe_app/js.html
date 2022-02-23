@@ -38,6 +38,11 @@ crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/static/css/turtleslider.css">
     <link rel="stylesheet" href="/static/css/progressbar.css">
 
+    <!-- @jsinger parse tree and codegen libs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/acorn/8.7.0/acorn.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/acorn-walk@8.2.0/dist/walk.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/astring@1.8.1/dist/astring.min.js"></script>
+
   </head>
 
   <nav id="header" class="navbar navbar-expand-lg p-3 d-flex flex-wrap">
@@ -163,6 +168,7 @@ crossorigin="anonymous"></script>
 
 
         <script>
+          const DEBUG = false;
           var csvTurtle = document.getElementById("csvTurtle");
           var timeout = false;
           var progressBarAlt = document.getElementById("progressBarAlt");
@@ -173,7 +179,6 @@ crossorigin="anonymous"></script>
           var initcodeFiles = parseInt(`/* initcode_files */`);
           var tutorialSettings = JSON.parse(`/* tutorial_settings */`);
           var libraries = JSON.parse(`/* library check */`);
-          var async = JSON.parse("/* go slow */");
           var csvString = "";
           var currentFile = 1;
           var turtleSpeed = 1000;
@@ -219,19 +224,95 @@ crossorigin="anonymous"></script>
           }
 
           codeInput = myCodeMirror.getValue();
-	  async = false;  
-          if (async) {
-            /* @jsinger we automatically make user
+	  let rewriteAsyncCode = true;
+          if (rewriteAsyncCode) {
+            /* automatically annotate user
              * function definitions to be async,
-             * so they can be called in user code
+             * so they can be called in GIJOE 
+	     * framework with controlled delays
              */
-            codeFragment = codeInput.replace(/function /gi, 'async function ');
-            codeFragment = goSlowMode(codeFragment);
+	    let ast = acorn.Parser.parse(codeInput);
+	    acorn.walk.simple(ast, {
+	      FunctionDeclaration(node) {
+		// make this user def'd function async...
+		node.async = true;
+	      }
+	    });
+
+            /* goSlowMode for turtle functions:
+	     * we add sleep calls for some turtle calls
+	     */
+	    acorn.walk.ancestor(ast, { CallExpression(node, ancestors) {
+	      if (node.callee.name === 'forward' ||
+		  node.callee.name === 'left'     ||
+		  node.callee.name === 'right') {
+
+		if (DEBUG) {
+		  console.log('found turtle fn: ' + node.callee.name);
+		  console.assert(ancestors.length >=3 );
+		}
+                let parent = ancestors[ancestors.length-2];
+		if (DEBUG) {
+                  console.assert(parent.type == 'ExpressionStatement');
+		}
+		let enclBlock = ancestors[ancestors.length-3];
+		let replaceIndex = enclBlock.body.indexOf(parent);
+		if (DEBUG) {
+		  console.assert(replaceIndex != -1);
+		}
+
+		// clone the call expr for a sleep call
+		let sleepCall = Object.assign({}, node); // shallow clone
+		sleepCall.callee = Object.assign({}, sleepCall.callee);
+		sleepCall.callee.name = 'sleep';
+		sleepCall.arguments = [{"type":"Identifier","start":0,"end":0,"name":"turtleSpeed"}];
+		// clone the parent for a new (sleep) exprstmt
+		let exprStmt = Object.assign({}, parent);
+		exprStmt.expression = sleepCall;
+		// clone the exprStmt for a new blockStmt
+		let blockStmt = Object.assign({}, parent);
+		blockStmt.type = 'BlockStatement';
+		delete blockStmt.expression;
+		blockStmt.body = [exprStmt,parent];
+		// put the orig exprstmt (with the orig call) as stmt 1 in block
+		// put a new exprstmt, with a new sleep as stmt 0 in block
+		// put the new blockstmt in place of the orig expr stmt
+		enclBlock.body[replaceIndex] = blockStmt;
+	      }
+	    }});
+
+	    // add awaits for all function calls
+	    acorn.walk.ancestor(ast, { CallExpression(node, ancestors) {
+	      if (DEBUG) {
+		console.assert(ancestors.length >=2 );
+	      }
+	      let parent = ancestors[ancestors.length-2];
+	      if (DEBUG) {
+		console.assert(parent.type == 'ExpressionStatement');
+	      }
+	      let awaitExpr = Object.assign({}, node);  // shallow clone
+	      awaitExpr.type = "AwaitExpression";
+	      awaitExpr.argument = node;
+	      parent.expression = awaitExpr; // splice in await statement
+	    }});
+
+	    // convert the updated AST back into JS code
+	    codeFragment = astring.generate(ast);
+
+	    /* wrap the top-level user code in its own async function
+	     * (since we are using await)
+	     */
+	    codeFragment = goSlowMode(codeFragment);
           } else {
+	    // no changes required for timing delay control
             codeFragment = codeInput;
           }
           codeFragment = preventInfiniteLooping(codeFragment);
-          
+
+          if (DEBUG) {
+	    console.log("rewritten code is: \n" + codeFragment);
+	    console.log("\n");
+	  }
 
           //goSlowButton and submitcodeButton should not be clickable while execution is happening
           const submitCodeButton = document.getElementById("submitcode");
@@ -239,6 +320,7 @@ crossorigin="anonymous"></script>
           if(isGoSlowOn){
             if(!submitCodeButton.disabled) {
               submitCodeButton.disabled = true;
+	      console.log('disabled submit');
             }
           }
 
@@ -250,12 +332,13 @@ crossorigin="anonymous"></script>
           
           try{
               clearConsole();
-              if (async) {
+              if (rewriteAsyncCode) {
                 result = eval(codeFragment).catch( handleError ).then( function () {  //only a catch like this can catch most errors
 
                 if(isGoSlowOn){
                   if(submitCodeButton.disabled) {
                     submitCodeButton.disabled = false;
+		    console.log('re-enabled submit');
                   }
                 }
 
@@ -277,7 +360,7 @@ crossorigin="anonymous"></script>
                 console.log( "---" );
 
                 });
-              } else {
+              } else { // (!rewriteAsyncCode)
                 result = eval(codeFragment);
 
                 if(!timeout) {

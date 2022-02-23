@@ -62,11 +62,11 @@ app.get('/', (req,res) => {
 								.replace("/* library check */", true)
 								.replace("/* go slow */", true);
 								fs.readFile(appdir + "/turtle.js")
-									.then(code => {
-										s = s.replace("<!-- PREAMBLE CODE -->", code);
-										res.end(s);
-										return;
-									});
+								.then(turtlecode => {
+								    s = s.replace("<!-- PREAMBLE CODE -->", turtlecode);
+								    res.end(s);
+								    return;
+								});
 							});
 						} else if (settings.libraries.DOM) {
 							fs.readFile(appdir + "/DOMArea.html")
