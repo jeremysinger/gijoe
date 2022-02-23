@@ -21,14 +21,15 @@ then execute this by clicking a 'run' button and observing the results immediate
 We expect code to output string values to the console log (which we visualize) and
 to generate simple graphics with turtle libraries (which we support directly). These
 small programs are typical 'beginner' exercises, which we will embed in our
-Computational Thinking with JavaScript MOOC.
+*Computational Thinking with JavaScript* online course.
 
 ## Libraries
 
-Currently GIJOE has support for two libraries these include
+Currently GIJOE has support for three libraries, which are:
 
 * **Turtle** - this library contains a small turtle (represented by a triangle) as it moves around a canvas. Source code for this library can be found in the [turtle.js](https://git.dcs.gla.ac.uk/guss/jsmooc/-/blob/main/gijoe_app/turtle.js) file within the gijoe_app directory on this repository
 * **DOM Experimentation Zone** - This is an area for a student to practice their DOM manipulation skills. Simply add an htmlFiles directory containing an exercise.html file to the custom file to play around with it. This creates an HTML editor alongside a representation of what that HTML looks like when rendered. (Please see the Lab Setup Instructions heading to see how to make use of this)
+* **Papa Parse** - this is an open-source industrial strength [CSV parser](https://www.papaparse.com/). We are only using the most basic features.
 
 ## Lab Setup Instructions
 
@@ -61,9 +62,9 @@ from within this directory. Then run this container with
 
 and browse to http://localhost:8080 to see GIJOE in action.
 
-### Direction Execution
+### Direct Execution
 
-To run directly using node, simply execute
+To run directly using node on your local machine, simply execute
 `npm install`
 from within this directory to fetch the appropriate packages. Then
 run the app with
@@ -74,7 +75,7 @@ and browse to http://localhost:8080 to see GIJOE in action.
 ## Sightings in the Wild
 
 We are intending to run GIJOE in the online labs for our
-upcoming Coursera specialization entitled *Computational
+upcoming [Coursera](https://www.coursera.org) specialization entitled *Computational
 Thinking with JavaScript*.
 
 ## Markdown Guide
@@ -187,7 +188,7 @@ The markdown is rendered using the showdown library. Therefore every part of mar
 
 ### settings.json
 
-For creating labs we have the **settings.json** file to help you choose how you want your labs to be carried out. The settings.json should look like this:
+For creating labs we have the **settings.json** file to help you choose how you want your labs to be configured. The settings.json should look like this:
 
 ```json
 {
