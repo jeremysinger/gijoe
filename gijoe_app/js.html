@@ -104,12 +104,13 @@ crossorigin="anonymous"></script>
             </div>  
           </div>
             
-          <form id="sharedcode" method='post' action='https://jsfiddle.net/api/post/mootools/1.3/dependencies/more/' target='check'>
-
-            <textarea name='js' id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
-            <textarea name='html' id="htmlToShare" class="hidden"> /* insert the html turtle-infrastructure code to be shared in jsfiddle */ </textarea>
-
+          <form id="sharedcode" method="post" action="https://jsfiddle.net/api/post/library/pure/" target="check">
+            <textarea name="js" id="textareacode" style="padding: 10px; background-color: 0xffffff;">/* insert JavaScript code here */</textarea>
+            <textarea name="html" id="htmlToShare" class="hidden"> /* insert the html turtle infrastructure code to be shared in jsfiddle */ </textarea>
+	    <input type="text" name="title" class="hidden" value="JavaScript Project" />
+	    <input type="text" name="description" class="hidden" value="Code exported from Coursera Computational Thinking in JavaScript" />
           </form>
+
           <div class="row container">
             <div class="handle codeControls col btn-group" role="group" aria-label="codeControls">
 
@@ -320,7 +321,6 @@ crossorigin="anonymous"></script>
           if(isGoSlowOn){
             if(!submitCodeButton.disabled) {
               submitCodeButton.disabled = true;
-	      console.log('disabled submit');
             }
           }
 
@@ -338,7 +338,6 @@ crossorigin="anonymous"></script>
                 if(isGoSlowOn){
                   if(submitCodeButton.disabled) {
                     submitCodeButton.disabled = false;
-		    console.log('re-enabled submit');
                   }
                 }
 
