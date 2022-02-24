@@ -4,7 +4,7 @@
 
 # use a cut-down base package that
 # Coursera supports
-FROM python:3.8.1-slim
+FROM python:3-slim
 
 # make sure apt is up to date
 RUN apt-get update --fix-missing
