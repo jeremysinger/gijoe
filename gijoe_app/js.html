@@ -289,12 +289,19 @@ crossorigin="anonymous"></script>
 	      }
 	      let parent = ancestors[ancestors.length-2];
 	      if (DEBUG) {
-		console.assert(parent.type == 'ExpressionStatement');
+                console.assert(parent.type === 'ExpressionStatement' ||
+                               parent.type === 'VariableDeclarator');
 	      }
 	      let awaitExpr = Object.assign({}, node);  // shallow clone
 	      awaitExpr.type = "AwaitExpression";
 	      awaitExpr.argument = node;
-	      parent.expression = awaitExpr; // splice in await statement
+	      // splice in await statement
+	      if (parent.type === 'ExpressionStatement') {
+		parent.expression = awaitExpr;
+	      }
+	      else if (parent.type === 'VariableDeclarator') {
+		parent.init = awaitExpr;
+	      }
 	    }});
 
 	    // convert the updated AST back into JS code
