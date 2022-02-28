@@ -4,15 +4,11 @@
 
 # use a cut-down base package that
 # Coursera supports
-FROM python:3-slim
+FROM node:17-buster-slim
 
 # make sure apt is up to date
 RUN apt-get update --fix-missing
 RUN apt-get install -y curl
-
-# install Node
-RUN curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
-RUN apt-get install -y nodejs
 
 # setup config and files
 WORKDIR /usr/src/app
