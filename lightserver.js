@@ -38,103 +38,107 @@ app.get('/', (req,res) => {
 	.then(contents => {
 	    res.setHeader("Content-Type", "text/html");
 	    res.writeHead(200);
-	    fs.readFile(workdir + "/instructions.txt")
-		.then(instrs => {
-		    fs.readFile(workdir + "/initialcode.js")
-			.then(initcode => {
-				fs.readFile(workdir + "/settings.json")
-				.then(settings => {
-					fs.readFile(appdir + "/savefiles/1.js")
-					.then(savecode => {
-						let s = contents.toString()
-						.replace("<!-- INSTRS -->", instrs)
-						.replace("/* initial code */", initcode)
-						.replace("/* tutorial_settings */", settings)
-						.replace("/* saved code */", savecode)
-						.replace("/* tutorial_files */", markdownList.length)
-						.replace("/* initcode_files */", initcodeList.length);
-						settings = JSON.parse(settings);
-						if (settings.libraries.turtle) {
+	    fs.readFile(appdir + "/version_stamp.txt")
+		.then(version => {
+		    fs.readFile(workdir + "/instructions.txt")
+			.then(instrs => {
+			    fs.readFile(workdir + "/initialcode.js")
+				.then(initcode => {
+				    fs.readFile(workdir + "/settings.json")
+					.then(settings => {
+					    fs.readFile(appdir + "/savefiles/1.js")
+						.then(savecode => {
+						    let s = contents.toString()
+							.replace("<!-- VERSION -->", version)
+							.replace("<!-- INSTRS -->", instrs)
+							.replace("/* initial code */", initcode)
+							.replace("/* tutorial_settings */", settings)
+							.replace("/* saved code */", savecode)
+							.replace("/* tutorial_files */", markdownList.length)
+							.replace("/* initcode_files */", initcodeList.length);
+						    settings = JSON.parse(settings);
+						    if (settings.libraries.turtle) {
 							fs.readFile(appdir + "/turtleCanvas.html")
-							.then(turtleContent => {
+							    .then(turtleContent => {
 								let turtleString = turtleContent.toString();
 								s = s.replace("<!-- LIBRARY-CONTROLS -->", turtleString)
-								.replace("/* library check */", true)
-								.replace("/* go slow */", true);
+								    .replace("/* library check */", true)
+								    .replace("/* go slow */", true);
 								fs.readFile(appdir + "/turtle.js")
-								.then(turtlecode => {
-								    s = s.replace("<!-- PREAMBLE CODE -->", turtlecode);
-								    res.end(s);
-								    return;
-								});
-							});
-						} else if (settings.libraries.DOM) {
+								    .then(turtlecode => {
+									s = s.replace("<!-- PREAMBLE CODE -->", turtlecode);
+									res.end(s);
+									return;
+								    });
+							    });
+						    } else if (settings.libraries.DOM) {
 							fs.readFile(appdir + "/DOMArea.html")
-							.then(domContent => {
+							    .then(domContent => {
 								let domString = domContent.toString();
 								s = s.replace("<!-- LIBRARY-CONTROLS -->", domString)
-								.replace("/* library check */", true)
-								.replace("/* go slow */", false);
+								    .replace("/* library check */", true)
+								    .replace("/* go slow */", false);
 								//Get the HTML file
 								fs.readFile(`${workdir}/htmlFiles/exercise.html`)
 								res.end(s);
 								return;
-							});
-						} else if (settings.libraries.csv) {
+							    });
+						    } else if (settings.libraries.csv) {
 							fs.readFile(appdir + "/CSVArea.html")
-							.then(csvContent => {
+							    .then(csvContent => {
 								let csvString = csvContent.toString();
 								s = s.replace("<!-- LIBRARY-CONTROLS -->", csvString)
-								.replace("/* library check */", true)
-								.replace("/* go slow */", false);
+								    .replace("/* library check */", true)
+								    .replace("/* go slow */", false);
 								fs.readFile(appdir + "/papaparse.min.js")
-								.then(code => {
+								    .then(code => {
 									s = s.replace("<!-- PREAMBLE CODE -->", code);
 									fs.readdir(workdir + "/csv_files")
-									.then(files => {
+									    .then(files => {
 										var options = files.map(file => `<option value='${file}'>${file}</option>`);
 										s = s.replace("<!-- OPTIONS -->", options);
 										res.end(s);
 										return;
-									})
-								});
-							});
+									    })
+								    });
+							    });
 
-						} else if (settings.libraries.csvAndTurtle) {
+						    } else if (settings.libraries.csvAndTurtle) {
 							fs.readFile(appdir + "/CSVArea.html")
-							.then(csvContent => {
+							    .then(csvContent => {
 								let csvString = csvContent.toString();
 								s = s.replace("<!-- LIBRARY-CONTROLS -->", csvString)
-								.replace("/* library check */", true)
-								.replace("/* go slow */", true);
+								    .replace("/* library check */", true)
+								    .replace("/* go slow */", true);
 								fs.readFile(appdir + "/papaparse.min.js")
-								.then(code => {
+								    .then(code => {
 									let theCode = code;
 									fs.readFile(appdir + "/turtle.js")
-									.then(turtleCode => {
+									    .then(turtleCode => {
 										theCode = theCode + turtleCode;
 										s = s.replace("<!-- PREAMBLE CODE -->", theCode);
 										fs.readFile(appdir + "/turtleCanvas.html")
-										.then(turtleContent => {
+										    .then(turtleContent => {
 											let turtleString = turtleContent.toString();
 											s = s.replace("<!-- TURTLE AREA-->", turtleString);
 											fs.readdir(workdir + "/csv_files")
-											.then(files => {
+											    .then(files => {
 												var options = files.map(file => `<option value='${file}'>${file}</option>`);
 												s = s.replace("<!-- OPTIONS -->", options);
 												res.end(s);
 												return;
-											})
-										})
-									})
-								})
-							})
-						} else {
+											    })
+										    })
+									    })
+								    })
+							    })
+						    } else {
 							s = s.replace("/* library check */", false)
-							.replace("/* go slow */", false);
+							    .replace("/* go slow */", false);
 							res.end(s);
 							return;
-						}
+						    }
+						})
 					})
 				})
 			})

@@ -5,3 +5,4 @@ tutorials/
 *.zip
 .DS_Store
 custom/.DS_Store
+gijoe_app/version_stamp.txt
