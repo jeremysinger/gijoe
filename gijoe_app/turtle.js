@@ -290,6 +290,7 @@ function showTurtle() {
 // turn on/off redrawing
 function redrawOnMove(bool) {
     turtle.redraw = bool;
+    drawIf();
 }
 
 // lift up the pen (don't draw)
