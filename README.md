@@ -78,6 +78,11 @@ We are intending to run GIJOE in the online labs for our
 upcoming [Coursera](https://www.coursera.org) specialization entitled *Computational
 Thinking with JavaScript*.
 
+### Deploying to Coursera
+
+This is a two-stage process. The generic GIJOE lab image is created with `make zip` and this can be uploaded as a Coursera Lab image. Each individual lab is then customized with tutorial.md, initialcode.js, instructions.txt  and settings.json files, stored at top-level in a zipfile. These are the replacement files for the "custom" directory (mount point `/usr/src/app/custom` ).
+
+
 ## Markdown Guide
 
 ### Text
