@@ -7,3 +7,4 @@ zip: clean
 clean:
 	rm -vf gijoe_app/version_stamp.txt
 	rm -vf gijoe_app/savefiles/*.js
+	git log -1 --format="version %h released %cd"  origin/main > ./gijoe_app/version_stamp.txt
