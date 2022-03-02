@@ -320,7 +320,7 @@ function splitMarkdown() {
             resolve();
         })
         .catch(error => {
-            console.error("splitMarkdown error " + err);
+            console.error("splitMarkdown error " + error);
             reject();
         })
     });
