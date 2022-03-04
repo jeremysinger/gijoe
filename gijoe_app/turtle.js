@@ -364,14 +364,59 @@ function shape(s) {
     draw();
 }
 
-// set the colour of the line using RGB values in the range 0 - 255.
-function colour(r, g, b, a) {
-    imageContext.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + a + ")";
-    turtle.colour.r = r;
-    turtle.colour.g = g;
-    turtle.colour.b = b;
-    turtle.colour.a = a;
+function rectangle(width, height) {
+    // start at current x,y pos (transformed)
+    imageContext.save();
+    centerCoords(imageContext);
+    imageContext.beginPath();
+    // move to width/height (what about wrap?)
+    var x = turtle.pos.x;
+    var y = turtle.pos.y;
+    imageContext.moveTo(x, y);
+    // filled rectangle, in colour of turtle...
+    var newX = x+width;
+    var newY = y+height;
+    // ignore wrap and angle of turtle for now...
+    if (turtle.penDown) {
+	let r = turtle.colour.r;
+	let g = turtle.colour.g;
+	let b = turtle.colour.b;
+	let a = turtle.colour.a;
+	imageContext.fillStyle = "rgba(" + r + "," + g + "," + b + "," + a + ")";
+	imageContext.fillRect(x,y,width,height);
+    }
+    imageContext.restore();
+    drawIf();
 }
+
+// set the colour of the line using RGB values in the range 0 - 255,
+// with optional alpha (between 0 and 1)
+// OR set the colour of the line using a single param
+// which is a recognized CSS string value
+function colour(r, g, b, a) {
+    if (arguments.length === 1 && (typeof r) === 'string')  {
+	// it's a CSS string colour setting
+	let col = r;
+	imageContext.strokeStyle = col;
+	// update the red/green/blue/alpha components
+	let hexCol = imageContext.strokeStyle;
+	// hexCol is a string of the form '#aabbcc'
+	turtle.colour.r = Number('0x' + hexCol[1] + hexCol[2]);
+	turtle.colour.g = Number('0x' + hexCol[3] + hexCol[4]);
+	turtle.colour.b = Number('0x' + hexCol[5] + hexCol[6]);
+	turtle.colour.a = 1; // assume fully opaque
+    } else if (arguments.length > 1 && (typeof r) === 'number') {
+	let alpha = (arguments.length==4?a:1); // default opaque
+	imageContext.strokeStyle = "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
+	turtle.colour.r = r;
+	turtle.colour.g = g;
+	turtle.colour.b = b;
+	turtle.colour.a = alpha;
+    }
+}
+
+// alias for US spelling
+var color = colour;
 
 // Generate a random integer between low and hi
 function random(low, hi) {
