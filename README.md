@@ -33,14 +33,14 @@ Currently GIJOE has support for three libraries, which are:
 
 ## Lab Setup Instructions
 
-In order for your lab to be setup properly. You need the following requirements inside your zip folder. These are
+In order for your lab to be setup properly, you need the following files inside the *custom* directory. (Or if you are using Coursera Docker, in the root of the lab's zip folder.) These files are
 
 * **A "tutorials.md" file** - This is a markdown file to contain all of the tutorial stuff. For full documentation please check the [**"tutorials.md"**](#tutorials.md) section in the documentation.
 * **An initialcode.js file** this will be the replacement for the savefiles directory as they will be moved in the gijoe_app directory. Full documentation for this file can be found in the [**initialCode file**](#initialcode.js) part of the documentation.
 * **A settings.json file** - Please see the [**settings.json**](#settings.json) header for more information on how to set this up
-* **instructions.txt** this file contains the instructions at the top
+* **instructions.txt** this file contains generic tutorial instructions shown at the top of the landing page
 
-**As of the 10th August 2021, the js.html and preamble.js files are now in a seperate directory and you do not need to include this in the folders.**
+**Note the template webpage *js.html* and included JavaScript *preamble.js* files are now in a separate directory and you do not need to include this in the folders.**
 
 ### Lab Setup if DOM is turned on
 
